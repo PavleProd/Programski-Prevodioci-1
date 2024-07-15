@@ -25,13 +25,15 @@ public class MJTest {
 		Reader br = null;
 		try {
 			
-			File sourceCode = new File("test/program.mj");	
+			File sourceCode = new File("test/program.mj"); // micro java ulazni kod koji testiramo
 			log.info("Compiling source file: " + sourceCode.getAbsolutePath());
 			
 			br = new BufferedReader(new FileReader(sourceCode));
 			
 			Yylex lexer = new Yylex(br);
 			Symbol currToken = null;
+			
+			// cita simbole dok ne stignemo do EOF simbola
 			while ((currToken = lexer.next_token()).sym != sym.EOF) {
 				if (currToken != null && currToken.value != null)
 					log.info(currToken.toString() + " " + currToken.value.toString());
