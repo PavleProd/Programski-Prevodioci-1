@@ -1,0 +1,4 @@
+*.class
+workspace/.metadata
+workspace/.recommenders
+*.log.*
