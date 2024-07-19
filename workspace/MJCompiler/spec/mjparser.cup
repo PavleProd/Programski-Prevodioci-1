@@ -63,9 +63,112 @@ terminal GT, GTE, LT, LTE, AND, OR;
 terminal INC, DEC;
 terminal SEMICOLON, COLON, COMMA, DOT;
 
-terminal Integer NUMBER;
+terminal Integer INT;
 terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
 
-precedence left ELSE;
+terminal TYPE_INT, TYPE_BOOL, TYPE_CHAR;
+
+nonterminal Type, BasicType, Value, BasicValue;
+nonterminal BasicDeclaration, BasicDefinition, BasicDefinitionNoType, BasicDefinitionList, BasicDefinitionListNoType;
+nonterminal Declaration, Definition;
+
+nonterminal Program, ProgramDeclList, ProgramDecl, ConstDeclList;
+
+/* TIPOVI, Basic koristiti samo kad nam on specificno treba */
+
+Type ::= IDENT:typeName
+		 |
+		 BasicType
+		 ;
+		 
+BasicType ::= TYPE_INT
+			  |
+			  TYPE_BOOL
+			  |
+			  TYPE_CHAR
+			  ;
+
+Value ::= IDENT:value
+		  |
+		  BasicValue
+		  ;
+
+BasicValue ::= INT
+			   |
+			   BOOL
+			   |
+			   CHAR
+			   ;
+
+/* DEKLARACIJA I DEFINICIJA promenljivih, namerno bez ; jer moze da bude vise u istom redu */
+			   
+Declaration ::= Type IDENT:varName
+				|
+				BasicDeclaration;
+				
+BasicDeclaration ::= BasicType IDENT:varName
+					 ;
+
+Definition ::= Type IDENT:varName EQUAL Value
+			   |
+			   BasicDefinition
+			   ;
+			   
+BasicDefinitionList ::= BasicType BasicDefinitionListNoType
+						;
+
+BasicDefinitionListNoType ::= BasicDefinitionNoType
+							  |
+							  BasicDefinitionListNoType COMMA BasicDefinitionNoType
+							  ;
+
+BasicDefinitionNoType ::= IDENT:varName EQUAL BasicValue
+						  ;
+			   
+BasicDefinition ::= BasicType IDENT:varName EQUAL BasicValue
+					;
+			   
+/* PROGRAM DEFINICIJA */
+
+Program ::= PROGRAM IDENT:programName ProgramDeclList LBRACE RBRACE
+;
+
+ProgramDeclList ::= ProgramDecl
+					|
+					ProgramDeclList ProgramDecl
+					|
+					/* epsilon */
+					;
+
+ProgramDecl ::= ConstDeclList
+				;
+
+ConstDeclList ::= CONST BasicDefinitionList
+				  ;
+				  
+
+
+
+			  
+
+			  
+			  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

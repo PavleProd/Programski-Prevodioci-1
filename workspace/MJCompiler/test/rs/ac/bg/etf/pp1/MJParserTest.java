@@ -9,10 +9,13 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import java_cup.runtime.Symbol;
-import rs.ac.bg.etf.pp1.ast.SyntaxNode;
+//import rs.ac.bg.etf.pp1.ast.SyntaxNode;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
-import rs.etf.pp1.mj.runtime.Code;
-import rs.etf.pp1.symboltable.Tab;
+//import rs.etf.pp1.mj.runtime.Code;
+//import rs.etf.pp1.symboltable.Tab;
+
+import rs.ac.bg.etf.pp1.ast.*;
+//import rs.ac.bg.etf.pp1.RuleVisitor;
 
 public class MJParserTest {
 
@@ -40,9 +43,22 @@ public class MJParserTest {
 			Yylex lexer = new Yylex(br);
 			MJParser p = new MJParser(lexer);
 	        Symbol s = p.parse();  //pocetak parsiranja
-	        SyntaxNode prog = (SyntaxNode)(s.value);
 	        
-			Tab.init(); // Universe scope
+	        Program prog = (Program)(s.value); 
+			// ispis sintaksnog stabla
+			log.info(prog.toString(""));
+			log.info("===================================");
+
+			// ispis prepoznatih programskih konstrukcija
+			/*RuleVisitor v = new RuleVisitor();
+			prog.traverseBottomUp(v); 
+	      
+			log.info(" Print count calls = " + v.printCallCount);
+
+			log.info(" Deklarisanih promenljivih ima = " + v.varDeclCount);*/
+	        
+			// SyntaxNode prog = (SyntaxNode)(s.value);
+			/*Tab.init(); // Universe scope
 			SemanticPass semanticCheck = new SemanticPass();
 			prog.traverseBottomUp(semanticCheck);
 			
@@ -65,7 +81,7 @@ public class MJParserTest {
 	        }
 	        else {
 	        	log.error("Parsiranje NIJE uspesno zavrseno!");
-	        }
+	        }*/
 		}
 	}
 }

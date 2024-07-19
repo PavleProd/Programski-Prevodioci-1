@@ -1,61 +1,11 @@
-INFO  23:04:38,994 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  23:04:39,006 - #2 program
-INFO  23:04:39,006 - #15 MJProgram
-INFO  23:04:39,006 - #15 int
-INFO  23:04:39,006 - #15 x
-INFO  23:04:39,007 - #5 ;
-INFO  23:04:39,007 - #15 int
-INFO  23:04:39,007 - #15 y
-INFO  23:04:39,007 - #5 ;
-INFO  23:04:39,007 - #3 {
-INFO  23:04:39,007 - #15 int
-INFO  23:04:39,007 - #15 k
-INFO  23:04:39,007 - #6 (
-INFO  23:04:39,007 - #7 )
-INFO  23:04:39,007 - #15 int
-INFO  23:04:39,007 - #15 c
-INFO  23:04:39,007 - #5 ;
-INFO  23:04:39,007 - #3 {
-INFO  23:04:39,008 - #15 c
-INFO  23:04:39,008 - #12 =
-INFO  23:04:39,008 - #14 1
-INFO  23:04:39,008 - #5 ;
-INFO  23:04:39,008 - #10 return
-INFO  23:04:39,008 - #15 c
-INFO  23:04:39,008 - #11 +
-INFO  23:04:39,008 - #14 2
-INFO  23:04:39,008 - #5 ;
-INFO  23:04:39,009 - #4 }
-INFO  23:04:39,009 - #15 int
-INFO  23:04:39,009 - #15 main
-INFO  23:04:39,009 - #6 (
-INFO  23:04:39,009 - #7 )
-INFO  23:04:39,009 - #3 {
-INFO  23:04:39,010 - #15 y
-INFO  23:04:39,010 - #12 =
-INFO  23:04:39,010 - #14 2
-INFO  23:04:39,010 - #5 ;
-INFO  23:04:39,010 - #15 x
-INFO  23:04:39,010 - #12 =
-INFO  23:04:39,010 - #15 y
-INFO  23:04:39,010 - #11 +
-INFO  23:04:39,010 - #14 2
-INFO  23:04:39,010 - #5 ;
-INFO  23:04:39,011 - #15 y
-INFO  23:04:39,011 - #12 =
-INFO  23:04:39,011 - #15 k
-INFO  23:04:39,011 - #6 (
-INFO  23:04:39,011 - #7 )
-INFO  23:04:39,011 - #11 +
-INFO  23:04:39,011 - #14 3
-INFO  23:04:39,011 - #5 ;
-INFO  23:04:39,011 - #9 print
-INFO  23:04:39,011 - #6 (
-INFO  23:04:39,011 - #15 y
-INFO  23:04:39,012 - #7 )
-INFO  23:04:39,012 - #5 ;
-INFO  23:04:39,012 - #10 return
-INFO  23:04:39,012 - #14 0
-INFO  23:04:39,012 - #5 ;
-INFO  23:04:39,012 - #4 }
-INFO  23:04:39,012 - #4 }
+INFO  16:12:32,082 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  16:12:32,259 - #2 program
+INFO  16:12:32,260 - #47 MJProgram
+INFO  16:12:32,260 - #18 {
+INFO  16:12:32,260 - #19 }
+INFO  16:12:32,268 - Program(
+ MJProgram
+) [Program]
+INFO  16:12:32,268 - ===================================
+INFO  16:12:32,276 -  Print count calls = 0
+INFO  16:12:32,276 -  Deklarisanih promenljivih ima = 0

@@ -72,13 +72,15 @@
 		</java>
 	</target>
 
-	<target name="runObj" depends="disasm" >
-		<java classname="rs.etf.pp1.mj.runtime.Run">
-			<arg value="test/program.obj"/>
-			<classpath>
-				<pathelement location="lib/mj-runtime.jar"/>
-			</classpath>
-		</java>
+	<target name="runObj" depends="disasm">
+	        <java classname="rs.etf.pp1.mj.runtime.Run">
+	        	<!--redirector output="test/output.txt" error="test/error.txt" /-->
+	        	<arg value="-debug"/>
+	            <arg value="test/program.obj"/>
+	            <classpath>
+	                <pathelement location="lib/mj-runtime.jar"/>
+	            </classpath>
+	        </java>
 	</target>
 
 </project>

@@ -1,4 +1,4 @@
-package rs.ac.bg.etf.pp1;
+/*package rs.ac.bg.etf.pp1;
 
 import rs.ac.bg.etf.pp1.CounterVisitor.FormParamCounter;
 import rs.ac.bg.etf.pp1.CounterVisitor.VarCounter;
@@ -115,4 +115,4 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(AddExpr AddExpr) {
 		Code.put(Code.add);
 	}
-}
+}*/
