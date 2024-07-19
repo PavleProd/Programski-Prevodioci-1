@@ -61,101 +61,248 @@ terminal PLUS, MINUS, MUL, DIV, MOD;
 terminal EQUAL, DOUBLE_EQUAL, NOT_EQUAL;
 terminal GT, GTE, LT, LTE, AND, OR;
 terminal INC, DEC;
-terminal SEMICOLON, COLON, COMMA, DOT;
+terminal SEMICOLON, COLON, DOUBLE_COLON, COMMA, DOT;
 
 terminal Integer INT;
 terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
 
-terminal TYPE_INT, TYPE_BOOL, TYPE_CHAR;
+nonterminal Program, Type;
+nonterminal Namespace, Declaration, DeclarationList;
+nonterminal ConstDeclaration, ConstDeclarationList, ConstDeclarationElement, ConstValue;
+nonterminal VarDeclarationOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
+nonterminal MethodDeclaration, MethodDeclarationType, FormPars, FormParsList, Parameter, Statement, Statements;
 
-nonterminal Program, ProgramDeclList, ProgramDecl, ConstDeclList;
+nonterminal ExprOptional, Expr, ActPars, ActParsOptionalBrackets;
+nonterminal Term, AddTerms, AddTermsList, AddTerm;
+nonterminal Factor, MulFactors, MulFactorsList, MulFactor;
+nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
+nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember; 
 
-nonterminal Type, BasicType, Value, BasicValue;
-nonterminal BasicDeclaration, BasicDefinition, BasicDefinitionNoType, BasicDefinitionList, BasicDefinitionListNoType;
-nonterminal Declaration, Definition;
 
 /* PROGRAM */
 
-Program ::= (Program) PROGRAM IDENT:programName ProgramDeclList LBRACE RBRACE
-;
-
-
-/* TIPOVI, Basic koristiti samo kad nam on specificno treba */
-
-Type ::= (Type_Custom) IDENT:typeName
+Program ::= (Program) PROGRAM IDENT:programName Namespace DeclarationList LBRACE MethodDeclaration RBRACE
+			;
+			
+Type ::= IDENT:typeName
 		 |
-		 (Type_Basic) BasicType
+		 Type DOUBLE_COLON IDENT:typeName
 		 ;
-		 
-BasicType ::= (BasicType_Int) TYPE_INT
+
+Namespace ::= NAMESPACE IDENT:namespaceName LBRACE DeclarationList LBRACE MethodDeclaration RBRACE RBRACE
 			  |
-			  (BasicType_Bool) TYPE_BOOL
-			  |
-			  (BasicType_Char) TYPE_CHAR
+			  /* EPSILON */
 			  ;
 
-Value ::= (Value_Custom) IDENT:value
-		  |
-		  (Value_Basic) BasicValue
-		  ;
+DeclarationList ::= DeclarationList Declaration
+					| /* EPSILON */
+					;
 
-BasicValue ::= (BasicValue_Int) INT
-			   |
-			   (BasicValue_Bool) BOOL
-			   |
-			   (BasicValue_Char) CHAR
-			   ;
-
-/* DEKLARACIJA I DEFINICIJA promenljivih, namerno bez ; jer moze da bude vise u istom redu */
-			   
-Declaration ::= (Declaration_Custom) Type IDENT:varName
+Declaration ::= ConstDeclaration SEMICOLON
 				|
-				(Declaration_Basic) BasicDeclaration;
-				
-BasicDeclaration ::= (BasicDeclaration) BasicType IDENT:varName
-					 ;
-
-Definition ::= (Definition_Custom) Type IDENT:varName EQUAL Value
-			   |
-			   (Definition_Basic) BasicDefinition
-			   ;
-			   
-BasicDefinitionList ::= (BasicDefinitionList) BasicType BasicDefinitionListNoType
-						;
-
-BasicDefinitionListNoType ::= (BasicDefinitionListNoType_One) BasicDefinitionNoType
-							  |
-							  (BasicDefinitionListNoType_Multiple) BasicDefinitionListNoType COMMA BasicDefinitionNoType
-							  ;
-
-BasicDefinitionNoType ::= (BasicDefinitionNoType) IDENT:varName EQUAL BasicValue
-						  ;
-			   
-BasicDefinition ::= (BasicDefinition ) BasicType IDENT:varName EQUAL BasicValue
-					;
-			   
-/* PROGRAM DEFINICIJA */
-
-ProgramDeclList ::= (ProgramDeclList_Exists) ProgramDeclList ProgramDecl
-					|
-					(ProgramDeclList_Epsilon) /* epsilon */
-					;
-
-ProgramDecl ::= (ProgramDecl) ConstDeclList SEMICOLON
+				VarDeclaration SEMICOLON
 				;
 
-ConstDeclList ::= (ConstDeclList) CONST BasicDefinitionList
-				  ;
+/* CONST DECLARATION */
+
+ConstDeclaration ::= CONST Type ConstDeclarationList
+					 ;
+		 
+ConstDeclarationList ::= ConstDeclarationElement
+						 |
+						 ConstDeclarationList COMMA ConstDeclarationElement
+						 ;
+
+ConstDeclarationElement ::= IDENT:varName EQUAL ConstValue
+							;
+						
+ConstValue ::= INT
+			   |
+			   BOOL
+			   |
+			   CHAR
+			   ;
+
+/* VAR DECLARATION */
+VarDeclarationOptional ::= VarDeclaration
+						   |
+						   /* EPSILON */
+						   ;
+
+VarDeclaration ::= Type VarList
+				   ;
+
+VarList ::= VarListElement
+			|
+			VarList COMMA VarListElement
+			;
+			
+VarListElement ::= IDENT:elementName VarOrArray
+				   ;
 				  
+VarOrArray ::= LBRACK RBRACK
+			   |
+			   /* EPSILON */
+			   ;
+	
+/* METODE */	
+		   
+MethodDeclaration ::= MethodDeclarationType IDENT:methodName LPAREN FormPars RPAREN VarDeclarationOptional LBRACE Statements RBRACE
+					  |
+					  /* EPSILON */
+					  ;
+					  
+MethodDeclarationType ::= Type
+						  |
+						  VOID
+						  ;
 
+FormPars ::= FormParsList
+			 |
+			 /* EPSILON */
+			 ;
+			 
+FormParsList ::= FormParsList COMMA Parameter
+				 |
+				 Parameter
+				 ;
+			 
+Parameter ::= Type VarListElement
+			  ;
+			  
+Statements ::= Statements Statement
+			   |
+			   /* EPSILON */
+			   ;
+			 
+Statement ::= BREAK SEMICOLON
+			  |
+			  CONTINUE SEMICOLON
+			  |
+			  RETURN ExprOptional SEMICOLON
+			  ;
 
+/* EXPR */
 
+ExprOptional ::= Expr
+				 |
+				 /* EPSILON */
+				 ;
+				 
+ActParsOptionalBrackets ::= LPAREN ActPars RPAREN
+							|
+							/* EPSILON */
+							;
+							
+ActPars ::= Expr
+			|
+			ActPars COMMA Expr
+			;
+		  
+Expr ::= MinusOptional Term AddTerms
+		 ;
+
+/* TERM */
+
+Term ::= Factor MulFactors
+		;
+		
+AddTerms ::= AddTermsList
+			 |
+			 /* Epsilon */
+			 ;
+
+AddTermsList ::= AddTermsList AddTerm
+				 |
+				 AddTerm
+				 ;
+				 
+AddTerm ::= AddOp Term
+			;
+
+/* FACTOR */
+
+Factor ::= Designator ActParsOptionalBrackets
+		   |
+		   ConstValue /* int, bool, char konstanta */
+		   |
+		   LPAREN Expr RPAREN
+		   ;
+	
+MulFactors ::= MulFactorsList
+			 |
+			 /* Epsilon */
+			 ;
+
+MulFactorsList ::= MulFactorsList MulFactor
+				 |
+				 MulFactor
+				 ;
+				 
+MulFactor ::= MulOp Factor
+			;
+
+MinusOptional ::= MINUS
+			      |
+			      /* EPSILON */
+			      ;
+
+/* DESIGNATOR */
+
+Designator ::= Type Members
+			   ;
+			   
+Members ::= MemberList
+			|
+			/* EPSILON */
+			;
+			  
+MemberList ::= MemberList Member
+			   |
+			   Member
+			   ;
+
+Member ::= DOT ArrayOrVarMember
+		   ;
+		   
+ArrayOrVarMember ::= IDENT:varValue
+					 |
+					 LBRACK Expr RBRACK
+					 ;
+
+Label ::= IDENT:label
+		 ;
+
+AssignOp ::= EQUAL;
+
+Relop ::= DOUBLE_EQUAL
+		  |
+		  NOT_EQUAL
+		  |
+		  GT
+		  |
+		  GTE
+		  |
+		  LT
+		  |
+		  LTE
+		  ;
+
+AddOp ::= PLUS
+		  |
+		  MINUS
+		  ;
+			 
+MulOp ::= MUL
+		  |
+		  DIV
+		  |
+		  MOD
+		  ;
 			  
 
-			  
-			  
 
 
 

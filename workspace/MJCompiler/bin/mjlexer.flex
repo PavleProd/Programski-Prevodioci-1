@@ -55,10 +55,6 @@ import java_cup.runtime.Symbol;
 "class"		{ return new_symbol(sym.CLASS, yytext()); }
 "extends"	{ return new_symbol(sym.CONST, yytext()); }
 
-"int"		{ return new_symbol(sym.TYPE_INT, yytext()); }
-"char"		{ return new_symbol(sym.TYPE_CHAR, yytext()); }
-"bool"		{ return new_symbol(sym.TYPE_BOOL, yytext()); }
-
 "{"		{ return new_symbol(sym.LBRACE, yytext()); }
 "}"		{ return new_symbol(sym.RBRACE, yytext()); }
 "("		{ return new_symbol(sym.LPAREN, yytext()); }
@@ -72,8 +68,8 @@ import java_cup.runtime.Symbol;
 "/"		{ return new_symbol(sym.DIV, yytext()); }
 "%"		{ return new_symbol(sym.MOD, yytext()); }
 
-"="		{ return new_symbol(sym.EQUAL, yytext()); }
 "=="		{ return new_symbol(sym.DOUBLE_EQUAL, yytext()); }
+"="		{ return new_symbol(sym.EQUAL, yytext()); }
 "!="		{ return new_symbol(sym.NOT_EQUAL, yytext()); }
 
 ">"		{ return new_symbol(sym.GT, yytext()); }
@@ -87,6 +83,7 @@ import java_cup.runtime.Symbol;
 "--"		{ return new_symbol(sym.DEC, yytext()); }
 
 ";"		{ return new_symbol(sym.SEMICOLON, yytext()); }
+"::"    { return new_symbol(sym.DOUBLE_COLON, yytext()); }
 ":"		{ return new_symbol(sym.COLON, yytext()); }
 ","		{ return new_symbol(sym.COMMA, yytext()); }
 "."		{ return new_symbol(sym.DOT, yytext()); }

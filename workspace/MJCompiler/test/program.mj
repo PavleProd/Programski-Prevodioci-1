@@ -1,4 +1,15 @@
 program MJProgram
-const a x = true, y = false, z = 1;
+namespace test { const int x = 5, y = 6; { void f() {} }}
+const bool x = true, z = false;
+const int x = 6;
+const char c = 7;
+int x, y, z;
+kurac d;
 {
+	int x(int c, int a, int d[], float x) {
+		break;
+		continue;
+		return - 1 * 2 + 3 * (1 + 2 + 3) + prvi::drugi::treci.cetvri.peti(1) % 6;
+		
+	}
 }
