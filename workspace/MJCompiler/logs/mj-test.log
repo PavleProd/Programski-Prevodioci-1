@@ -1,11 +1,8 @@
-INFO  16:12:32,082 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  16:12:32,259 - #2 program
-INFO  16:12:32,260 - #47 MJProgram
-INFO  16:12:32,260 - #18 {
-INFO  16:12:32,260 - #19 }
-INFO  16:12:32,268 - Program(
- MJProgram
-) [Program]
-INFO  16:12:32,268 - ===================================
-INFO  16:12:32,276 -  Print count calls = 0
-INFO  16:12:32,276 -  Deklarisanih promenljivih ima = 0
+INFO  20:38:04,351 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  20:38:04,374 - #2 program
+INFO  20:38:04,374 - #47 MJProgram
+INFO  20:38:04,374 - #6 const
+INFO  20:38:04,374 - #47 a
+ERROR 20:38:04,375 - 
+Sintaksna greska na liniji 2
+ERROR 20:38:04,375 - Fatalna greska, parsiranje se ne moze nastaviti na liniji 2

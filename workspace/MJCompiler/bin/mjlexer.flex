@@ -100,9 +100,9 @@ import java_cup.runtime.Symbol;
 "true"|"false" { return new_symbol(sym.BOOL, Boolean.valueOf(yytext().equals("true") ? true : false)); }
 "'"."'" {return new_symbol(sym.CHAR, Character.valueOf(yytext().charAt(1))); }
 
-([a-zA-Z])[a-zA-Z0-9_]* 	{return new_symbol (sym.IDENT, yytext()); }
+[a-zA-Z][a-zA-Z0-9_]* 	{return new_symbol (sym.IDENT, yytext()); }
 
-. { System.err.println("Leksicka greska: Ilegalni karakter: " + yytext() + ", linija: " + (yyline+1) + ", kolona: " + yycolumn); }
+. { System.err.println("Leksicka greska: Ilegalni karakter: " + yytext() + ", linija: " + (yyline+1) + ", kolona: " + (yycolumn + 1)); }
 
 
 

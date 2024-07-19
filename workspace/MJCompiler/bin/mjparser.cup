@@ -70,82 +70,83 @@ terminal String IDENT;
 
 terminal TYPE_INT, TYPE_BOOL, TYPE_CHAR;
 
+nonterminal Program, ProgramDeclList, ProgramDecl, ConstDeclList;
+
 nonterminal Type, BasicType, Value, BasicValue;
 nonterminal BasicDeclaration, BasicDefinition, BasicDefinitionNoType, BasicDefinitionList, BasicDefinitionListNoType;
 nonterminal Declaration, Definition;
 
-nonterminal Program, ProgramDeclList, ProgramDecl, ConstDeclList;
+/* PROGRAM */
+
+Program ::= (Program) PROGRAM IDENT:programName ProgramDeclList LBRACE RBRACE
+;
+
 
 /* TIPOVI, Basic koristiti samo kad nam on specificno treba */
 
-Type ::= IDENT:typeName
+Type ::= (Type_Custom) IDENT:typeName
 		 |
-		 BasicType
+		 (Type_Basic) BasicType
 		 ;
 		 
-BasicType ::= TYPE_INT
+BasicType ::= (BasicType_Int) TYPE_INT
 			  |
-			  TYPE_BOOL
+			  (BasicType_Bool) TYPE_BOOL
 			  |
-			  TYPE_CHAR
+			  (BasicType_Char) TYPE_CHAR
 			  ;
 
-Value ::= IDENT:value
+Value ::= (Value_Custom) IDENT:value
 		  |
-		  BasicValue
+		  (Value_Basic) BasicValue
 		  ;
 
-BasicValue ::= INT
+BasicValue ::= (BasicValue_Int) INT
 			   |
-			   BOOL
+			   (BasicValue_Bool) BOOL
 			   |
-			   CHAR
+			   (BasicValue_Char) CHAR
 			   ;
 
 /* DEKLARACIJA I DEFINICIJA promenljivih, namerno bez ; jer moze da bude vise u istom redu */
 			   
-Declaration ::= Type IDENT:varName
+Declaration ::= (Declaration_Custom) Type IDENT:varName
 				|
-				BasicDeclaration;
+				(Declaration_Basic) BasicDeclaration;
 				
-BasicDeclaration ::= BasicType IDENT:varName
+BasicDeclaration ::= (BasicDeclaration) BasicType IDENT:varName
 					 ;
 
-Definition ::= Type IDENT:varName EQUAL Value
+Definition ::= (Definition_Custom) Type IDENT:varName EQUAL Value
 			   |
-			   BasicDefinition
+			   (Definition_Basic) BasicDefinition
 			   ;
 			   
-BasicDefinitionList ::= BasicType BasicDefinitionListNoType
+BasicDefinitionList ::= (BasicDefinitionList) BasicType BasicDefinitionListNoType
 						;
 
-BasicDefinitionListNoType ::= BasicDefinitionNoType
+BasicDefinitionListNoType ::= (BasicDefinitionListNoType_One) BasicDefinitionNoType
 							  |
-							  BasicDefinitionListNoType COMMA BasicDefinitionNoType
+							  (BasicDefinitionListNoType_Multiple) BasicDefinitionListNoType COMMA BasicDefinitionNoType
 							  ;
 
-BasicDefinitionNoType ::= IDENT:varName EQUAL BasicValue
+BasicDefinitionNoType ::= (BasicDefinitionNoType) IDENT:varName EQUAL BasicValue
 						  ;
 			   
-BasicDefinition ::= BasicType IDENT:varName EQUAL BasicValue
+BasicDefinition ::= (BasicDefinition ) BasicType IDENT:varName EQUAL BasicValue
 					;
 			   
 /* PROGRAM DEFINICIJA */
 
-Program ::= PROGRAM IDENT:programName ProgramDeclList LBRACE RBRACE
-;
-
-ProgramDeclList ::= ProgramDecl
+ProgramDeclList ::= (ProgramDeclList_Exists) ProgramDeclList ProgramDecl
 					|
-					ProgramDeclList ProgramDecl
-					|
-					/* epsilon */
+					(ProgramDeclList_Epsilon) /* epsilon */
 					;
 
-ProgramDecl ::= ConstDeclList
+ProgramDecl ::= (ProgramDecl) ConstDeclList SEMICOLON
 				;
 
-ConstDeclList ::= CONST BasicDefinitionList
+ConstDeclList ::= (ConstDeclList) CONST BasicDefinitionList
 				  ;
 				  
 

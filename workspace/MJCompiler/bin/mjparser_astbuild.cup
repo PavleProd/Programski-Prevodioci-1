@@ -1,0 +1,186 @@
+package rs.ac.bg.etf.pp1;
+
+import java_cup.runtime.*;
+import org.apache.log4j.*;
+
+// import java.io.*;
+import rs.ac.bg.etf.pp1.ast.*;
+
+
+parser code {:
+	
+	boolean errorDetected = false;
+	
+	Logger log = Logger.getLogger(getClass());
+   
+   
+    // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
+     
+    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+      done_parsing();
+      report_error(message, info);
+    }
+  
+    public void syntax_error(Symbol cur_token) {
+        report_error("\nSintaksna greska", cur_token);
+    }
+  
+    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+    }
+
+    public void report_error(String message, Object info) {
+    	errorDetected = true;
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append (" na liniji ").append(((Symbol)info).left);
+        log.error(msg.toString());
+    }
+    
+    public void report_info(String message, Object info) {
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append (" na liniji ").append(((Symbol)info).left);
+        log.info(msg.toString());
+    }
+    
+:}
+
+scan with {:
+	Symbol s = this.getScanner().next_token();
+	if (s != null && s.value != null) 
+		log.info(s.toString() + " " + s.value.toString());
+	return s;
+:}
+
+terminal PROGRAM, BREAK, CLASS, ELSE, CONST, IF, NEW, PRINT, READ, RETURN, VOID;
+terminal EXTENDS, CONTINUE, FOR, STATIC, NAMESPACE;
+
+terminal LBRACE, RBRACE, LPAREN, RPAREN, LBRACK, RBRACK;
+terminal PLUS, MINUS, MUL, DIV, MOD;
+terminal EQUAL, DOUBLE_EQUAL, NOT_EQUAL;
+terminal GT, GTE, LT, LTE, AND, OR;
+terminal INC, DEC;
+terminal SEMICOLON, COLON, COMMA, DOT;
+
+terminal Integer INT;
+terminal Boolean BOOL;
+terminal Character CHAR;
+terminal String IDENT;
+
+terminal TYPE_INT, TYPE_BOOL, TYPE_CHAR;
+
+nonterminal Program Program;
+nonterminal ProgramDeclList ProgramDeclList;
+nonterminal ProgramDecl ProgramDecl;
+nonterminal ConstDeclList ConstDeclList;
+
+nonterminal Type Type;
+nonterminal BasicType BasicType;
+nonterminal Value Value;
+nonterminal BasicValue BasicValue;
+nonterminal BasicDeclaration BasicDeclaration;
+nonterminal BasicDefinition BasicDefinition;
+nonterminal BasicDefinitionNoType BasicDefinitionNoType;
+nonterminal BasicDefinitionList BasicDefinitionList;
+nonterminal BasicDefinitionListNoType BasicDefinitionListNoType;
+nonterminal Declaration Declaration;
+nonterminal Definition Definition;
+
+/* PROGRAM */
+
+Program ::= (Program) PROGRAM IDENT:programName ProgramDeclList:P1 LBRACE RBRACE {: RESULT=new Program(programName, P1); RESULT.setLine(programNameleft); :}
+;
+
+
+/* TIPOVI, Basic koristiti samo kad nam on specificno treba */
+
+Type ::= (Type_Custom) IDENT:typeName {: RESULT=new Type_Custom(typeName); RESULT.setLine(typeNameleft); :}
+		 |
+		 (Type_Basic) BasicType:B1 {: RESULT=new Type_Basic(B1); RESULT.setLine(B1left); :}
+		 ;
+		 
+BasicType ::= (BasicType_Int) TYPE_INT {: RESULT=new BasicType_Int(); :}
+			  |
+			  (BasicType_Bool) TYPE_BOOL {: RESULT=new BasicType_Bool(); :}
+			  |
+			  (BasicType_Char) TYPE_CHAR {: RESULT=new BasicType_Char(); :}
+			  ;
+
+Value ::= (Value_Custom) IDENT:value {: RESULT=new Value_Custom(value); RESULT.setLine(valueleft); :}
+		  |
+		  (Value_Basic) BasicValue:B1 {: RESULT=new Value_Basic(B1); RESULT.setLine(B1left); :}
+		  ;
+
+BasicValue ::= (BasicValue_Int) INT:I1 {: RESULT=new BasicValue_Int(I1); RESULT.setLine(I1left); :}
+			   |
+			   (BasicValue_Bool) BOOL:B1 {: RESULT=new BasicValue_Bool(B1); RESULT.setLine(B1left); :}
+			   |
+			   (BasicValue_Char) CHAR:C1 {: RESULT=new BasicValue_Char(C1); RESULT.setLine(C1left); :}
+			   ;
+
+/* DEKLARACIJA I DEFINICIJA promenljivih, namerno bez ; jer moze da bude vise u istom redu */
+			   
+Declaration ::= (Declaration_Custom) Type:T1 IDENT:varName {: RESULT=new Declaration_Custom(T1, varName); RESULT.setLine(T1left); :}
+				|
+				(Declaration_Basic) BasicDeclaration:B1 {: RESULT=new Declaration_Basic(B1); RESULT.setLine(B1left); :};
+				
+BasicDeclaration ::= BasicType:B1 IDENT:varName {: RESULT=new BasicDeclarationDerived1(B1, varName); RESULT.setLine(B1left); :}
+					 ;
+
+Definition ::= Type:T1 IDENT:varName EQUAL Value:V2 {: RESULT=new DefinitionDerived1(T1, varName, V2); RESULT.setLine(T1left); :}
+			   |
+			   BasicDefinition:B1 {: RESULT=new DefinitionDerived2(B1); RESULT.setLine(B1left); :}
+			   ;
+			   
+BasicDefinitionList ::= BasicType:B1 BasicDefinitionListNoType:B2 {: RESULT=new BasicDefinitionListDerived1(B1, B2); RESULT.setLine(B1left); :}
+						;
+
+BasicDefinitionListNoType ::= BasicDefinitionNoType:B1 {: RESULT=new BasicDefinitionListNoTypeDerived1(B1); RESULT.setLine(B1left); :}
+							  |
+							  BasicDefinitionListNoType:B1 COMMA BasicDefinitionNoType:B2 {: RESULT=new BasicDefinitionListNoTypeDerived2(B1, B2); RESULT.setLine(B1left); :}
+							  ;
+
+BasicDefinitionNoType ::= IDENT:varName EQUAL BasicValue:B1 {: RESULT=new BasicDefinitionNoTypeDerived1(varName, B1); RESULT.setLine(varNameleft); :}
+						  ;
+			   
+BasicDefinition ::= BasicType:B1 IDENT:varName EQUAL BasicValue:B2 {: RESULT=new BasicDefinitionDerived1(B1, varName, B2); RESULT.setLine(B1left); :}
+					;
+			   
+/* PROGRAM DEFINICIJA */
+
+ProgramDeclList ::= ProgramDeclList:P1 ProgramDecl:P2 {: RESULT=new ProgramDeclListDerived1(P1, P2); RESULT.setLine(P1left); :}
+					| {: RESULT=new ProgramDeclListDerived2(); :}
+					/* epsilon */
+					;
+
+ProgramDecl ::= ConstDeclList:C1 SEMICOLON {: RESULT=new ProgramDeclDerived1(C1); RESULT.setLine(C1left); :}
+				;
+
+ConstDeclList ::= CONST BasicDefinitionList:B1 {: RESULT=new ConstDeclListDerived1(B1); RESULT.setLine(B1left); :}
+				  ;
+				  
+
+
+
+			  
+
+			  
+			  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
