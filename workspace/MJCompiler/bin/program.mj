@@ -10,6 +10,9 @@ kurac d;
 		break;
 		continue;
 		return - 1 * 2 + 3 * (1 + 2 + 3) + prvi::drugi::treci.cetvri.peti(1) % 6;
-		
+		read (x);
+		print (-23 / prvi::drugi::treci.cetvri.peti(1) % 6);
+		if (x || y + 3 && 5 > 6 ) break;
+		if (123 && 5 >= 6 || 7 != 8) continue; else return;
 	}
 }

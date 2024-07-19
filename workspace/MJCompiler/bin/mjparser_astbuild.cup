@@ -92,6 +92,7 @@ nonterminal Statements Statements;
 
 nonterminal ExprOptional ExprOptional;
 nonterminal Expr Expr;
+nonterminal ExprRelopOptional ExprRelopOptional;
 nonterminal ActPars ActPars;
 nonterminal ActParsOptionalBrackets ActParsOptionalBrackets;
 nonterminal Term Term;
@@ -112,8 +113,15 @@ nonterminal Designator Designator;
 nonterminal Members Members;
 nonterminal MemberList MemberList;
 nonterminal Member Member;
-nonterminal ArrayOrVarMember ArrayOrVarMember; 
+nonterminal ArrayOrVarMember ArrayOrVarMember;
 
+nonterminal ElseOptional ElseOptional;
+nonterminal NumConstOptional NumConstOptional;
+nonterminal Condition Condition;
+nonterminal CondTerm CondTerm;
+nonterminal CondFact CondFact;
+
+precedence left ELSE;
 
 /* PROGRAM */
 
@@ -216,9 +224,44 @@ Statement ::= BREAK SEMICOLON {: RESULT=new StatementDerived1(); :}
 			  CONTINUE SEMICOLON {: RESULT=new StatementDerived2(); :}
 			  |
 			  RETURN ExprOptional:E1 SEMICOLON {: RESULT=new StatementDerived3(E1); RESULT.setLine(E1left); :}
+			  |
+			  READ LPAREN Designator:D1 RPAREN SEMICOLON {: RESULT=new StatementDerived4(D1); RESULT.setLine(D1left); :}
+			  |
+			  PRINT LPAREN Expr:E1 NumConstOptional:N2 RPAREN SEMICOLON {: RESULT=new StatementDerived5(E1, N2); RESULT.setLine(E1left); :}
+			  |
+			  IF LPAREN Condition:C1 RPAREN Statement:S2 ElseOptional:E3 {: RESULT=new StatementDerived6(C1, S2, E3); RESULT.setLine(C1left); :}
 			  ;
+			  
+ElseOptional ::= ELSE Statement:S1 {: RESULT=new ElseOptionalDerived1(S1); RESULT.setLine(S1left); :}
+				 | {: RESULT=new ElseOptionalDerived2(); :}
+				 /* EPSILON */
+				 ;
+			  
+NumConstOptional ::= COMMA INT:I1 {: RESULT=new NumConstOptionalDerived1(I1); RESULT.setLine(I1left); :}
+				     | {: RESULT=new NumConstOptionalDerived2(); :}
+				     /* EPSILON */
+				     ;
+		     
+/* CONDITION */
+
+Condition ::= CondTerm:C1 {: RESULT=new ConditionDerived1(C1); RESULT.setLine(C1left); :}
+			  |
+			  Condition:C1 OR CondTerm:C2 {: RESULT=new ConditionDerived2(C1, C2); RESULT.setLine(C1left); :}
+			  ;
+				
+CondTerm ::= CondFact:C1 {: RESULT=new CondTermDerived1(C1); RESULT.setLine(C1left); :}
+			 |
+			 CondTerm:C1 AND CondFact:C2 {: RESULT=new CondTermDerived2(C1, C2); RESULT.setLine(C1left); :}
+			 ;
+
+CondFact ::= Expr:E1 ExprRelopOptional:E2 {: RESULT=new CondFactDerived1(E1, E2); RESULT.setLine(E1left); :}
+			 ;
 
 /* EXPR */
+
+ExprRelopOptional ::= Relop:R1 Expr:E2 {: RESULT=new ExprRelopOptionalDerived1(R1, E2); RESULT.setLine(R1left); :}
+					  | {: RESULT=new ExprRelopOptionalDerived2(); :}
+					  /* EPSILON */;
 
 ExprOptional ::= Expr:E1 {: RESULT=new ExprOptionalDerived1(E1); RESULT.setLine(E1left); :}
 				 | {: RESULT=new ExprOptionalDerived2(); :}

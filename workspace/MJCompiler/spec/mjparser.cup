@@ -74,12 +74,16 @@ nonterminal ConstDeclaration, ConstDeclarationList, ConstDeclarationElement, Con
 nonterminal VarDeclarationOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
 nonterminal MethodDeclaration, MethodDeclarationType, FormPars, FormParsList, Parameter, Statement, Statements;
 
-nonterminal ExprOptional, Expr, ActPars, ActParsOptionalBrackets;
+nonterminal ExprOptional, Expr, ExprRelopOptional, ActPars, ActParsOptionalBrackets;
 nonterminal Term, AddTerms, AddTermsList, AddTerm;
 nonterminal Factor, MulFactors, MulFactorsList, MulFactor;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
-nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember; 
+nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
 
+nonterminal ElseOptional, NumConstOptional;
+nonterminal Condition, CondTerm, CondFact;
+
+precedence left ELSE;
 
 /* PROGRAM */
 
@@ -182,9 +186,44 @@ Statement ::= BREAK SEMICOLON
 			  CONTINUE SEMICOLON
 			  |
 			  RETURN ExprOptional SEMICOLON
+			  |
+			  READ LPAREN Designator RPAREN SEMICOLON
+			  |
+			  PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON
+			  |
+			  IF LPAREN Condition RPAREN Statement ElseOptional
 			  ;
+			  
+ElseOptional ::= ELSE Statement
+				 |
+				 /* EPSILON */
+				 ;
+			  
+NumConstOptional ::= COMMA INT
+				     |
+				     /* EPSILON */
+				     ;
+		     
+/* CONDITION */
+
+Condition ::= CondTerm
+			  |
+			  Condition OR CondTerm
+			  ;
+				
+CondTerm ::= CondFact
+			 |
+			 CondTerm AND CondFact
+			 ;
+
+CondFact ::= Expr ExprRelopOptional
+			 ;
 
 /* EXPR */
+
+ExprRelopOptional ::= Relop Expr
+					  |
+					  /* EPSILON */;
 
 ExprOptional ::= Expr
 				 |
