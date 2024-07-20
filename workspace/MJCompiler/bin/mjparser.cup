@@ -74,14 +74,15 @@ nonterminal ConstDeclaration, ConstDeclarationList, ConstDeclarationElement, Con
 nonterminal VarDeclarationOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
 nonterminal MethodDeclaration, MethodDeclarationType, FormPars, FormParsList, Parameter, Statement, Statements;
 
-nonterminal ExprOptional, Expr, ExprRelopOptional, ActPars, ActParsOptionalBrackets;
+nonterminal ExprOptional, Expr, ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional;
 nonterminal Term, AddTerms, AddTermsList, AddTerm;
 nonterminal Factor, MulFactors, MulFactorsList, MulFactor;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
+nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorList2;
 nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
 
 nonterminal ElseOptional, NumConstOptional;
-nonterminal Condition, CondTerm, CondFact;
+nonterminal Condition, CondTerm, CondFact, CondFactOptional;
 
 precedence left ELSE;
 
@@ -181,7 +182,9 @@ Statements ::= Statements Statement
 			   /* EPSILON */
 			   ;
 			 
-Statement ::= BREAK SEMICOLON
+Statement ::= DesignatorStatement SEMICOLON
+			  |
+			  BREAK SEMICOLON
 			  |
 			  CONTINUE SEMICOLON
 			  |
@@ -192,6 +195,10 @@ Statement ::= BREAK SEMICOLON
 			  PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON
 			  |
 			  IF LPAREN Condition RPAREN Statement ElseOptional
+			  |
+			  FOR LPAREN DesignatorList2 SEMICOLON CondFactOptional SEMICOLON DesignatorList2 RPAREN Statement
+			  |
+			  LBRACE Statements RBRACE
 			  ;
 			  
 ElseOptional ::= ELSE Statement
@@ -216,6 +223,11 @@ CondTerm ::= CondFact
 			 CondTerm AND CondFact
 			 ;
 
+CondFactOptional ::= CondFact
+					 |
+					 /* EPSILON */
+					 ;
+
 CondFact ::= Expr ExprRelopOptional
 			 ;
 
@@ -234,7 +246,12 @@ ActParsOptionalBrackets ::= LPAREN ActPars RPAREN
 							|
 							/* EPSILON */
 							;
-							
+
+ActParsOptional ::= ActPars
+					|
+					/* EPSILON */
+					;
+		
 ActPars ::= Expr
 			|
 			ActPars COMMA Expr
@@ -289,6 +306,35 @@ MinusOptional ::= MINUS
 			      ;
 
 /* DESIGNATOR */
+
+DesignatorStatement ::= Designator DesignatorStatementOptions
+					;
+					
+DesignatorStatementOptions ::= AssignOp Expr
+							   |
+							   LPAREN ActParsOptional RPAREN
+							   |
+							   INC
+							   |
+							   DEC
+							   |
+							   LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator
+							   ;
+							   
+DesignatorListOptional ::= DesignatorList
+						   |
+						   /* EPSILON */
+						   ;
+						
+DesignatorList ::= Designator COMMA
+				   |
+				   DesignatorList COMMA Designator COMMA
+				   ; 
+
+DesignatorList2 ::= Designator
+					|
+					DesignatorList2 COMMA Designator
+					;
 
 Designator ::= Type Members
 			   ;
