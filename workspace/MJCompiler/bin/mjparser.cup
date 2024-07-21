@@ -91,300 +91,301 @@ precedence left ELSE;
 Program ::= (Program) PROGRAM IDENT:programName Namespace DeclarationList LBRACE MethodDeclaration RBRACE
 			;
 			
-Type ::= IDENT:typeName
+Type ::= (Type_NoScope) IDENT:typeName
 		 |
-		 Type DOUBLE_COLON IDENT:typeName
+		 (Type_Scope) Type DOUBLE_COLON IDENT:typeName
 		 ;
 
-Namespace ::= NAMESPACE IDENT:namespaceName LBRACE DeclarationList LBRACE MethodDeclaration RBRACE RBRACE
+Namespace ::= (Namespace_Define) NAMESPACE IDENT:namespaceName LBRACE DeclarationList LBRACE MethodDeclaration RBRACE RBRACE
 			  |
-			  /* EPSILON */
+			  (Namespace_Skip) /* EPSILON */
 			  ;
 
-DeclarationList ::= DeclarationList Declaration
-					| /* EPSILON */
+DeclarationList ::= (DeclarationList_Define) DeclarationList Declaration
+					|
+					(DeclarationList_SKIP) /* EPSILON */
 					;
 
-Declaration ::= ConstDeclaration SEMICOLON
+Declaration ::= (Declaration_Const) ConstDeclaration SEMICOLON
 				|
-				VarDeclaration SEMICOLON
+				(Declaration_Var) VarDeclaration SEMICOLON
 				;
 
 /* CONST DECLARATION */
 
-ConstDeclaration ::= CONST Type ConstDeclarationList
+ConstDeclaration ::= (ConstDeclaration) CONST Type ConstDeclarationList
 					 ;
 		 
-ConstDeclarationList ::= ConstDeclarationElement
+ConstDeclarationList ::= (ConstDeclarationList_One)  ConstDeclarationElement
 						 |
-						 ConstDeclarationList COMMA ConstDeclarationElement
+						 (ConstDeclarationList_Multiple) ConstDeclarationList COMMA ConstDeclarationElement
 						 ;
 
-ConstDeclarationElement ::= IDENT:varName EQUAL ConstValue
+ConstDeclarationElement ::= (ConstDeclarationElement) IDENT:varName EQUAL ConstValue
 							;
 						
-ConstValue ::= INT
+ConstValue ::= (ConstValue_INT) INT
 			   |
-			   BOOL
+			   (ConstValue_BOOL) BOOL
 			   |
-			   CHAR
+			   (ConstValue_CHAR) CHAR
 			   ;
 
 /* VAR DECLARATION */
-VarDeclarationOptional ::= VarDeclaration
+VarDeclarationOptional ::= (VarDeclarationOptional_Declare) VarDeclaration
 						   |
-						   /* EPSILON */
+						   (VarDeclarationOptional_SKIP) /* EPSILON */
 						   ;
 
-VarDeclaration ::= Type VarList
+VarDeclaration ::= (VarDeclaration) Type VarList
 				   ;
 
-VarList ::= VarListElement
+VarList ::= (VarList_One) VarListElement
 			|
-			VarList COMMA VarListElement
+			(VarList_Multiple) VarList COMMA VarListElement
 			;
 			
-VarListElement ::= IDENT:elementName VarOrArray
+VarListElement ::= (VarListElement) IDENT:elementName VarOrArray
 				   ;
 				  
-VarOrArray ::= LBRACK RBRACK
+VarOrArray ::= (VarOrArray_Array) LBRACK RBRACK
 			   |
-			   /* EPSILON */
+			   (VarOrArray_Var) /* EPSILON */
 			   ;
 	
 /* METODE */	
 		   
-MethodDeclaration ::= MethodDeclarationType IDENT:methodName LPAREN FormPars RPAREN VarDeclarationOptional LBRACE Statements RBRACE
+MethodDeclaration ::= (MethodDeclaration_Declare) MethodDeclarationType IDENT:methodName LPAREN FormPars RPAREN VarDeclarationOptional LBRACE Statements RBRACE
 					  |
-					  /* EPSILON */
+					  (MethodDeclaration_Skip) /* EPSILON */
 					  ;
 					  
-MethodDeclarationType ::= Type
+MethodDeclarationType ::= (MethodDeclarationType_Type) Type
 						  |
-						  VOID
+						  (MethodDeclarationType_Void) VOID
 						  ;
 
-FormPars ::= FormParsList
+FormPars ::= (FormPars_OneOrMore) FormParsList
 			 |
-			 /* EPSILON */
+			 (FormPars_None) /* EPSILON */
 			 ;
 			 
-FormParsList ::= FormParsList COMMA Parameter
+FormParsList ::= (FormParsList_Multiple) FormParsList COMMA Parameter
 				 |
-				 Parameter
+				 (FormParsList_One) Parameter
 				 ;
 			 
-Parameter ::= Type VarListElement
+Parameter ::= (Parameter) Type VarListElement
 			  ;
 			  
-Statements ::= Statements Statement
+Statements ::= (Statements_OneOrMore) Statements Statement
 			   |
-			   /* EPSILON */
+			   (Statements_None) /* EPSILON */
 			   ;
 			 
-Statement ::= DesignatorStatement SEMICOLON
+Statement ::= (Statement_DesignatorStatement) DesignatorStatement SEMICOLON
 			  |
-			  BREAK SEMICOLON
+			  (Statement_Break) BREAK SEMICOLON
 			  |
-			  CONTINUE SEMICOLON
+			  (Statement_Continue) CONTINUE SEMICOLON
 			  |
-			  RETURN ExprOptional SEMICOLON
+			  (Statement_Return) RETURN ExprOptional SEMICOLON
 			  |
-			  READ LPAREN Designator RPAREN SEMICOLON
+			  (Statement_Read) READ LPAREN Designator RPAREN SEMICOLON
 			  |
-			  PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON
+			  (Statement_Print) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON
 			  |
-			  IF LPAREN Condition RPAREN Statement ElseOptional
+			  (Statement_If) IF LPAREN Condition RPAREN Statement ElseOptional
 			  |
-			  FOR LPAREN DesignatorList2 SEMICOLON CondFactOptional SEMICOLON DesignatorList2 RPAREN Statement
+			  (Statement_For) FOR LPAREN DesignatorList2 SEMICOLON CondFactOptional SEMICOLON DesignatorList2 RPAREN Statement
 			  |
-			  LBRACE Statements RBRACE
+			  (Statement_Statements) LBRACE Statements RBRACE
 			  ;
 			  
-ElseOptional ::= ELSE Statement
+ElseOptional ::= (ElseOptional_Define) ELSE Statement
 				 |
-				 /* EPSILON */
+				 (ElseOptional_Skip) /* EPSILON */
 				 ;
 			  
-NumConstOptional ::= COMMA INT
+NumConstOptional ::= (NumConstOptional_Define) COMMA INT
 				     |
-				     /* EPSILON */
+				     (NumConstOptional_Skip) /* EPSILON */
 				     ;
 		     
 /* CONDITION */
 
-Condition ::= CondTerm
+Condition ::= (Condition_One) CondTerm
 			  |
-			  Condition OR CondTerm
+			  (Condition_MultipleOR) Condition OR CondTerm
 			  ;
 				
-CondTerm ::= CondFact
+CondTerm ::= (CondTerm_One) CondFact
 			 |
-			 CondTerm AND CondFact
+			 (CondTerm_MultipleAND) CondTerm AND CondFact
 			 ;
 
-CondFactOptional ::= CondFact
+CondFactOptional ::= (CondFact_Define) CondFact
 					 |
-					 /* EPSILON */
+					 (CondFact_Skip) /* EPSILON */
 					 ;
 
-CondFact ::= Expr ExprRelopOptional
+CondFact ::= (CondFact) Expr ExprRelopOptional
 			 ;
 
 /* EXPR */
 
-ExprRelopOptional ::= Relop Expr
+ExprRelopOptional ::= (ExprRelopOptional_Define) Relop Expr
 					  |
-					  /* EPSILON */;
+					  (ExprRelopOptional_Skip) /* EPSILON */;
 
-ExprOptional ::= Expr
+ExprOptional ::= (ExprOptional_Define) Expr
 				 |
-				 /* EPSILON */
+				 (ExprOptional_Skip) /* EPSILON */
 				 ;
 				 
-ActParsOptionalBrackets ::= LPAREN ActPars RPAREN
+ActParsOptionalBrackets ::= (ActParsOptionalBrackets_Define) LPAREN ActPars RPAREN
 							|
-							/* EPSILON */
+							(ActParsOptionalBrackets_Skip) /* EPSILON */
 							;
 
-ActParsOptional ::= ActPars
+ActParsOptional ::= (ActParsOptional_Define) ActPars
 					|
-					/* EPSILON */
+					(ActParsOptional_Skip) /* EPSILON */
 					;
 		
-ActPars ::= Expr
+ActPars ::= (ActPars_One) Expr
 			|
-			ActPars COMMA Expr
+			(ActPars_Multiple) ActPars COMMA Expr
 			;
 		  
-Expr ::= MinusOptional Term AddTerms
+Expr ::= (Expr) MinusOptional Term AddTerms
 		 ;
 
 /* TERM */
 
-Term ::= Factor MulFactors
-		;
+Term ::= (Term) Factor MulFactors
+		 ;
 		
-AddTerms ::= AddTermsList
+AddTerms ::= (AddTerms_Define) AddTermsList
 			 |
-			 /* Epsilon */
+			 (AddTerms_Skip) /* Epsilon */
 			 ;
 
-AddTermsList ::= AddTermsList AddTerm
+AddTermsList ::= (AddTermsList_Multiple) AddTermsList AddTerm
 				 |
-				 AddTerm
+				 (AddTermsList_One) AddTerm
 				 ;
 				 
-AddTerm ::= AddOp Term
+AddTerm ::= (AddTerm) AddOp Term
 			;
 
 /* FACTOR */
 
-Factor ::= Designator ActParsOptionalBrackets
+Factor ::= (Factor_Designator) Designator ActParsOptionalBrackets
 		   |
-		   ConstValue /* int, bool, char konstanta */
+		   (Factor_Const) ConstValue /* int, bool, char konstanta */
 		   |
-		   LPAREN Expr RPAREN
+		   (Factor_Expr) LPAREN Expr RPAREN
 		   ;
 	
-MulFactors ::= MulFactorsList
-			 |
-			 /* Epsilon */
-			 ;
+MulFactors ::= (MulFactors_Define) MulFactorsList
+			   |
+			   (MulFactors_Skip) /* Epsilon */
+			   ;
 
-MulFactorsList ::= MulFactorsList MulFactor
-				 |
-				 MulFactor
-				 ;
+MulFactorsList ::= (MulFactorsList_Multiple) MulFactorsList MulFactor
+				   |
+				   (MulFactorsList_Skip) MulFactor
+				   ;
 				 
-MulFactor ::= MulOp Factor
-			;
+MulFactor ::= (MulFactor) MulOp Factor
+			  ;
 
-MinusOptional ::= MINUS
+MinusOptional ::= (MinusOptional_Define) MINUS
 			      |
-			      /* EPSILON */
+			      (MinusOptional_Skip) /* EPSILON */
 			      ;
 
 /* DESIGNATOR */
 
-DesignatorStatement ::= Designator DesignatorStatementOptions
+DesignatorStatement ::= (DesignatorStatement) Designator DesignatorStatementOptions
 					;
 					
-DesignatorStatementOptions ::= AssignOp Expr
+DesignatorStatementOptions ::= (DesignatorStatementOptions_AssignOpExpr) AssignOp Expr
 							   |
-							   LPAREN ActParsOptional RPAREN
+							   (DesignatorStatementOptions_ActPars) LPAREN ActParsOptional RPAREN
 							   |
-							   INC
+							   (DesignatorStatementOptions_Inc) INC
 							   |
-							   DEC
+							   (DesignatorStatementOptions_Dec) DEC
 							   |
-							   LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator
+							   (DesignatorStatementOptions_DesignatorList) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator
 							   ;
 							   
-DesignatorListOptional ::= DesignatorList
+DesignatorListOptional ::= (DesignatorListOptional_Define) DesignatorList
 						   |
-						   /* EPSILON */
+						   (DesignatorListOptional_Skip) /* EPSILON */
 						   ;
 						
-DesignatorList ::= Designator COMMA
+DesignatorList ::= (DesignatorList_One) Designator COMMA
 				   |
-				   DesignatorList COMMA Designator COMMA
+				   (DesignatorList_Multiple) DesignatorList COMMA Designator COMMA
 				   ; 
 
-DesignatorList2 ::= Designator
+DesignatorList2 ::= (DesignatorList2_One) Designator
 					|
-					DesignatorList2 COMMA Designator
+					(DesignatorList2_Multiple) DesignatorList2 COMMA Designator
 					;
 
-Designator ::= Type Members
+Designator ::= (Designator) Type Members
 			   ;
 			   
-Members ::= MemberList
+Members ::= (Members_Define) MemberList
 			|
-			/* EPSILON */
+			(Members_Skip) /* EPSILON */
 			;
 			  
-MemberList ::= MemberList Member
+MemberList ::= (MemberList_Multiple) MemberList Member
 			   |
-			   Member
+			   (MemberList_One) Member
 			   ;
 
-Member ::= DOT ArrayOrVarMember
+Member ::= (Member) DOT ArrayOrVarMember
 		   ;
 		   
-ArrayOrVarMember ::= IDENT:varValue
+ArrayOrVarMember ::= (ArrayOrVarMember_Var) IDENT:varValue
 					 |
-					 LBRACK Expr RBRACK
+					 (ArrayOrVarMember_Array) LBRACK Expr RBRACK
 					 ;
 
-Label ::= IDENT:label
+Label ::= (Label) IDENT:label
 		 ;
 
-AssignOp ::= EQUAL;
+AssignOp ::= (AssignOp_EQUAL) EQUAL;
 
-Relop ::= DOUBLE_EQUAL
+Relop ::= (Relop_Double_Equal) DOUBLE_EQUAL
 		  |
-		  NOT_EQUAL
+		  (Relop_Not_Equal) NOT_EQUAL
 		  |
-		  GT
+		  (Relop_GT) GT
 		  |
-		  GTE
+		  (Relop_GTE) GTE
 		  |
-		  LT
+		  (Relop_LT) LT
 		  |
-		  LTE
+		  (Relop_LTE) LTE
 		  ;
 
-AddOp ::= PLUS
+AddOp ::= (AddOp_Plus) PLUS
 		  |
-		  MINUS
+		  (AddOp_Minus) MINUS
 		  ;
 			 
-MulOp ::= MUL
+MulOp ::= (MulOp_Mul) MUL
 		  |
-		  DIV
+		  (MulOp_Div) DIV
 		  |
-		  MOD
+		  (MulOp_Mod) MOD
 		  ;
 			  
 
