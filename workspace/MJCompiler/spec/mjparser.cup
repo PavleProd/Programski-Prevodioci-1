@@ -68,17 +68,17 @@ terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
 
-nonterminal Program, Type;
+nonterminal Program, Type, Var;
 nonterminal Namespace, Declaration, DeclarationList;
 nonterminal ConstDeclaration, ConstDeclarationList, ConstDeclarationElement, ConstValue;
-nonterminal VarDeclarationOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
-nonterminal MethodDeclaration, MethodDeclarationType, FormPars, FormParsList, Parameter, Statement, Statements;
+nonterminal VarDeclarationListOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
+nonterminal MethodsDeclarationList, MethodDeclaration, MethodDeclarationType, FormPars, FormParsList, Parameter, Statement, Statements;
 
 nonterminal ExprOptional, Expr, ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional;
 nonterminal Term, AddTerms, AddTermsList, AddTerm;
-nonterminal Factor, MulFactors, MulFactorsList, MulFactor;
+nonterminal Factor, FactorNew, MulFactors, MulFactorsList, MulFactor;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
-nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorList2;
+nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorStatementListOptional, DesignatorStatementList;
 nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
 
 nonterminal ElseOptional, NumConstOptional;
@@ -88,15 +88,20 @@ precedence left ELSE;
 
 /* PROGRAM */
 
-Program ::= (Program) PROGRAM IDENT:programName Namespace DeclarationList LBRACE MethodDeclaration RBRACE
+Program ::= (Program) PROGRAM IDENT:programName Namespace DeclarationList LBRACE MethodsDeclarationList RBRACE
 			;
 			
 Type ::= (Type_NoScope) IDENT:typeName
 		 |
 		 (Type_Scope) Type DOUBLE_COLON IDENT:typeName
 		 ;
+		 
+Var ::=  (Var_NoScope) IDENT:varName
+		 |
+		 (Var_Scope) Var DOUBLE_COLON IDENT:varName
+		 ;
 
-Namespace ::= (Namespace_Define) NAMESPACE IDENT:namespaceName LBRACE DeclarationList LBRACE MethodDeclaration RBRACE RBRACE
+Namespace ::= (Namespace_Define) NAMESPACE IDENT:namespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE
 			  |
 			  (Namespace_Skip) /* EPSILON */
 			  ;
@@ -132,12 +137,14 @@ ConstValue ::= (ConstValue_INT) INT
 			   ;
 
 /* VAR DECLARATION */
-VarDeclarationOptional ::= (VarDeclarationOptional_Declare) VarDeclaration
-						   |
-						   (VarDeclarationOptional_SKIP) /* EPSILON */
-						   ;
+VarDeclarationListOptional ::= (VarDeclarationListOptional_OneOrMore) VarDeclaration SEMICOLON VarDeclarationListOptional
+							   |
+							   (VarDeclarationListOptional_Skip) /* EPSILON */
+							   ;
 
-VarDeclaration ::= (VarDeclaration) Type VarList
+VarDeclaration ::= (VarDeclaration_VarList) Type VarList
+				   |
+				   (VarDeclaration_Error) error {: parser.report_error("Deklaracija promenljive nevalidna! Izvrsen oporavak od greske!", null); :}
 				   ;
 
 VarList ::= (VarList_One) VarListElement
@@ -154,10 +161,13 @@ VarOrArray ::= (VarOrArray_Array) LBRACK RBRACK
 			   ;
 	
 /* METODE */	
-		   
-MethodDeclaration ::= (MethodDeclaration_Declare) MethodDeclarationType IDENT:methodName LPAREN FormPars RPAREN VarDeclarationOptional LBRACE Statements RBRACE
-					  |
-					  (MethodDeclaration_Skip) /* EPSILON */
+
+MethodsDeclarationList ::= (MethodsDeclarationList_OneOrMore) MethodsDeclarationList MethodDeclaration
+						   |
+						   (MethodsDeclarationList_Skip) /* EPSILON */
+						   ;
+ 
+MethodDeclaration ::= (MethodDeclaration_Declare) MethodDeclarationType IDENT:methodName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE
 					  ;
 					  
 MethodDeclarationType ::= (MethodDeclarationType_Type) Type
@@ -168,6 +178,8 @@ MethodDeclarationType ::= (MethodDeclarationType_Type) Type
 FormPars ::= (FormPars_OneOrMore) FormParsList
 			 |
 			 (FormPars_None) /* EPSILON */
+			 |
+			 (FormPars_Error) error {: parser.report_error("Navodjenje argumenata funkcije nevalidno! Izvrsen oporavak od greske!", null); :}
 			 ;
 			 
 FormParsList ::= (FormParsList_Multiple) FormParsList COMMA Parameter
@@ -197,7 +209,7 @@ Statement ::= (Statement_DesignatorStatement) DesignatorStatement SEMICOLON
 			  |
 			  (Statement_If) IF LPAREN Condition RPAREN Statement ElseOptional
 			  |
-			  (Statement_For) FOR LPAREN DesignatorList2 SEMICOLON CondFactOptional SEMICOLON DesignatorList2 RPAREN Statement
+			  (Statement_For) FOR LPAREN DesignatorStatementListOptional SEMICOLON CondFactOptional SEMICOLON DesignatorStatementListOptional RPAREN Statement
 			  |
 			  (Statement_Statements) LBRACE Statements RBRACE
 			  ;
@@ -217,6 +229,8 @@ NumConstOptional ::= (NumConstOptional_Define) COMMA INT
 Condition ::= (Condition_One) CondTerm
 			  |
 			  (Condition_MultipleOR) Condition OR CondTerm
+			  |
+			  (Condition_Error) error {: parser.report_error("Uslov If-a nevalidan! Izvrsen oporavak od greske!", null); :}
 			  ;
 				
 CondTerm ::= (CondTerm_One) CondFact
@@ -243,7 +257,7 @@ ExprOptional ::= (ExprOptional_Define) Expr
 				 (ExprOptional_Skip) /* EPSILON */
 				 ;
 				 
-ActParsOptionalBrackets ::= (ActParsOptionalBrackets_Define) LPAREN ActPars RPAREN
+ActParsOptionalBrackets ::= (ActParsOptionalBrackets_Define) LPAREN ActParsOptional RPAREN
 							|
 							(ActParsOptionalBrackets_Skip) /* EPSILON */
 							;
@@ -286,7 +300,14 @@ Factor ::= (Factor_Designator) Designator ActParsOptionalBrackets
 		   (Factor_Const) ConstValue /* int, bool, char konstanta */
 		   |
 		   (Factor_Expr) LPAREN Expr RPAREN
+		   |
+		   (Factor_New) NEW Type FactorNew
 		   ;
+		   
+FactorNew ::= (FactorNew_Array) LBRACK Expr RBRACK
+			  |
+			  (FactorNew_Object) LPAREN ActParsOptional RPAREN
+			  ;
 	
 MulFactors ::= (MulFactors_Define) MulFactorsList
 			   |
@@ -308,8 +329,10 @@ MinusOptional ::= (MinusOptional_Define) MINUS
 
 /* DESIGNATOR */
 
-DesignatorStatement ::= (DesignatorStatement) Designator DesignatorStatementOptions
-					;
+DesignatorStatement ::= (DesignatorStatement_Designator_With_Options) Designator DesignatorStatementOptions
+						|
+						(DesignatorStatement_DesignatorList) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator
+						;
 					
 DesignatorStatementOptions ::= (DesignatorStatementOptions_AssignOpExpr) AssignOp Expr
 							   |
@@ -319,7 +342,7 @@ DesignatorStatementOptions ::= (DesignatorStatementOptions_AssignOpExpr) AssignO
 							   |
 							   (DesignatorStatementOptions_Dec) DEC
 							   |
-							   (DesignatorStatementOptions_DesignatorList) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator
+							   (DesignatorStatementOptions_Error) error {: parser.report_error("Operacija nevalidna! Izvrsen oporavak od greske!", null); :}
 							   ;
 							   
 DesignatorListOptional ::= (DesignatorListOptional_Define) DesignatorList
@@ -332,12 +355,17 @@ DesignatorList ::= (DesignatorList_One) Designator COMMA
 				   (DesignatorList_Multiple) DesignatorList COMMA Designator COMMA
 				   ; 
 
-DesignatorList2 ::= (DesignatorList2_One) Designator
+DesignatorStatementListOptional ::= (DesignatorStatementListOptional_Define) DesignatorStatementList
+								    |
+								    (DesignatorStatementListOptional_Skip) /* EPSILON */
+								    ;
+
+DesignatorStatementList ::= (DesignatorStatementList_More) DesignatorStatementList COMMA DesignatorStatement
 					|
-					(DesignatorList2_Multiple) DesignatorList2 COMMA Designator
+					(DesignatorStatementList_One) DesignatorStatement
 					;
 
-Designator ::= (Designator) Type Members
+Designator ::= (Designator) Var Members
 			   ;
 			   
 Members ::= (Members_Define) MemberList
@@ -350,13 +378,10 @@ MemberList ::= (MemberList_Multiple) MemberList Member
 			   (MemberList_One) Member
 			   ;
 
-Member ::= (Member) DOT ArrayOrVarMember
+Member ::= (Member_Value) DOT IDENT:varValue
+		   |
+		   (Member_Array) LBRACK Expr RBRACK
 		   ;
-		   
-ArrayOrVarMember ::= (ArrayOrVarMember_Var) IDENT:varValue
-					 |
-					 (ArrayOrVarMember_Array) LBRACK Expr RBRACK
-					 ;
 
 Label ::= (Label) IDENT:label
 		 ;

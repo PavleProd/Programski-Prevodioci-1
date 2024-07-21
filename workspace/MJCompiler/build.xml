@@ -33,7 +33,7 @@
 	</target>
 
 	<target name="parserGen" depends="lexerGen">
-		<java jar="lib/cup_v10k.jar" fork="true">
+		<java jar="lib/cup_v10k.jar" fork="true" output="parser_output.log">
 			<arg value="-destdir"/>
 			<arg value="src/rs/ac/bg/etf/pp1"/>
 			<arg value="-ast"/>
