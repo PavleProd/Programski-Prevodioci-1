@@ -12,7 +12,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	private int nVars;
 	private boolean returnFound = false;
 	
-	private Type currType;
+	private Type currentType;
 	private Obj currentMethod = null;
 	private String currentNamespace = "";
 
@@ -42,7 +42,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	{
 		String typeName = type.getTypeName();
 		Obj typeNode = Tab.find(typeName);
-		this.currType = type;
+		this.currentType = type;
 		
 		if(typeNode == Tab.noObj) // nije pronadjen tip
 		{
@@ -63,7 +63,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	@Override
 	public void visit(Type_Scope type)
 	{
-		this.currType = type;
+		this.currentType = type;
 		
 		String namespaceName = type.getNamespaceName();
 		String typeName = type.getTypeName();
@@ -178,24 +178,22 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		if(Tab.currentScope.findSymbol(methodName) != null) // metoda vec definisana u scope-u
 		{
 			reportError("Redefinicija metode " + methodName, null);
-			return;
 		}
 		
 		log.info("Obrada metode " + methodName);
-		currentMethod = Tab.insert(Obj.Meth, methodName, this.currType.struct);
+		currentMethod = Tab.insert(Obj.Meth, methodName, this.currentType.struct);
 		typeAndName.obj = currentMethod;
 		
 		Tab.openScope();
 	}
 	
+	@Override
 	public void visit(MethodDeclarationTypeAndName_Void typeAndName)
 	{
-		String namespacePrefix = (this.currentNamespace != "") ? (this.currentNamespace + "::") : "";
-		String methodName = namespacePrefix + typeAndName.getMethodName();
+		String methodName = this.getNamespacePrefix() + typeAndName.getMethodName();
 		if(Tab.currentScope.findSymbol(methodName) != null) // metoda vec definisana u scope-u
 		{
-			reportError("Redefinicija metode " + methodName, null);
-			return;
+			reportError("Redefinicija metode " + methodName, typeAndName);
 		}
 		
 		log.info("Obrada metode " + methodName);
@@ -205,9 +203,56 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Tab.openScope();
 	}
 	
+	// CONST DECLARATION
+	
+	public void visit(ConstDeclarationElement constDecl)
+	{
+		String name = this.getNamespacePrefix() + constDecl.getVarName();
+		log.info("Obrada konstante " + name);
+		
+		if(Tab.currentScope.findSymbol(name) != null)
+		{
+			reportError("Redifinicija promenljive " + name, constDecl);
+		}
+		
+		Struct expectedType = this.currentType.struct;
+		Struct actualType = constDecl.getConstValue().struct;
+		
+		if(expectedType != actualType)
+		{
+			reportError("Pogresan tip promenljive!", constDecl);
+		}
+		
+		constDecl.obj = Tab.insert(Obj.Con, name, actualType);
+	}
+	
+	@Override
+	public void visit(ConstValue_INT constVal)
+	{
+		constVal.struct = Tab.intType;
+	}
+	
+	@Override
+	public void visit(ConstValue_CHAR constVal)
+	{
+		constVal.struct = Tab.charType;
+	}
+	
+	@Override
+	public void visit(ConstValue_BOOL constVal)
+	{
+		constVal.struct = TabCustom.boolType;
+	}
+	
+	
 	public boolean passed() 
 	{
 		return !errorDetected;
+	}
+	
+	private String getNamespacePrefix()
+	{
+		return (this.currentNamespace != "") ? (this.currentNamespace + "::") : "";
 	}
 }
 

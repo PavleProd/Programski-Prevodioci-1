@@ -7,9 +7,17 @@ Warning: Terminal "COLON" was declared but never used
 Warning: Terminal "EXTENDS" was declared but never used
 Warning: Non terminal "ArrayOrVarMember" was declared but never used
 Building parse tables...
+------- ast extension v0.8 summary -------
+  Generated 48 base classes
+  Generated 113 derived classes
+  Generated 15 record classes
   Computing non-terminal nullability...
+  Generated interface SyntaxNode
   Computing first sets...
+  Generated interface Visitor
+  Generated adapter class VisitorAdaptor
   Building state machine...
+-----------------------------------------------
   Filling in tables...
   Checking for non-reduced productions...
 *** Production "Label ::= IDENT " never reduced
@@ -446,14 +454,6 @@ transition on AssignOp to state [169]
 transition on error to state [168]
 
 -------------------
-------- ast extension v0.8 summary -------
-  Generated 48 base classes
-  Generated 113 derived classes
-  Generated 15 record classes
-  Generated interface SyntaxNode
-  Generated interface Visitor
-  Generated adapter class VisitorAdaptor
------------------------------------------------
 lalr_state [52]: {
   [Statement ::= IF (*) LPAREN Condition RPAREN Statement ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }

@@ -70,7 +70,7 @@ terminal String IDENT;
 
 nonterminal Var;
 nonterminal Namespace, Declaration, DeclarationList;
-nonterminal ConstDeclaration, ConstDeclarationList, ConstDeclarationElement, ConstValue;
+nonterminal ConstDeclaration, ConstDeclarationList;
 nonterminal VarDeclarationListOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
 nonterminal MethodsDeclarationList, FormPars, FormParsList, Parameter, Statement, Statements;
 
@@ -84,7 +84,8 @@ nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
 nonterminal ElseOptional, NumConstOptional;
 nonterminal Condition, CondTerm, CondFact, CondFactOptional;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName, ConstDeclarationElement;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type;
 
 precedence left ELSE;
@@ -130,7 +131,7 @@ Declaration ::= (Declaration_Const) ConstDeclaration SEMICOLON
 ConstDeclaration ::= (ConstDeclaration) CONST Type ConstDeclarationList
 					 ;
 		 
-ConstDeclarationList ::= (ConstDeclarationList_One)  ConstDeclarationElement
+ConstDeclarationList ::= (ConstDeclarationList_One) ConstDeclarationElement
 						 |
 						 (ConstDeclarationList_Multiple) ConstDeclarationList COMMA ConstDeclarationElement
 						 ;
