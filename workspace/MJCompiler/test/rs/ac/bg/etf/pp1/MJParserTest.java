@@ -13,7 +13,7 @@ import java_cup.runtime.Symbol;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
 //import rs.etf.pp1.mj.runtime.Code;
 //import rs.etf.pp1.symboltable.Tab;
-
+import rs.etf.pp1.symboltable.Tab;
 import rs.ac.bg.etf.pp1.ast.*;
 //import rs.ac.bg.etf.pp1.RuleVisitor;
 
@@ -57,15 +57,15 @@ public class MJParserTest {
 
 			log.info(" Deklarisanih promenljivih ima = " + v.varDeclCount);*/
 	        
-			// SyntaxNode prog = (SyntaxNode)(s.value);
-			/*Tab.init(); // Universe scope
-			SemanticPass semanticCheck = new SemanticPass();
+			SyntaxNode progNode = (SyntaxNode)(s.value);
+			TabCustom.init(); // Universe scope
+			SemanticAnalyzer semanticCheck = new SemanticAnalyzer();
 			prog.traverseBottomUp(semanticCheck);
 			
-	        log.info("Print calls = " + semanticCheck.printCallCount);
-	        Tab.dump();
+	       // log.info("Print calls = " + semanticCheck.printCallCount);
+			TabCustom.dump();
 	        
-	        if (!p.errorDetected && semanticCheck.passed()) {
+	        /*if (!p.errorDetected && semanticCheck.passed()) {
 	        	File objFile = new File(args[1]);
 	        	log.info("Generating bytecode file: " + objFile.getAbsolutePath());
 	        	if (objFile.exists())

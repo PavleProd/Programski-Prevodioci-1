@@ -68,11 +68,11 @@ terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
 
-nonterminal Program, Type, Var;
+nonterminal Var;
 nonterminal Namespace, Declaration, DeclarationList;
 nonterminal ConstDeclaration, ConstDeclarationList, ConstDeclarationElement, ConstValue;
 nonterminal VarDeclarationListOptional, VarDeclaration, VarList, VarListElement, VarOrArray;
-nonterminal MethodsDeclarationList, MethodDeclaration, MethodDeclarationType, FormPars, FormParsList, Parameter, Statement, Statements;
+nonterminal MethodsDeclarationList, FormPars, FormParsList, Parameter, Statement, Statements;
 
 nonterminal ExprOptional, Expr, ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional;
 nonterminal Term, AddTerms, AddTermsList, AddTerm;
@@ -84,16 +84,22 @@ nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
 nonterminal ElseOptional, NumConstOptional;
 nonterminal Condition, CondTerm, CondFact, CondFactOptional;
 
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type;
+
 precedence left ELSE;
 
 /* PROGRAM */
 
-Program ::= (Program) PROGRAM IDENT:programName Namespace DeclarationList LBRACE MethodsDeclarationList RBRACE
+Program ::= (Program) PROGRAM ProgramName Namespace DeclarationList LBRACE MethodsDeclarationList RBRACE
 			;
+
+ProgramName ::= (ProgramName) IDENT:name
+				;
 			
 Type ::= (Type_NoScope) IDENT:typeName
 		 |
-		 (Type_Scope) Type DOUBLE_COLON IDENT:typeName
+		 (Type_Scope) IDENT:namespaceName DOUBLE_COLON IDENT:typeName
 		 ;
 		 
 Var ::=  (Var_NoScope) IDENT:varName
@@ -167,12 +173,12 @@ MethodsDeclarationList ::= (MethodsDeclarationList_OneOrMore) MethodsDeclaration
 						   (MethodsDeclarationList_Skip) /* EPSILON */
 						   ;
  
-MethodDeclaration ::= (MethodDeclaration_Declare) MethodDeclarationType IDENT:methodName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE
+MethodDeclaration ::= (MethodDeclaration) MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE
 					  ;
 					  
-MethodDeclarationType ::= (MethodDeclarationType_Type) Type
+MethodDeclarationTypeAndName ::= (MethodDeclarationTypeAndName_Type) Type IDENT:methodName 
 						  |
-						  (MethodDeclarationType_Void) VOID
+						  (MethodDeclarationTypeAndName_Void) VOID IDENT:methodName 
 						  ;
 
 FormPars ::= (FormPars_OneOrMore) FormParsList
