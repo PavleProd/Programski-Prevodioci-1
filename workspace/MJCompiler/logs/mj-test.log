@@ -1,42 +1,55 @@
-INFO  19:07:21,858 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  19:07:21,903 - #2 program
-INFO  19:07:21,903 - #48 p
-INFO  19:07:21,903 - #18 {
-INFO  19:07:21,905 - #12 void
-INFO  19:07:21,906 - #48 main
-INFO  19:07:21,906 - #20 (
-INFO  19:07:21,906 - #21 )
-INFO  19:07:21,907 - #18 {
-INFO  19:07:21,908 - #19 }
-INFO  19:07:21,908 - #48 int
-INFO  19:07:21,909 - #48 f
-INFO  19:07:21,910 - #20 (
-INFO  19:07:21,910 - #21 )
-INFO  19:07:21,911 - #18 {
-INFO  19:07:21,911 - #19 }
-INFO  19:07:21,911 - #48 guzulja_pancerotic
-INFO  19:07:21,911 - #48 t
-INFO  19:07:21,911 - #20 (
-INFO  19:07:21,911 - #21 )
-INFO  19:07:21,911 - #18 {
-INFO  19:07:21,911 - #19 }
-INFO  19:07:21,912 - #19 }
-INFO  19:07:21,913 - Program(
+INFO  21:41:56,717 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  21:41:56,761 - #2 program
+INFO  21:41:56,761 - #48 p
+INFO  21:41:56,761 - #17 namespace
+INFO  21:41:56,762 - #48 Test
+INFO  21:41:56,762 - #18 {
+INFO  21:41:56,763 - #18 {
+INFO  21:41:56,763 - #12 void
+INFO  21:41:56,764 - #48 f1
+INFO  21:41:56,764 - #20 (
+INFO  21:41:56,765 - #21 )
+INFO  21:41:56,765 - #18 {
+INFO  21:41:56,766 - #19 }
+INFO  21:41:56,767 - #48 int
+INFO  21:41:56,767 - #48 x
+INFO  21:41:56,767 - #20 (
+INFO  21:41:56,768 - #21 )
+INFO  21:41:56,768 - #18 {
+INFO  21:41:56,768 - #19 }
+INFO  21:41:56,768 - #19 }
+INFO  21:41:56,768 - #19 }
+INFO  21:41:56,768 - #18 {
+INFO  21:41:56,770 - #12 void
+INFO  21:41:56,770 - #48 main
+INFO  21:41:56,770 - #20 (
+INFO  21:41:56,771 - #21 )
+INFO  21:41:56,771 - #18 {
+INFO  21:41:56,771 - #19 }
+INFO  21:41:56,771 - #48 bool
+INFO  21:41:56,771 - #48 x
+INFO  21:41:56,771 - #20 (
+INFO  21:41:56,771 - #21 )
+INFO  21:41:56,771 - #18 {
+INFO  21:41:56,771 - #19 }
+INFO  21:41:56,771 - #19 }
+INFO  21:41:56,772 - Program(
   ProgramName(
    p
   ) [ProgramName]
-  Namespace_Skip(
-  ) [Namespace_Skip]
-  DeclarationList_SKIP(
-  ) [DeclarationList_SKIP]
-  MethodsDeclarationList_OneOrMore(
+  Namespace_Define(
+    NamespaceName(
+     Test
+    ) [NamespaceName]
+    DeclarationList_SKIP(
+    ) [DeclarationList_SKIP]
     MethodsDeclarationList_OneOrMore(
       MethodsDeclarationList_OneOrMore(
         MethodsDeclarationList_Skip(
         ) [MethodsDeclarationList_Skip]
         MethodDeclaration(
           MethodDeclarationTypeAndName_Void(
-           main
+           f1
           ) [MethodDeclarationTypeAndName_Void]
           FormPars_None(
           ) [FormPars_None]
@@ -49,12 +62,29 @@ INFO  19:07:21,913 - Program(
       MethodDeclaration(
         MethodDeclarationTypeAndName_Type(
           Type_NoScope(
-            TypeName(
-             int
-            ) [TypeName]
+           int
           ) [Type_NoScope]
-         f
+         x
         ) [MethodDeclarationTypeAndName_Type]
+        FormPars_None(
+        ) [FormPars_None]
+        VarDeclarationListOptional_Skip(
+        ) [VarDeclarationListOptional_Skip]
+        Statements_None(
+        ) [Statements_None]
+      ) [MethodDeclaration]
+    ) [MethodsDeclarationList_OneOrMore]
+  ) [Namespace_Define]
+  DeclarationList_SKIP(
+  ) [DeclarationList_SKIP]
+  MethodsDeclarationList_OneOrMore(
+    MethodsDeclarationList_OneOrMore(
+      MethodsDeclarationList_Skip(
+      ) [MethodsDeclarationList_Skip]
+      MethodDeclaration(
+        MethodDeclarationTypeAndName_Void(
+         main
+        ) [MethodDeclarationTypeAndName_Void]
         FormPars_None(
         ) [FormPars_None]
         VarDeclarationListOptional_Skip(
@@ -66,11 +96,9 @@ INFO  19:07:21,913 - Program(
     MethodDeclaration(
       MethodDeclarationTypeAndName_Type(
         Type_NoScope(
-          TypeName(
-           guzulja_pancerotic
-          ) [TypeName]
+         bool
         ) [Type_NoScope]
-       t
+       x
       ) [MethodDeclarationTypeAndName_Type]
       FormPars_None(
       ) [FormPars_None]
@@ -81,10 +109,12 @@ INFO  19:07:21,913 - Program(
     ) [MethodDeclaration]
   ) [MethodsDeclarationList_OneOrMore]
 ) [Program]
-INFO  19:07:21,913 - ===================================
-INFO  19:07:21,919 - Obrada programa p
-INFO  19:07:21,919 - Obrada metode main
-INFO  19:07:21,920 - Tip: int
-INFO  19:07:21,920 - Obrada metode f
-ERROR 19:07:21,920 - Nije pronadjen tip guzulja_pancerotic u tabeli simbola!
-INFO  19:07:21,920 - Obrada metode t
+INFO  21:41:56,773 - ===================================
+INFO  21:41:56,778 - Obrada programa p
+INFO  21:41:56,778 - Obrada namespacea: Test
+INFO  21:41:56,778 - Obrada metode Test::f1
+INFO  21:41:56,778 - Tip: int
+INFO  21:41:56,778 - Obrada metode Test::x
+INFO  21:41:56,779 - Obrada metode main
+INFO  21:41:56,779 - Tip: bool
+INFO  21:41:56,779 - Obrada metode x

@@ -84,7 +84,7 @@ nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
 nonterminal ElseOptional, NumConstOptional;
 nonterminal Condition, CondTerm, CondFact, CondFactOptional;
 
-nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct Type;
 
 precedence left ELSE;
@@ -107,10 +107,13 @@ Var ::=  (Var_NoScope) IDENT:varName
 		 (Var_Scope) Var DOUBLE_COLON IDENT:varName
 		 ;
 
-Namespace ::= (Namespace_Define) NAMESPACE IDENT:namespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE
+Namespace ::= (Namespace_Define) NAMESPACE NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE
 			  |
 			  (Namespace_Skip) /* EPSILON */
 			  ;
+			  
+NamespaceName ::= (NamespaceName) IDENT:namespaceName
+				  ;
 
 DeclarationList ::= (DeclarationList_Define) DeclarationList Declaration
 					|

@@ -10,10 +10,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	private boolean errorDetected = false;
 	private int printCallCount = 0;
 	private int nVars;
+	private boolean returnFound = false;
 	
 	private Type currType;
 	private Obj currentMethod = null;
-	private boolean returnFound = false;
+	private String currentNamespace = "";
 
 	Logger log = Logger.getLogger(getClass());
 
@@ -34,6 +35,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		log.info(msg.toString());
 	}
 	
+	// TYPE
+	
 	@Override
 	public void visit(Type_NoScope type) 
 	{
@@ -45,14 +48,12 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		{
 			reportError("Nije pronadjen tip " + typeName + " u tabeli simbola!", null);
 			type.struct = Tab.noType;
-			return;
 		}
 		
 		if(typeNode.getKind() != Obj.Type) // nije tip (nego promenljiva, klasa itd)
 		{
 			reportError("Greska: Ime " + typeName + " ne predstavlja tip!", type);
 			type.struct = Tab.noType;
-			return;
 		}
 		
 		log.info("Tip: " + typeName);
@@ -75,6 +76,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			reportError("Nije pronadjen namespace " + namespaceName + " u tabeli simbola!", type);
 		}
 		
+		if(namespaceNode.getKind() != ObjCustom.Namespace) // tip nije namespace
+		{
+			reportError("Ime " + namespaceName + " ne predstavlja namespace!", type);
+		}
+		
 		// provera da li namesapce nije dobrog tipa?
 		
 		Obj typeNode = Tab.find(typeFullName);
@@ -83,22 +89,23 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		{
 			reportError("Nije pronadjen tip " + typeFullName + " u tabeli simbola!", type);
 			type.struct = Tab.noType;
-			return;
 		}
 		
 		if(typeNode.getKind() != Obj.Type) // nije tip (nego promenljiva, klasa itd)
 		{
-			reportError("Greska: Ime " + typeFullName + " ne predstavlja tip!", type);
+			reportError("Ime " + typeFullName + " ne predstavlja tip!", type);
 			type.struct = Tab.noType;
-			return;
 		}
 		
 		log.info("Tip: " + typeFullName);
 		type.struct = typeNode.getType();
 	}
 	
+	// PROGRAM
+	
 	@Override
-	public void visit(Program program) {
+	public void visit(Program program) // kraj programa
+	{
 		Obj mainMethod = Tab.find("main");
 		if(mainMethod == Tab.noObj
 					  || mainMethod.getKind() != Obj.Meth 
@@ -115,17 +122,38 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	}
 
 	@Override
-	public void visit(ProgramName progName) 
+	public void visit(ProgramName progName) // pocetak programa
 	{
 		// kind (enum simbola), name, type
 		log.info("Obrada programa " + progName.getName());
 		progName.obj = Tab.insert(Obj.Prog, progName.getName(), Tab.noType);
 		Tab.openScope();     	
 	}
-
-	public boolean passed() {
-		return !errorDetected;
+	
+	// NAMESPACE
+	
+	public void visit(NamespaceName namespaceName) // pocetak namespace-a
+	{
+		String name = namespaceName.getNamespaceName();
+		log.info("Obrada namespacea: " + name);
+	
+		namespaceName.obj = Tab.insert(ObjCustom.Namespace, name, Tab.noType);
+		
+		Tab.openScope();
+		
+		this.currentNamespace = name;
 	}
+	
+	public void visit(Namespace_Define namespace) // kraj namespace-a
+	{
+		Tab.chainLocalSymbols(namespace.getNamespaceName().obj);
+		Tab.closeScope();
+		
+		this.currentNamespace = "";
+	}
+	
+	
+	// METHOD DECLARATION
 	
 	@Override
 	public void visit(MethodDeclaration method)
@@ -144,7 +172,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(MethodDeclarationTypeAndName_Type typeAndName)
 	{
-		String methodName = typeAndName.getMethodName();
+		String namespacePrefix = (this.currentNamespace != "") ? (this.currentNamespace + "::") : "";
+
+		String methodName = namespacePrefix + typeAndName.getMethodName();
 		if(Tab.currentScope.findSymbol(methodName) != null) // metoda vec definisana u scope-u
 		{
 			reportError("Redefinicija metode " + methodName, null);
@@ -152,7 +182,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		log.info("Obrada metode " + methodName);
-		currentMethod = Tab.insert(Obj.Meth, typeAndName.getMethodName(), this.currType.struct);
+		currentMethod = Tab.insert(Obj.Meth, methodName, this.currType.struct);
 		typeAndName.obj = currentMethod;
 		
 		Tab.openScope();
@@ -160,7 +190,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(MethodDeclarationTypeAndName_Void typeAndName)
 	{
-		String methodName = typeAndName.getMethodName();
+		String namespacePrefix = (this.currentNamespace != "") ? (this.currentNamespace + "::") : "";
+		String methodName = namespacePrefix + typeAndName.getMethodName();
 		if(Tab.currentScope.findSymbol(methodName) != null) // metoda vec definisana u scope-u
 		{
 			reportError("Redefinicija metode " + methodName, null);
@@ -168,11 +199,15 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		log.info("Obrada metode " + methodName);
-		currentMethod = Tab.insert(Obj.Meth, typeAndName.getMethodName(), Tab.noType);
+		currentMethod = Tab.insert(Obj.Meth, methodName, Tab.noType);
 		typeAndName.obj = currentMethod;
 		
 		Tab.openScope();
 	}
 	
+	public boolean passed() 
+	{
+		return !errorDetected;
+	}
 }
 

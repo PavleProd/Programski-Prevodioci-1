@@ -1,13 +1,25 @@
 program p
+
+namespace Test
+{
+	{
+		void f1()
+		{
+		
+		}
+		
+		int x()
+		{
+		
+		}
+	}
+}
+
 {
 	void main() {
 	}
 	
-	int f()
-	{
-	}
-	
-	guzulja_pancerotic t()
+	bool x()
 	{
 	}
 }
