@@ -244,6 +244,34 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		constVal.struct = TabCustom.boolType;
 	}
 	
+	// VAR DECLARATION
+	
+	public void visit(VarListElement element)
+	{
+		String name = getNamespacePrefix() + element.getElementName();
+		
+		if(Tab.currentScope.findSymbol(name) != null)
+		{
+			reportError("Redefinisanje promenljive " + name, element);
+		}
+		
+		Struct struct;
+		if(element.getVarOrArray() instanceof VarOrArray_Array)
+		{
+			log.info("Obrada niza " + name);
+			struct = new Struct(Struct.Array, this.currentType.struct);
+		}
+		else
+		{
+			log.info("Obrada promenljive " + name);
+			struct = this.currentType.struct;
+		}
+		
+		element.obj = Tab.insert(Obj.Var, name, struct);
+		
+	}
+	
+	// Utility
 	
 	public boolean passed() 
 	{

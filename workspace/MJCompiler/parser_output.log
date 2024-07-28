@@ -6,21 +6,21 @@ Warning: Terminal "CLASS" was declared but never used
 Warning: Terminal "COLON" was declared but never used
 Warning: Terminal "EXTENDS" was declared but never used
 Warning: Non terminal "ArrayOrVarMember" was declared but never used
-Building parse tables...
 ------- ast extension v0.8 summary -------
+Building parse tables...
   Generated 48 base classes
-  Generated 113 derived classes
-  Generated 15 record classes
-  Computing non-terminal nullability...
-  Generated interface SyntaxNode
-  Computing first sets...
+  Computing non-terminal nullability...  Generated 113 derived classes
+
+  Computing first sets...  Generated 15 record classes
+
+  Building state machine...  Generated interface SyntaxNode
+
   Generated interface Visitor
-  Generated adapter class VisitorAdaptor
-  Building state machine...
------------------------------------------------
   Filling in tables...
+  Generated adapter class VisitorAdaptor
   Checking for non-reduced productions...
 *** Production "Label ::= IDENT " never reduced
+-----------------------------------------------
 Writing parser...
 ===== Viable Prefix Recognizer =====
 START lalr_state [0]: {

@@ -2,26 +2,31 @@ program p
 
 namespace Test
 {
+	const int x = 1, y = 2, z = 3;
 	{
 		void f1()
 		{
 		
 		}
 		
-		int x()
+		int f2()
 		{
 		
 		}
 	}
 }
 
-const int x = 5;
+const int x = 4, y = 5;
+int vx, vy, vz[];
+const bool t = true;
+const char c = 'a';
+char d;
 
 {
 	void main() {
 	}
 	
-	bool x()
+	bool f1()
 	{
 	}
 }
