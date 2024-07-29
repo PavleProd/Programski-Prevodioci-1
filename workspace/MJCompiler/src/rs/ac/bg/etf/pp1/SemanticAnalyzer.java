@@ -102,6 +102,41 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		type.struct = typeNode.getType();
 	}
 	
+	// VAR
+	
+	@Override
+	public void visit(Var_NoScope var) 
+	{
+		String varName = var.getVarName();
+		Obj varNode = Tab.find(varName);
+		
+		if(varNode == Tab.noObj) // nije pronadjen simbol
+		{
+			reportError("Nije pronadjen simbol " + varName + " u tabeli simbola!", null);
+		}
+		
+		var.obj = varNode;
+		
+		log.info("Var: " + varName);
+	}
+	
+	@Override
+	public void visit(Var_Scope var)
+	{
+		String namespaceName = var.getNamespaceName();
+		String varName = namespaceName + var.getVarName();
+		Obj varNode = Tab.find(varName);
+		
+		if(varNode == Tab.noObj) // nije pronadjen simbol
+		{
+			reportError("Nije pronadjen simbol " + varName + " u tabeli simbola!", null);
+		}
+		
+		var.obj = varNode;
+		
+		log.info("Var: " + varName);
+	}
+	
 	// PROGRAM
 	
 	@Override
@@ -344,6 +379,67 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 	}
 	
+	public void visit(Statement_Read statement)
+	{
+		Designator designator = statement.getDesignator();
+		
+		int[] allowedObjKinds = {Obj.Var, Obj.Elem};
+		
+		boolean isAllowed = false;
+		for(int kind : allowedObjKinds)
+		{
+			if(designator.obj.getKind() == kind)
+			{
+				isAllowed = true;
+				break;
+			}
+		}
+		
+		if(!isAllowed)
+		{
+			reportError("Dozvoljena je samo promenljiva ili clan niza!", null);
+			return;
+		}
+		
+		Struct[] allowedTypes = {Tab.intType, Tab.charType, TabCustom.boolType};
+		isAllowed = false;
+		for(Struct type : allowedTypes)
+		{
+			if(designator.obj.getType() == type)
+			{
+				isAllowed = true;
+				break;
+			}
+		}
+		
+		if(!isAllowed)
+		{
+			reportError("Dozvoljeni tipovi: int, char, bool!", null);
+			return;
+		}
+	}
+	
+	@Override
+	public void visit(Statement_Print statement)
+	{
+		Struct[] allowedTypes = {Tab.intType, Tab.charType, TabCustom.boolType};
+		boolean isAllowed = false;
+		for(Struct type : allowedTypes)
+		{
+			if(statement.getExpr().struct == type)
+			{
+				isAllowed = true;
+				break;
+			}
+		}
+		
+		if(!isAllowed)
+		{
+			reportError("Dozvoljeni tipovi: int, char, bool!", null);
+			return;
+		}
+	}
+	
 	// EXPR
 	
 	@Override
@@ -403,9 +499,91 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	// FACTOR
 	
+	public void visit(Factor_Designator factor)
+	{
+		factor.struct = factor.getDesignator().obj.getType();
+	}
+	
 	public void visit(Factor_Const factor)
 	{
 		factor.struct = factor.getConstValue().struct;
+	}
+	
+	public void visit(Factor_Expr factor)
+	{
+		factor.struct = factor.getExpr().struct;
+	}
+	
+	public void visit(Factor_New factor)
+	{
+		Struct arrayElementType = factor.getType().struct;
+
+		FactorNew factorNew = factor.getFactorNew();
+		if(factorNew instanceof FactorNew_Array)
+		{
+			FactorNew_Array factorNewArray = (FactorNew_Array)factorNew;
+			if(factorNewArray.getExpr().struct != Tab.intType)
+			{
+				reportError("Pogresan tip izraza, ocekivan int", factor);
+				return;
+			}
+		}
+		
+		factor.struct = new Struct(Struct.Array, arrayElementType);
+	}
+	
+	// DESIGNATOR
+	
+	public void visit(Designator designator)
+	{
+		Members members = designator.getMembers();
+		
+		if(members instanceof Members_Skip) // designator je const, promenljiva, metoda
+		{
+			int[] allowedKinds = {Obj.Con, Obj.Var, Obj.Meth};
+			int kind = designator.getVar().obj.getKind();
+			boolean isAllowed = false;
+			
+			for(int allowedKind : allowedKinds)
+			{
+				if(kind == allowedKind)
+				{
+					designator.obj = designator.getVar().obj;
+					isAllowed = true;
+					return;
+				}
+			}
+			
+			if(!isAllowed)
+			{
+				reportError("Nedozvoljeni tip podataka!", null);
+				return;
+			}
+		}
+		else // designator je niz
+		{
+			Struct type = designator.getVar().obj.getType();
+			
+			if(type.getKind() != Struct.Array)
+			{
+				reportError("Pogresan tip izraza, ocekivan array", null);
+				return;
+			}
+			
+			designator.obj = new Obj(Obj.Elem, "", type.getElemType());
+		}
+		
+		
+	}
+	
+	@Override
+	public void visit(Member_Array member)
+	{
+		if(member.getExpr().struct != Tab.intType)
+		{
+			reportError("Pogresan tip izraza, ocekivan int", null);
+			return;
+		}
 	}
 	
 	

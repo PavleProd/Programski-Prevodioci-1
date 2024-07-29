@@ -27,11 +27,14 @@ char d;
 	}
 	
 	int f1() {
-		return -123;
+		read(vz[2]);
+		print(x, 2);
+		return vz[3];
 	}
 	
 	
-	bool f2(int a, char b[])
+	int f2(int a, char b[])
 	{
+		return f1();
 	}
 }

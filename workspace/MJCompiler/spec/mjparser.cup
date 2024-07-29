@@ -68,7 +68,6 @@ terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
 
-nonterminal Var;
 nonterminal Namespace, Declaration, DeclarationList;
 nonterminal ConstDeclaration, ConstDeclarationList;
 nonterminal VarDeclarationListOptional, VarDeclaration, VarList, VarOrArray;
@@ -78,15 +77,16 @@ nonterminal ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional
 nonterminal FactorNew;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
 nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorStatementListOptional, DesignatorStatementList;
-nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
+nonterminal Members, MemberList, Member, ArrayOrVarMember;
 
 nonterminal ElseOptional, NumConstOptional;
 nonterminal Condition, CondTerm, CondFact, CondFactOptional;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ConstDeclarationElement, VarListElement, Parameter;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ExprOptional, Expr, Term, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Var, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue, Type;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprOptional, Expr, Term, Factor;
 
 precedence left ELSE;
 
@@ -367,7 +367,7 @@ MemberList ::= (MemberList_Multiple) MemberList Member
 			   (MemberList_One) Member
 			   ;
 
-Member ::= (Member_Value) DOT IDENT:varValue
+Member ::= (Member_Value) DOT IDENT:member
 		   |
 		   (Member_Array) LBRACK Expr RBRACK
 		   ;

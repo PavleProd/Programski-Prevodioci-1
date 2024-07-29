@@ -68,7 +68,6 @@ terminal Boolean BOOL;
 terminal Character CHAR;
 terminal String IDENT;
 
-nonterminal Var Var;
 nonterminal Namespace Namespace;
 nonterminal Declaration Declaration;
 nonterminal DeclarationList DeclarationList;
@@ -101,7 +100,6 @@ nonterminal DesignatorListOptional DesignatorListOptional;
 nonterminal DesignatorList DesignatorList;
 nonterminal DesignatorStatementListOptional DesignatorStatementListOptional;
 nonterminal DesignatorStatementList DesignatorStatementList;
-nonterminal Designator Designator;
 nonterminal Members Members;
 nonterminal MemberList MemberList;
 nonterminal Member Member;
@@ -116,8 +114,9 @@ nonterminal CondFactOptional CondFactOptional;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ConstDeclarationElement, VarListElement, Parameter;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ExprOptional, Expr, Term, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj Var, Designator;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue, Type;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprOptional, Expr, Term, Factor;
 
 precedence left ELSE;
 
@@ -398,7 +397,7 @@ MemberList ::= (MemberList_Multiple) MemberList:M1 Member:M2 {: RESULT=new Membe
 			   (MemberList_One) Member:M1 {: RESULT=new MemberList_One(M1); RESULT.setLine(M1left); :}
 			   ;
 
-Member ::= (Member_Value) DOT IDENT:varValue {: RESULT=new Member_Value(varValue); RESULT.setLine(varValueleft); :}
+Member ::= (Member_Value) DOT IDENT:member {: RESULT=new Member_Value(member); RESULT.setLine(memberleft); :}
 		   |
 		   (Member_Array) LBRACK Expr:E1 RBRACK {: RESULT=new Member_Array(E1); RESULT.setLine(E1left); :}
 		   ;
