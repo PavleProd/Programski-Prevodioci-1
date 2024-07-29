@@ -72,11 +72,10 @@ nonterminal Var;
 nonterminal Namespace, Declaration, DeclarationList;
 nonterminal ConstDeclaration, ConstDeclarationList;
 nonterminal VarDeclarationListOptional, VarDeclaration, VarList, VarOrArray;
-nonterminal MethodsDeclarationList, FormPars, FormParsList, Parameter, Statement, Statements;
+nonterminal MethodsDeclarationList, FormPars, FormParsList, Statement, Statements;
 
-nonterminal ExprOptional, Expr, ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional;
-nonterminal Term, AddTerms, AddTermsList, AddTerm;
-nonterminal Factor, FactorNew, MulFactors, MulFactorsList, MulFactor;
+nonterminal ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional;
+nonterminal FactorNew;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
 nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorStatementListOptional, DesignatorStatementList;
 nonterminal Designator, Members, MemberList, Member, ArrayOrVarMember;
@@ -85,9 +84,9 @@ nonterminal ElseOptional, NumConstOptional;
 nonterminal Condition, CondTerm, CondFact, CondFactOptional;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName;
-nonterminal rs.etf.pp1.symboltable.concepts.Obj ConstDeclarationElement, VarListElement;
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ConstDeclarationElement, VarListElement, Parameter;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct Type;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, ExprOptional, Expr, Term, Factor;
 
 precedence left ELSE;
 
@@ -106,7 +105,7 @@ Type ::= (Type_NoScope) IDENT:typeName
 		 
 Var ::=  (Var_NoScope) IDENT:varName
 		 |
-		 (Var_Scope) Var DOUBLE_COLON IDENT:varName
+		 (Var_Scope) IDENT:namespaceName DOUBLE_COLON IDENT:varName
 		 ;
 
 Namespace ::= (Namespace_Define) NAMESPACE NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE
@@ -197,8 +196,8 @@ FormParsList ::= (FormParsList_Multiple) FormParsList COMMA Parameter
 				 |
 				 (FormParsList_One) Parameter
 				 ;
-			 
-Parameter ::= (Parameter) Type VarListElement
+				 
+Parameter ::= (Parameter) Type IDENT:name VarOrArray
 			  ;
 			  
 Statements ::= (Statements_OneOrMore) Statements Statement
@@ -283,26 +282,18 @@ ActPars ::= (ActPars_One) Expr
 			(ActPars_Multiple) ActPars COMMA Expr
 			;
 		  
-Expr ::= (Expr) MinusOptional Term AddTerms
+Expr ::= (Expr_TermMultiple) Expr AddOp Term
+		 |
+		 (Expr_TermOne) Term
+		 |
+		 (Expr_MinusTermOne) MINUS Term
 		 ;
 
 /* TERM */
 
-Term ::= (Term) Factor MulFactors
-		 ;
-		
-AddTerms ::= (AddTerms_Define) AddTermsList
-			 |
-			 (AddTerms_Skip) /* Epsilon */
-			 ;
-
-AddTermsList ::= (AddTermsList_Multiple) AddTermsList AddTerm
-				 |
-				 (AddTermsList_One) AddTerm
-				 ;
-				 
-AddTerm ::= (AddTerm) AddOp Term
-			;
+Term ::= (Term_One) Factor
+		 |
+		 (Term_MultipleMulOp) Term MulOp Factor;
 
 /* FACTOR */
 
@@ -318,19 +309,6 @@ Factor ::= (Factor_Designator) Designator ActParsOptionalBrackets
 FactorNew ::= (FactorNew_Array) LBRACK Expr RBRACK
 			  |
 			  (FactorNew_Object) LPAREN ActParsOptional RPAREN
-			  ;
-	
-MulFactors ::= (MulFactors_Define) MulFactorsList
-			   |
-			   (MulFactors_Skip) /* Epsilon */
-			   ;
-
-MulFactorsList ::= (MulFactorsList_Multiple) MulFactorsList MulFactor
-				   |
-				   (MulFactorsList_Skip) MulFactor
-				   ;
-				 
-MulFactor ::= (MulFactor) MulOp Factor
 			  ;
 
 MinusOptional ::= (MinusOptional_Define) MINUS

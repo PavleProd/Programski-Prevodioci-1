@@ -1,87 +1,104 @@
-INFO  23:38:36,732 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  23:38:36,777 - #2 program
-INFO  23:38:36,778 - #48 p
-INFO  23:38:36,778 - #17 namespace
-INFO  23:38:36,778 - #48 Test
-INFO  23:38:36,778 - #18 {
-INFO  23:38:36,779 - #6 const
-INFO  23:38:36,779 - #48 int
-INFO  23:38:36,780 - #48 x
-INFO  23:38:36,780 - #29 =
-INFO  23:38:36,780 - #45 1
-INFO  23:38:36,780 - #43 ,
-INFO  23:38:36,781 - #48 y
-INFO  23:38:36,781 - #29 =
-INFO  23:38:36,781 - #45 2
-INFO  23:38:36,781 - #43 ,
-INFO  23:38:36,781 - #48 z
-INFO  23:38:36,781 - #29 =
-INFO  23:38:36,781 - #45 3
-INFO  23:38:36,782 - #40 ;
-INFO  23:38:36,782 - #18 {
-INFO  23:38:36,783 - #12 void
-INFO  23:38:36,784 - #48 f1
-INFO  23:38:36,784 - #20 (
-INFO  23:38:36,784 - #21 )
-INFO  23:38:36,785 - #18 {
-INFO  23:38:36,786 - #19 }
-INFO  23:38:36,786 - #48 int
-INFO  23:38:36,787 - #48 f2
-INFO  23:38:36,787 - #20 (
-INFO  23:38:36,787 - #21 )
-INFO  23:38:36,787 - #18 {
-INFO  23:38:36,787 - #19 }
-INFO  23:38:36,787 - #19 }
-INFO  23:38:36,787 - #19 }
-INFO  23:38:36,787 - #6 const
-INFO  23:38:36,788 - #48 int
-INFO  23:38:36,788 - #48 x
-INFO  23:38:36,788 - #29 =
-INFO  23:38:36,788 - #45 4
-INFO  23:38:36,788 - #43 ,
-INFO  23:38:36,788 - #48 y
-INFO  23:38:36,788 - #29 =
-INFO  23:38:36,788 - #45 5
-INFO  23:38:36,788 - #40 ;
-INFO  23:38:36,788 - #48 int
-INFO  23:38:36,788 - #48 vx
-INFO  23:38:36,789 - #43 ,
-INFO  23:38:36,790 - #48 vy
-INFO  23:38:36,790 - #43 ,
-INFO  23:38:36,790 - #48 vz
-INFO  23:38:36,790 - #22 [
-INFO  23:38:36,790 - #23 ]
-INFO  23:38:36,790 - #40 ;
-INFO  23:38:36,791 - #6 const
-INFO  23:38:36,791 - #48 bool
-INFO  23:38:36,791 - #48 t
-INFO  23:38:36,792 - #29 =
-INFO  23:38:36,792 - #46 true
-INFO  23:38:36,792 - #40 ;
-INFO  23:38:36,792 - #6 const
-INFO  23:38:36,792 - #48 char
-INFO  23:38:36,792 - #48 c
-INFO  23:38:36,792 - #29 =
-INFO  23:38:36,792 - #47 a
-INFO  23:38:36,792 - #40 ;
-INFO  23:38:36,793 - #48 char
-INFO  23:38:36,793 - #48 d
-INFO  23:38:36,793 - #40 ;
-INFO  23:38:36,793 - #18 {
-INFO  23:38:36,793 - #12 void
-INFO  23:38:36,793 - #48 main
-INFO  23:38:36,793 - #20 (
-INFO  23:38:36,793 - #21 )
-INFO  23:38:36,793 - #18 {
-INFO  23:38:36,793 - #19 }
-INFO  23:38:36,793 - #48 bool
-INFO  23:38:36,793 - #48 f1
-INFO  23:38:36,793 - #20 (
-INFO  23:38:36,793 - #21 )
-INFO  23:38:36,793 - #18 {
-INFO  23:38:36,794 - #19 }
-INFO  23:38:36,794 - #19 }
-INFO  23:38:36,795 - Program(
+INFO  18:28:07,911 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  18:28:07,953 - #2 program
+INFO  18:28:07,954 - #48 p
+INFO  18:28:07,954 - #17 namespace
+INFO  18:28:07,954 - #48 Test
+INFO  18:28:07,954 - #18 {
+INFO  18:28:07,955 - #6 const
+INFO  18:28:07,956 - #48 int
+INFO  18:28:07,956 - #48 x
+INFO  18:28:07,956 - #29 =
+INFO  18:28:07,956 - #45 1
+INFO  18:28:07,956 - #43 ,
+INFO  18:28:07,957 - #48 y
+INFO  18:28:07,957 - #29 =
+INFO  18:28:07,957 - #45 2
+INFO  18:28:07,957 - #43 ,
+INFO  18:28:07,958 - #48 z
+INFO  18:28:07,958 - #29 =
+INFO  18:28:07,958 - #45 3
+INFO  18:28:07,958 - #40 ;
+INFO  18:28:07,959 - #18 {
+INFO  18:28:07,959 - #12 void
+INFO  18:28:07,961 - #48 f1
+INFO  18:28:07,961 - #20 (
+INFO  18:28:07,961 - #21 )
+INFO  18:28:07,962 - #18 {
+INFO  18:28:07,963 - #19 }
+INFO  18:28:07,963 - #48 int
+INFO  18:28:07,964 - #48 f2
+INFO  18:28:07,964 - #20 (
+INFO  18:28:07,965 - #21 )
+INFO  18:28:07,965 - #18 {
+INFO  18:28:07,965 - #19 }
+INFO  18:28:07,965 - #19 }
+INFO  18:28:07,965 - #19 }
+INFO  18:28:07,965 - #6 const
+INFO  18:28:07,965 - #48 int
+INFO  18:28:07,965 - #48 x
+INFO  18:28:07,965 - #29 =
+INFO  18:28:07,965 - #45 4
+INFO  18:28:07,966 - #43 ,
+INFO  18:28:07,966 - #48 y
+INFO  18:28:07,966 - #29 =
+INFO  18:28:07,966 - #45 5
+INFO  18:28:07,966 - #40 ;
+INFO  18:28:07,966 - #48 int
+INFO  18:28:07,966 - #48 vx
+INFO  18:28:07,966 - #43 ,
+INFO  18:28:07,968 - #48 vy
+INFO  18:28:07,968 - #43 ,
+INFO  18:28:07,968 - #48 vz
+INFO  18:28:07,968 - #22 [
+INFO  18:28:07,968 - #23 ]
+INFO  18:28:07,969 - #40 ;
+INFO  18:28:07,969 - #6 const
+INFO  18:28:07,970 - #48 bool
+INFO  18:28:07,970 - #48 t
+INFO  18:28:07,970 - #29 =
+INFO  18:28:07,970 - #46 true
+INFO  18:28:07,970 - #40 ;
+INFO  18:28:07,970 - #6 const
+INFO  18:28:07,970 - #48 char
+INFO  18:28:07,970 - #48 c
+INFO  18:28:07,970 - #29 =
+INFO  18:28:07,970 - #47 a
+INFO  18:28:07,970 - #40 ;
+INFO  18:28:07,971 - #48 char
+INFO  18:28:07,971 - #48 d
+INFO  18:28:07,971 - #40 ;
+INFO  18:28:07,972 - #18 {
+INFO  18:28:07,972 - #12 void
+INFO  18:28:07,972 - #48 main
+INFO  18:28:07,972 - #20 (
+INFO  18:28:07,972 - #21 )
+INFO  18:28:07,972 - #18 {
+INFO  18:28:07,973 - #19 }
+INFO  18:28:07,973 - #48 int
+INFO  18:28:07,973 - #48 f1
+INFO  18:28:07,973 - #20 (
+INFO  18:28:07,973 - #21 )
+INFO  18:28:07,973 - #18 {
+INFO  18:28:07,973 - #11 return
+INFO  18:28:07,973 - #25 -
+INFO  18:28:07,973 - #45 123
+INFO  18:28:07,973 - #40 ;
+INFO  18:28:07,974 - #19 }
+INFO  18:28:07,974 - #48 bool
+INFO  18:28:07,974 - #48 f2
+INFO  18:28:07,974 - #20 (
+INFO  18:28:07,974 - #48 int
+INFO  18:28:07,975 - #48 a
+INFO  18:28:07,975 - #43 ,
+INFO  18:28:07,975 - #48 char
+INFO  18:28:07,976 - #48 b
+INFO  18:28:07,976 - #22 [
+INFO  18:28:07,976 - #23 ]
+INFO  18:28:07,976 - #21 )
+INFO  18:28:07,976 - #18 {
+INFO  18:28:07,977 - #19 }
+INFO  18:28:07,977 - #19 }
+INFO  18:28:07,979 - Program(
   ProgramName(
    p
   ) [ProgramName]
@@ -265,18 +282,49 @@ INFO  23:38:36,795 - Program(
   ) [DeclarationList_Define]
   MethodsDeclarationList_OneOrMore(
     MethodsDeclarationList_OneOrMore(
-      MethodsDeclarationList_Skip(
-      ) [MethodsDeclarationList_Skip]
+      MethodsDeclarationList_OneOrMore(
+        MethodsDeclarationList_Skip(
+        ) [MethodsDeclarationList_Skip]
+        MethodDeclaration(
+          MethodDeclarationTypeAndName_Void(
+           main
+          ) [MethodDeclarationTypeAndName_Void]
+          FormPars_None(
+          ) [FormPars_None]
+          VarDeclarationListOptional_Skip(
+          ) [VarDeclarationListOptional_Skip]
+          Statements_None(
+          ) [Statements_None]
+        ) [MethodDeclaration]
+      ) [MethodsDeclarationList_OneOrMore]
       MethodDeclaration(
-        MethodDeclarationTypeAndName_Void(
-         main
-        ) [MethodDeclarationTypeAndName_Void]
+        MethodDeclarationTypeAndName_Type(
+          Type_NoScope(
+           int
+          ) [Type_NoScope]
+         f1
+        ) [MethodDeclarationTypeAndName_Type]
         FormPars_None(
         ) [FormPars_None]
         VarDeclarationListOptional_Skip(
         ) [VarDeclarationListOptional_Skip]
-        Statements_None(
-        ) [Statements_None]
+        Statements_OneOrMore(
+          Statements_None(
+          ) [Statements_None]
+          Statement_Return(
+            ExprOptional_Define(
+              Expr_MinusTermOne(
+                Term_One(
+                  Factor_Const(
+                    ConstValue_INT(
+                     123
+                    ) [ConstValue_INT]
+                  ) [Factor_Const]
+                ) [Term_One]
+              ) [Expr_MinusTermOne]
+            ) [ExprOptional_Define]
+          ) [Statement_Return]
+        ) [Statements_OneOrMore]
       ) [MethodDeclaration]
     ) [MethodsDeclarationList_OneOrMore]
     MethodDeclaration(
@@ -284,10 +332,30 @@ INFO  23:38:36,795 - Program(
         Type_NoScope(
          bool
         ) [Type_NoScope]
-       f1
+       f2
       ) [MethodDeclarationTypeAndName_Type]
-      FormPars_None(
-      ) [FormPars_None]
+      FormPars_OneOrMore(
+        FormParsList_Multiple(
+          FormParsList_One(
+            Parameter(
+              Type_NoScope(
+               int
+              ) [Type_NoScope]
+             a
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [Parameter]
+          ) [FormParsList_One]
+          Parameter(
+            Type_NoScope(
+             char
+            ) [Type_NoScope]
+           b
+            VarOrArray_Array(
+            ) [VarOrArray_Array]
+          ) [Parameter]
+        ) [FormParsList_Multiple]
+      ) [FormPars_OneOrMore]
       VarDeclarationListOptional_Skip(
       ) [VarDeclarationListOptional_Skip]
       Statements_None(
@@ -295,29 +363,36 @@ INFO  23:38:36,795 - Program(
     ) [MethodDeclaration]
   ) [MethodsDeclarationList_OneOrMore]
 ) [Program]
-INFO  23:38:36,795 - ===================================
-INFO  23:38:36,801 - Obrada programa p
-INFO  23:38:36,802 - Obrada namespacea: Test
-INFO  23:38:36,802 - Tip: int
-INFO  23:38:36,802 - Obrada konstante Test::x
-INFO  23:38:36,802 - Obrada konstante Test::y
-INFO  23:38:36,802 - Obrada konstante Test::z
-INFO  23:38:36,802 - Obrada metode Test::f1
-INFO  23:38:36,803 - Tip: int
-INFO  23:38:36,803 - Obrada metode Test::f2
-INFO  23:38:36,803 - Tip: int
-INFO  23:38:36,803 - Obrada konstante x
-INFO  23:38:36,803 - Obrada konstante y
-INFO  23:38:36,803 - Tip: int
-INFO  23:38:36,803 - Obrada promenljive vx
-INFO  23:38:36,804 - Obrada promenljive vy
-INFO  23:38:36,804 - Obrada niza vz
-INFO  23:38:36,804 - Tip: bool
-INFO  23:38:36,804 - Obrada konstante t
-INFO  23:38:36,804 - Tip: char
-INFO  23:38:36,804 - Obrada konstante c
-INFO  23:38:36,804 - Tip: char
-INFO  23:38:36,805 - Obrada promenljive d
-INFO  23:38:36,805 - Obrada metode main
-INFO  23:38:36,805 - Tip: bool
-INFO  23:38:36,805 - Obrada metode f1
+INFO  18:28:07,979 - ===================================
+INFO  18:28:07,986 - Obrada programa p
+INFO  18:28:07,986 - Obrada namespacea: Test
+INFO  18:28:07,986 - Tip: int
+INFO  18:28:07,986 - Obrada konstante Test::x
+INFO  18:28:07,986 - Obrada konstante Test::y
+INFO  18:28:07,987 - Obrada konstante Test::z
+INFO  18:28:07,987 - Obrada metode Test::f1
+INFO  18:28:07,987 - Tip: int
+INFO  18:28:07,987 - Obrada metode Test::f2
+INFO  18:28:07,987 - Tip: int
+INFO  18:28:07,987 - Obrada konstante x
+INFO  18:28:07,987 - Obrada konstante y
+INFO  18:28:07,988 - Tip: int
+INFO  18:28:07,988 - Obrada promenljive vx
+INFO  18:28:07,988 - Obrada promenljive vy
+INFO  18:28:07,988 - Obrada niza vz
+INFO  18:28:07,988 - Tip: bool
+INFO  18:28:07,988 - Obrada konstante t
+INFO  18:28:07,988 - Tip: char
+INFO  18:28:07,988 - Obrada konstante c
+INFO  18:28:07,988 - Tip: char
+INFO  18:28:07,988 - Obrada promenljive d
+INFO  18:28:07,988 - Obrada metode main
+INFO  18:28:07,989 - Tip: int
+INFO  18:28:07,989 - Obrada metode f1
+INFO  18:28:07,989 - Povratak iz metode f1
+INFO  18:28:07,989 - Tip: bool
+INFO  18:28:07,989 - Obrada metode f2
+INFO  18:28:07,989 - Tip: int
+INFO  18:28:07,989 - Obrada argumenta promenljive a
+INFO  18:28:07,989 - Tip: char
+INFO  18:28:07,990 - Obrada argumenta niza b

@@ -26,7 +26,12 @@ char d;
 	void main() {
 	}
 	
-	bool f1()
+	int f1() {
+		return -123;
+	}
+	
+	
+	bool f2(int a, char b[])
 	{
 	}
 }

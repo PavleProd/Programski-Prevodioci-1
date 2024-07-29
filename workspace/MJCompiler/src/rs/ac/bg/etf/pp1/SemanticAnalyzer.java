@@ -15,6 +15,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	private Type currentType;
 	private Obj currentMethod = null;
 	private String currentNamespace = "";
+	private int loopCount = 0;
 
 	Logger log = Logger.getLogger(getClass());
 
@@ -191,7 +192,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(MethodDeclarationTypeAndName_Void typeAndName)
 	{
 		String methodName = this.getNamespacePrefix() + typeAndName.getMethodName();
-		if(Tab.currentScope.findSymbol(methodName) != null) // metoda vec definisana u scope-u
+		if(Tab.currentScope.findSymbol(methodName) != null) // simbol vec definisan u scope-u
 		{
 			reportError("Redefinicija metode " + methodName, typeAndName);
 		}
@@ -201,6 +202,31 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		typeAndName.obj = currentMethod;
 		
 		Tab.openScope();
+	}
+	
+	@Override
+	public void visit(Parameter parameter)
+	{
+		String name = getNamespacePrefix() + parameter.getName();
+		
+		if(Tab.currentScope.findSymbol(name) != null)
+		{
+			reportError("Redefinicija promenljive " + name, parameter);
+		}
+		
+		Struct type;
+		if(parameter.getVarOrArray() instanceof VarOrArray_Array)
+		{
+			log.info("Obrada argumenta niza " + name);
+			type = new Struct(Struct.Array, this.currentType.struct);
+		}
+		else
+		{
+			log.info("Obrada argumenta promenljive " + name);
+			type = this.currentType.struct;
+		}
+		
+		parameter.obj = Tab.insert(Obj.Var, name, type);
 	}
 	
 	// CONST DECLARATION
@@ -270,6 +296,118 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		element.obj = Tab.insert(Obj.Var, name, struct);
 		
 	}
+	
+	// STATEMENT
+	
+	@Override
+	public void visit(Statement_Break statement)
+	{
+		if(loopCount == 0)
+		{
+			reportError("Break naredba van for petlje! ", statement);
+		}
+	}
+	
+	@Override
+	public void visit(Statement_Continue statement)
+	{
+		if(loopCount == 0)
+		{
+			reportError("Continue naredba van for petlje! ", statement);
+		}
+	}
+	
+	@Override
+	public void visit(Statement_Return statement)
+	{
+		if(this.currentMethod == null)
+		{
+			reportError("Return naredba van metode! ", statement);
+			return;
+		}
+		
+		log.info("Povratak iz metode " + this.currentMethod.getName());
+		
+		if(this.currentMethod.getType() == Tab.noType) // void metoda
+		{
+			if(statement.getExprOptional() instanceof ExprOptional_Define)
+			{
+				reportError("Void metoda vraca ne-void vrednost! ", statement);
+			}
+		}
+		else // ne-void metoda
+		{
+			if(this.currentMethod.getType() != statement.getExprOptional().struct) // razlicit povratni tip
+			{
+				reportError("Pogresan povratni tip metode! ", statement);
+			}
+		}
+	}
+	
+	// EXPR
+	
+	@Override
+	public void visit(ExprOptional_Define expr)
+	{
+		expr.struct = expr.getExpr().struct;
+	}
+	
+	public void visit(Expr_TermMultiple expr)
+	{
+		Struct exprStruct = expr.getExpr().struct;
+		Struct termStruct = expr.getTerm().struct;
+		
+		if(exprStruct != Tab.intType || termStruct != Tab.intType)
+		{
+			reportError("Pogresan tip rezultata izraza! Ocekivan int", expr);
+		}
+		
+		expr.struct = Tab.intType;
+	}
+	
+	public void visit(Expr_TermOne expr)
+	{
+		// samo kad imamo jedan samostalan Term sme da ne bude int
+		expr.struct = expr.getTerm().struct;
+	}
+	
+	public void visit(Expr_MinusTermOne expr)
+	{
+		Struct termStruct = expr.getTerm().struct;
+		if(termStruct != Tab.intType)
+		{
+			reportError("Pogresan tip rezultata izraza! Ocekivan int", expr);
+		}
+		expr.struct = termStruct;
+	}
+	
+	// TERM
+	
+	@Override
+	public void visit(Term_One term)
+	{
+		term.struct = term.getFactor().struct;
+	}
+	
+	@Override
+	public void visit(Term_MultipleMulOp term)
+	{
+		if(term.getTerm().struct != Tab.intType || term.getFactor().struct != Tab.intType)
+		{
+			reportError("Pogresan tip izraza, ocekivan int", term);
+			return;
+		}
+		
+		term.struct = Tab.intType;
+	}
+	
+	// FACTOR
+	
+	public void visit(Factor_Const factor)
+	{
+		factor.struct = factor.getConstValue().struct;
+	}
+	
 	
 	// Utility
 	
