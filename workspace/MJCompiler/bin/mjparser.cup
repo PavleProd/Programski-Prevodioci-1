@@ -86,7 +86,7 @@ nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDecl
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ConstDeclarationElement, VarListElement, Parameter;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Var, Designator;
 nonterminal rs.etf.pp1.symboltable.concepts.Struct ConstValue, Type;
-nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprOptional, Expr, Term, Factor;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct ExprOptional, Expr, Term, Factor, Argument;
 
 precedence left ELSE;
 
@@ -277,10 +277,13 @@ ActParsOptional ::= (ActParsOptional_Define) ActPars
 					(ActParsOptional_Skip) /* EPSILON */
 					;
 		
-ActPars ::= (ActPars_One) Expr
+ActPars ::= (ActPars_One) Argument
 			|
-			(ActPars_Multiple) ActPars COMMA Expr
+			(ActPars_Multiple) ActPars COMMA Argument
 			;
+			
+Argument ::= (Argument) Expr
+			 ;
 		  
 Expr ::= (Expr_TermMultiple) Expr AddOp Term
 		 |

@@ -1,126 +1,80 @@
-INFO  23:40:03,438 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  23:40:03,482 - #2 program
-INFO  23:40:03,482 - #48 p
-INFO  23:40:03,482 - #17 namespace
-INFO  23:40:03,483 - #48 Test
-INFO  23:40:03,483 - #18 {
-INFO  23:40:03,483 - #6 const
-INFO  23:40:03,484 - #48 int
-INFO  23:40:03,484 - #48 x
-INFO  23:40:03,484 - #29 =
-INFO  23:40:03,484 - #45 1
-INFO  23:40:03,484 - #43 ,
-INFO  23:40:03,485 - #48 y
-INFO  23:40:03,485 - #29 =
-INFO  23:40:03,485 - #45 2
-INFO  23:40:03,485 - #43 ,
-INFO  23:40:03,485 - #48 z
-INFO  23:40:03,486 - #29 =
-INFO  23:40:03,486 - #45 3
-INFO  23:40:03,486 - #40 ;
-INFO  23:40:03,487 - #18 {
-INFO  23:40:03,487 - #12 void
-INFO  23:40:03,489 - #48 f1
-INFO  23:40:03,489 - #20 (
-INFO  23:40:03,489 - #21 )
-INFO  23:40:03,490 - #18 {
-INFO  23:40:03,490 - #19 }
-INFO  23:40:03,491 - #48 int
-INFO  23:40:03,491 - #48 f2
-INFO  23:40:03,492 - #20 (
-INFO  23:40:03,492 - #21 )
-INFO  23:40:03,492 - #18 {
-INFO  23:40:03,492 - #19 }
-INFO  23:40:03,492 - #19 }
-INFO  23:40:03,492 - #19 }
-INFO  23:40:03,492 - #6 const
-INFO  23:40:03,493 - #48 int
-INFO  23:40:03,493 - #48 x
-INFO  23:40:03,493 - #29 =
-INFO  23:40:03,493 - #45 4
-INFO  23:40:03,493 - #43 ,
-INFO  23:40:03,493 - #48 y
-INFO  23:40:03,493 - #29 =
-INFO  23:40:03,493 - #45 5
-INFO  23:40:03,493 - #40 ;
-INFO  23:40:03,494 - #48 int
-INFO  23:40:03,494 - #48 vx
-INFO  23:40:03,494 - #43 ,
-INFO  23:40:03,495 - #48 vy
-INFO  23:40:03,495 - #43 ,
-INFO  23:40:03,496 - #48 vz
-INFO  23:40:03,496 - #22 [
-INFO  23:40:03,496 - #23 ]
-INFO  23:40:03,496 - #40 ;
-INFO  23:40:03,497 - #6 const
-INFO  23:40:03,497 - #48 bool
-INFO  23:40:03,497 - #48 t
-INFO  23:40:03,497 - #29 =
-INFO  23:40:03,497 - #46 true
-INFO  23:40:03,497 - #40 ;
-INFO  23:40:03,497 - #6 const
-INFO  23:40:03,498 - #48 char
-INFO  23:40:03,498 - #48 c
-INFO  23:40:03,498 - #29 =
-INFO  23:40:03,498 - #47 a
-INFO  23:40:03,498 - #40 ;
-INFO  23:40:03,499 - #48 char
-INFO  23:40:03,499 - #48 d
-INFO  23:40:03,499 - #40 ;
-INFO  23:40:03,499 - #18 {
-INFO  23:40:03,499 - #12 void
-INFO  23:40:03,499 - #48 main
-INFO  23:40:03,499 - #20 (
-INFO  23:40:03,499 - #21 )
-INFO  23:40:03,499 - #18 {
-INFO  23:40:03,499 - #19 }
-INFO  23:40:03,500 - #48 int
-INFO  23:40:03,500 - #48 f1
-INFO  23:40:03,500 - #20 (
-INFO  23:40:03,500 - #21 )
-INFO  23:40:03,500 - #18 {
-INFO  23:40:03,500 - #10 read
-INFO  23:40:03,500 - #20 (
-INFO  23:40:03,500 - #48 vz
-INFO  23:40:03,500 - #22 [
-INFO  23:40:03,501 - #45 2
-INFO  23:40:03,501 - #23 ]
-INFO  23:40:03,501 - #21 )
-INFO  23:40:03,502 - #40 ;
-INFO  23:40:03,502 - #9 print
-INFO  23:40:03,502 - #20 (
-INFO  23:40:03,502 - #48 x
-INFO  23:40:03,502 - #43 ,
-INFO  23:40:03,504 - #45 2
-INFO  23:40:03,504 - #21 )
-INFO  23:40:03,504 - #40 ;
-INFO  23:40:03,504 - #11 return
-INFO  23:40:03,505 - #48 vz
-INFO  23:40:03,505 - #22 [
-INFO  23:40:03,505 - #45 3
-INFO  23:40:03,505 - #23 ]
-INFO  23:40:03,505 - #40 ;
-INFO  23:40:03,505 - #19 }
-INFO  23:40:03,506 - #48 int
-INFO  23:40:03,506 - #48 f2
-INFO  23:40:03,506 - #20 (
-INFO  23:40:03,506 - #48 int
-INFO  23:40:03,506 - #48 a
-INFO  23:40:03,506 - #43 ,
-INFO  23:40:03,507 - #48 char
-INFO  23:40:03,507 - #48 b
-INFO  23:40:03,508 - #22 [
-INFO  23:40:03,508 - #23 ]
-INFO  23:40:03,508 - #21 )
-INFO  23:40:03,508 - #18 {
-INFO  23:40:03,508 - #11 return
-INFO  23:40:03,508 - #48 f1
-INFO  23:40:03,508 - #20 (
-INFO  23:40:03,508 - #21 )
-INFO  23:40:03,509 - #40 ;
-INFO  23:40:03,509 - #19 }
-INFO  23:40:03,509 - #19 }
-INFO  23:40:03,511 - Program(
+INFO  22:31:49,745 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  22:31:49,786 - #2 program
+INFO  22:31:49,786 - #48 p
+INFO  22:31:49,787 - #17 namespace
+INFO  22:31:49,787 - #48 Test
+INFO  22:31:49,787 - #18 {
+INFO  22:31:49,788 - #6 const
+INFO  22:31:49,789 - #48 int
+INFO  22:31:49,789 - #48 x
+INFO  22:31:49,789 - #29 =
+INFO  22:31:49,789 - #45 1
+INFO  22:31:49,789 - #40 ;
+INFO  22:31:49,791 - #18 {
+INFO  22:31:49,791 - #12 void
+INFO  22:31:49,792 - #48 f1
+INFO  22:31:49,792 - #20 (
+INFO  22:31:49,792 - #21 )
+INFO  22:31:49,793 - #18 {
+INFO  22:31:49,793 - #19 }
+INFO  22:31:49,794 - #19 }
+INFO  22:31:49,795 - #19 }
+INFO  22:31:49,795 - #6 const
+INFO  22:31:49,796 - #48 int
+INFO  22:31:49,796 - #48 x
+INFO  22:31:49,796 - #29 =
+INFO  22:31:49,796 - #45 4
+INFO  22:31:49,796 - #40 ;
+INFO  22:31:49,797 - #48 int
+INFO  22:31:49,797 - #48 vx
+INFO  22:31:49,797 - #43 ,
+INFO  22:31:49,798 - #48 vz
+INFO  22:31:49,798 - #22 [
+INFO  22:31:49,798 - #23 ]
+INFO  22:31:49,798 - #40 ;
+INFO  22:31:49,799 - #18 {
+INFO  22:31:49,799 - #12 void
+INFO  22:31:49,799 - #48 main
+INFO  22:31:49,799 - #20 (
+INFO  22:31:49,799 - #21 )
+INFO  22:31:49,799 - #18 {
+INFO  22:31:49,800 - #19 }
+INFO  22:31:49,800 - #48 int
+INFO  22:31:49,800 - #48 f1
+INFO  22:31:49,800 - #20 (
+INFO  22:31:49,801 - #48 bool
+INFO  22:31:49,801 - #48 b
+INFO  22:31:49,801 - #43 ,
+INFO  22:31:49,802 - #48 int
+INFO  22:31:49,802 - #48 a
+INFO  22:31:49,802 - #21 )
+INFO  22:31:49,802 - #18 {
+INFO  22:31:49,802 - #19 }
+INFO  22:31:49,803 - #48 int
+INFO  22:31:49,803 - #48 f2
+INFO  22:31:49,803 - #20 (
+INFO  22:31:49,803 - #48 int
+INFO  22:31:49,803 - #48 a
+INFO  22:31:49,803 - #43 ,
+INFO  22:31:49,803 - #48 char
+INFO  22:31:49,803 - #48 b
+INFO  22:31:49,803 - #22 [
+INFO  22:31:49,803 - #23 ]
+INFO  22:31:49,804 - #21 )
+INFO  22:31:49,804 - #18 {
+INFO  22:31:49,804 - #11 return
+INFO  22:31:49,804 - #48 f1
+INFO  22:31:49,804 - #20 (
+INFO  22:31:49,806 - #46 true
+INFO  22:31:49,806 - #43 ,
+INFO  22:31:49,806 - #45 123
+INFO  22:31:49,807 - #24 +
+INFO  22:31:49,807 - #45 12
+INFO  22:31:49,820 - #21 )
+INFO  22:31:49,820 - #40 ;
+INFO  22:31:49,821 - #19 }
+INFO  22:31:49,821 - #19 }
+INFO  22:31:49,822 - Program(
   ProgramName(
    p
   ) [ProgramName]
@@ -136,56 +90,24 @@ INFO  23:40:03,511 - Program(
           Type_NoScope(
            int
           ) [Type_NoScope]
-          ConstDeclarationList_Multiple(
-            ConstDeclarationList_Multiple(
-              ConstDeclarationList_One(
-                ConstDeclarationElement(
-                 x
-                  ConstValue_INT(
-                   1
-                  ) [ConstValue_INT]
-                ) [ConstDeclarationElement]
-              ) [ConstDeclarationList_One]
-              ConstDeclarationElement(
-               y
-                ConstValue_INT(
-                 2
-                ) [ConstValue_INT]
-              ) [ConstDeclarationElement]
-            ) [ConstDeclarationList_Multiple]
+          ConstDeclarationList_One(
             ConstDeclarationElement(
-             z
+             x
               ConstValue_INT(
-               3
+               1
               ) [ConstValue_INT]
             ) [ConstDeclarationElement]
-          ) [ConstDeclarationList_Multiple]
+          ) [ConstDeclarationList_One]
         ) [ConstDeclaration]
       ) [Declaration_Const]
     ) [DeclarationList_Define]
     MethodsDeclarationList_OneOrMore(
-      MethodsDeclarationList_OneOrMore(
-        MethodsDeclarationList_Skip(
-        ) [MethodsDeclarationList_Skip]
-        MethodDeclaration(
-          MethodDeclarationTypeAndName_Void(
-           f1
-          ) [MethodDeclarationTypeAndName_Void]
-          FormPars_None(
-          ) [FormPars_None]
-          VarDeclarationListOptional_Skip(
-          ) [VarDeclarationListOptional_Skip]
-          Statements_None(
-          ) [Statements_None]
-        ) [MethodDeclaration]
-      ) [MethodsDeclarationList_OneOrMore]
+      MethodsDeclarationList_Skip(
+      ) [MethodsDeclarationList_Skip]
       MethodDeclaration(
-        MethodDeclarationTypeAndName_Type(
-          Type_NoScope(
-           int
-          ) [Type_NoScope]
-         f2
-        ) [MethodDeclarationTypeAndName_Type]
+        MethodDeclarationTypeAndName_Void(
+         f1
+        ) [MethodDeclarationTypeAndName_Void]
         FormPars_None(
         ) [FormPars_None]
         VarDeclarationListOptional_Skip(
@@ -197,91 +119,19 @@ INFO  23:40:03,511 - Program(
   ) [Namespace_Define]
   DeclarationList_Define(
     DeclarationList_Define(
-      DeclarationList_Define(
-        DeclarationList_Define(
-          DeclarationList_Define(
-            DeclarationList_SKIP(
-            ) [DeclarationList_SKIP]
-            Declaration_Const(
-              ConstDeclaration(
-                Type_NoScope(
-                 int
-                ) [Type_NoScope]
-                ConstDeclarationList_Multiple(
-                  ConstDeclarationList_One(
-                    ConstDeclarationElement(
-                     x
-                      ConstValue_INT(
-                       4
-                      ) [ConstValue_INT]
-                    ) [ConstDeclarationElement]
-                  ) [ConstDeclarationList_One]
-                  ConstDeclarationElement(
-                   y
-                    ConstValue_INT(
-                     5
-                    ) [ConstValue_INT]
-                  ) [ConstDeclarationElement]
-                ) [ConstDeclarationList_Multiple]
-              ) [ConstDeclaration]
-            ) [Declaration_Const]
-          ) [DeclarationList_Define]
-          Declaration_Var(
-            VarDeclaration_VarList(
-              Type_NoScope(
-               int
-              ) [Type_NoScope]
-              VarList_Multiple(
-                VarList_Multiple(
-                  VarList_One(
-                    VarListElement(
-                     vx
-                      VarOrArray_Var(
-                      ) [VarOrArray_Var]
-                    ) [VarListElement]
-                  ) [VarList_One]
-                  VarListElement(
-                   vy
-                    VarOrArray_Var(
-                    ) [VarOrArray_Var]
-                  ) [VarListElement]
-                ) [VarList_Multiple]
-                VarListElement(
-                 vz
-                  VarOrArray_Array(
-                  ) [VarOrArray_Array]
-                ) [VarListElement]
-              ) [VarList_Multiple]
-            ) [VarDeclaration_VarList]
-          ) [Declaration_Var]
-        ) [DeclarationList_Define]
-        Declaration_Const(
-          ConstDeclaration(
-            Type_NoScope(
-             bool
-            ) [Type_NoScope]
-            ConstDeclarationList_One(
-              ConstDeclarationElement(
-               t
-                ConstValue_BOOL(
-                 true
-                ) [ConstValue_BOOL]
-              ) [ConstDeclarationElement]
-            ) [ConstDeclarationList_One]
-          ) [ConstDeclaration]
-        ) [Declaration_Const]
-      ) [DeclarationList_Define]
+      DeclarationList_SKIP(
+      ) [DeclarationList_SKIP]
       Declaration_Const(
         ConstDeclaration(
           Type_NoScope(
-           char
+           int
           ) [Type_NoScope]
           ConstDeclarationList_One(
             ConstDeclarationElement(
-             c
-              ConstValue_CHAR(
-               a
-              ) [ConstValue_CHAR]
+             x
+              ConstValue_INT(
+               4
+              ) [ConstValue_INT]
             ) [ConstDeclarationElement]
           ) [ConstDeclarationList_One]
         ) [ConstDeclaration]
@@ -290,15 +140,22 @@ INFO  23:40:03,511 - Program(
     Declaration_Var(
       VarDeclaration_VarList(
         Type_NoScope(
-         char
+         int
         ) [Type_NoScope]
-        VarList_One(
+        VarList_Multiple(
+          VarList_One(
+            VarListElement(
+             vx
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [VarListElement]
+          ) [VarList_One]
           VarListElement(
-           d
-            VarOrArray_Var(
-            ) [VarOrArray_Var]
+           vz
+            VarOrArray_Array(
+            ) [VarOrArray_Array]
           ) [VarListElement]
-        ) [VarList_One]
+        ) [VarList_Multiple]
       ) [VarDeclaration_VarList]
     ) [Declaration_Var]
   ) [DeclarationList_Define]
@@ -326,92 +183,32 @@ INFO  23:40:03,511 - Program(
           ) [Type_NoScope]
          f1
         ) [MethodDeclarationTypeAndName_Type]
-        FormPars_None(
-        ) [FormPars_None]
+        FormPars_OneOrMore(
+          FormParsList_Multiple(
+            FormParsList_One(
+              Parameter(
+                Type_NoScope(
+                 bool
+                ) [Type_NoScope]
+               b
+                VarOrArray_Var(
+                ) [VarOrArray_Var]
+              ) [Parameter]
+            ) [FormParsList_One]
+            Parameter(
+              Type_NoScope(
+               int
+              ) [Type_NoScope]
+             a
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [Parameter]
+          ) [FormParsList_Multiple]
+        ) [FormPars_OneOrMore]
         VarDeclarationListOptional_Skip(
         ) [VarDeclarationListOptional_Skip]
-        Statements_OneOrMore(
-          Statements_OneOrMore(
-            Statements_OneOrMore(
-              Statements_None(
-              ) [Statements_None]
-              Statement_Read(
-                Designator(
-                  Var_NoScope(
-                   vz
-                  ) [Var_NoScope]
-                  Members_Define(
-                    MemberList_One(
-                      Member_Array(
-                        Expr_TermOne(
-                          Term_One(
-                            Factor_Const(
-                              ConstValue_INT(
-                               2
-                              ) [ConstValue_INT]
-                            ) [Factor_Const]
-                          ) [Term_One]
-                        ) [Expr_TermOne]
-                      ) [Member_Array]
-                    ) [MemberList_One]
-                  ) [Members_Define]
-                ) [Designator]
-              ) [Statement_Read]
-            ) [Statements_OneOrMore]
-            Statement_Print(
-              Expr_TermOne(
-                Term_One(
-                  Factor_Designator(
-                    Designator(
-                      Var_NoScope(
-                       x
-                      ) [Var_NoScope]
-                      Members_Skip(
-                      ) [Members_Skip]
-                    ) [Designator]
-                    ActParsOptionalBrackets_Skip(
-                    ) [ActParsOptionalBrackets_Skip]
-                  ) [Factor_Designator]
-                ) [Term_One]
-              ) [Expr_TermOne]
-              NumConstOptional_Define(
-               2
-              ) [NumConstOptional_Define]
-            ) [Statement_Print]
-          ) [Statements_OneOrMore]
-          Statement_Return(
-            ExprOptional_Define(
-              Expr_TermOne(
-                Term_One(
-                  Factor_Designator(
-                    Designator(
-                      Var_NoScope(
-                       vz
-                      ) [Var_NoScope]
-                      Members_Define(
-                        MemberList_One(
-                          Member_Array(
-                            Expr_TermOne(
-                              Term_One(
-                                Factor_Const(
-                                  ConstValue_INT(
-                                   3
-                                  ) [ConstValue_INT]
-                                ) [Factor_Const]
-                              ) [Term_One]
-                            ) [Expr_TermOne]
-                          ) [Member_Array]
-                        ) [MemberList_One]
-                      ) [Members_Define]
-                    ) [Designator]
-                    ActParsOptionalBrackets_Skip(
-                    ) [ActParsOptionalBrackets_Skip]
-                  ) [Factor_Designator]
-                ) [Term_One]
-              ) [Expr_TermOne]
-            ) [ExprOptional_Define]
-          ) [Statement_Return]
-        ) [Statements_OneOrMore]
+        Statements_None(
+        ) [Statements_None]
       ) [MethodDeclaration]
     ) [MethodsDeclarationList_OneOrMore]
     MethodDeclaration(
@@ -461,8 +258,45 @@ INFO  23:40:03,511 - Program(
                     ) [Members_Skip]
                   ) [Designator]
                   ActParsOptionalBrackets_Define(
-                    ActParsOptional_Skip(
-                    ) [ActParsOptional_Skip]
+                    ActParsOptional_Define(
+                      ActPars_Multiple(
+                        ActPars_One(
+                          Argument(
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Const(
+                                  ConstValue_BOOL(
+                                   true
+                                  ) [ConstValue_BOOL]
+                                ) [Factor_Const]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                          ) [Argument]
+                        ) [ActPars_One]
+                        Argument(
+                          Expr_TermMultiple(
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Const(
+                                  ConstValue_INT(
+                                   123
+                                  ) [ConstValue_INT]
+                                ) [Factor_Const]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                            AddOp_Plus(
+                            ) [AddOp_Plus]
+                            Term_One(
+                              Factor_Const(
+                                ConstValue_INT(
+                                 12
+                                ) [ConstValue_INT]
+                              ) [Factor_Const]
+                            ) [Term_One]
+                          ) [Expr_TermMultiple]
+                        ) [Argument]
+                      ) [ActPars_Multiple]
+                    ) [ActParsOptional_Define]
                   ) [ActParsOptionalBrackets_Define]
                 ) [Factor_Designator]
               ) [Term_One]
@@ -473,41 +307,30 @@ INFO  23:40:03,511 - Program(
     ) [MethodDeclaration]
   ) [MethodsDeclarationList_OneOrMore]
 ) [Program]
-INFO  23:40:03,511 - ===================================
-INFO  23:40:03,518 - Obrada programa p
-INFO  23:40:03,518 - Obrada namespacea: Test
-INFO  23:40:03,518 - Tip: int
-INFO  23:40:03,518 - Obrada konstante Test::x
-INFO  23:40:03,518 - Obrada konstante Test::y
-INFO  23:40:03,518 - Obrada konstante Test::z
-INFO  23:40:03,518 - Obrada metode Test::f1
-INFO  23:40:03,518 - Tip: int
-INFO  23:40:03,519 - Obrada metode Test::f2
-INFO  23:40:03,519 - Tip: int
-INFO  23:40:03,519 - Obrada konstante x
-INFO  23:40:03,519 - Obrada konstante y
-INFO  23:40:03,519 - Tip: int
-INFO  23:40:03,519 - Obrada promenljive vx
-INFO  23:40:03,519 - Obrada promenljive vy
-INFO  23:40:03,519 - Obrada niza vz
-INFO  23:40:03,519 - Tip: bool
-INFO  23:40:03,519 - Obrada konstante t
-INFO  23:40:03,519 - Tip: char
-INFO  23:40:03,520 - Obrada konstante c
-INFO  23:40:03,520 - Tip: char
-INFO  23:40:03,520 - Obrada promenljive d
-INFO  23:40:03,520 - Obrada metode main
-INFO  23:40:03,520 - Tip: int
-INFO  23:40:03,520 - Obrada metode f1
-INFO  23:40:03,520 - Var: vz
-INFO  23:40:03,521 - Var: x
-INFO  23:40:03,521 - Var: vz
-INFO  23:40:03,521 - Povratak iz metode f1
-INFO  23:40:03,521 - Tip: int
-INFO  23:40:03,521 - Obrada metode f2
-INFO  23:40:03,521 - Tip: int
-INFO  23:40:03,521 - Obrada argumenta promenljive a
-INFO  23:40:03,521 - Tip: char
-INFO  23:40:03,521 - Obrada argumenta niza b
-INFO  23:40:03,521 - Var: f1
-INFO  23:40:03,521 - Povratak iz metode f2
+INFO  22:31:49,823 - ===================================
+INFO  22:31:49,828 - Obrada programa p
+INFO  22:31:49,828 - Obrada namespacea: Test
+INFO  22:31:49,828 - Tip: int
+INFO  22:31:49,829 - Obrada konstante Test::x
+INFO  22:31:49,829 - Obrada metode Test::f1
+INFO  22:31:49,829 - Tip: int
+INFO  22:31:49,829 - Obrada konstante x
+INFO  22:31:49,829 - Tip: int
+INFO  22:31:49,829 - Obrada promenljive vx
+INFO  22:31:49,829 - Obrada niza vz
+INFO  22:31:49,830 - Obrada metode main
+INFO  22:31:49,830 - Tip: int
+INFO  22:31:49,830 - Obrada metode f1
+INFO  22:31:49,830 - Tip: bool
+INFO  22:31:49,830 - Obrada argumenta promenljive b
+INFO  22:31:49,830 - Tip: int
+INFO  22:31:49,830 - Obrada argumenta promenljive a
+INFO  22:31:49,830 - Tip: int
+INFO  22:31:49,830 - Obrada metode f2
+INFO  22:31:49,830 - Tip: int
+INFO  22:31:49,831 - Obrada argumenta promenljive a
+INFO  22:31:49,831 - Tip: char
+INFO  22:31:49,831 - Obrada argumenta niza b
+INFO  22:31:49,831 - Var: f1
+INFO  22:31:49,833 - Poziv funkcije f1
+INFO  22:31:49,833 - Povratak iz metode f2

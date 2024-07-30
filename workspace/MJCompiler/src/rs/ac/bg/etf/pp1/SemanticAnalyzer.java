@@ -1,4 +1,7 @@
 package rs.ac.bg.etf.pp1;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import rs.ac.bg.etf.pp1.ast.*;
@@ -8,12 +11,10 @@ import rs.etf.pp1.symboltable.concepts.*;
 public class SemanticAnalyzer extends VisitorAdaptor {
 
 	private boolean errorDetected = false;
-	private int printCallCount = 0;
-	private int nVars;
-	private boolean returnFound = false;
 	
 	private Type currentType;
 	private Obj currentMethod = null;
+	private Obj methodToBeCalled = null;
 	private String currentNamespace = "";
 	private int loopCount = 0;
 
@@ -124,7 +125,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(Var_Scope var)
 	{
 		String namespaceName = var.getNamespaceName();
-		String varName = namespaceName + var.getVarName();
+		String varName = namespaceName + "::" + var.getVarName();
 		Obj varNode = Tab.find(varName);
 		
 		if(varNode == Tab.noObj) // nije pronadjen simbol
@@ -151,8 +152,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			reportError("Metoda main nije definisana!", program);
 		}
 		
-		
-		nVars = Tab.currentScope.getnVars();
 		Tab.chainLocalSymbols(program.getProgramName().obj);
 		Tab.closeScope();
 	}
@@ -262,6 +261,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		parameter.obj = Tab.insert(Obj.Var, name, type);
+		
+		// Povecavamo broj argumenata za 1
+		this.currentMethod.setLevel(this.currentMethod.getLevel() + 1);
 	}
 	
 	// CONST DECLARATION
@@ -497,12 +499,62 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		term.struct = Tab.intType;
 	}
 	
-	// FACTOR
+	// POZIV FUNCKCIJE
+	
+	private ArrayList<Struct> args = new ArrayList<Struct>();
+	
+	@Override
+	public void visit(Argument argument)
+	{
+		argument.struct = argument.getExpr().struct;
+		this.args.add(argument.getExpr().struct);
+	}
+		
 	
 	public void visit(Factor_Designator factor)
 	{
 		factor.struct = factor.getDesignator().obj.getType();
+		
+		if(factor.getActParsOptionalBrackets() instanceof ActParsOptionalBrackets_Skip)
+		{
+			return;
+		}
+		
+		Obj methodToBeCalled = factor.getDesignator().obj;
+		
+		// ako je poziv f-je
+		if(methodToBeCalled.getKind() != Obj.Meth)
+		{
+			reportError("Objekat nije metoda!", null);
+			return;
+		}		
+		
+		if(this.args.size() != methodToBeCalled.getLevel())
+		{
+			reportError("Razlicit broj argumenata metode i poziva metode!", null);
+			return;
+		}
+		
+		// dohvatamo prvih getLevel (broj parametara) lokalnih simbola -> sve parametre
+		List<Obj> params = methodToBeCalled.getLocalSymbols()
+				.stream().limit(methodToBeCalled.getLevel()).toList();
+		
+		for(int i = 0; i < params.size(); ++i)
+		{
+			Struct argType = args.get(i);
+			Struct paramType = params.get(i).getType();
+			
+			if(argType != paramType)
+			{
+				reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", null);
+			}
+		}
+		
+		log.info("Poziv funkcije " + methodToBeCalled.getName());
+
 	}
+	
+	// FACTOR
 	
 	public void visit(Factor_Const factor)
 	{
@@ -585,7 +637,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			return;
 		}
 	}
-	
 	
 	// Utility
 	
