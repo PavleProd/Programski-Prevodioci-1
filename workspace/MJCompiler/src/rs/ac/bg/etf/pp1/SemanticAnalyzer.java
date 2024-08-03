@@ -1,5 +1,6 @@
 package rs.ac.bg.etf.pp1;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -14,7 +15,6 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	private Type currentType;
 	private Obj currentMethod = null;
-	private Obj methodToBeCalled = null;
 	private String currentNamespace = "";
 	private int loopCount = 0;
 
@@ -146,8 +146,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Obj mainMethod = Tab.find("main");
 		if(mainMethod == Tab.noObj
 					  || mainMethod.getKind() != Obj.Meth 
-					  || mainMethod.getType() != Tab.noType 
-					  || mainMethod.getLevel() != 0)
+					  || mainMethod.getType() != Tab.noType)
 		{
 			reportError("Metoda main nije definisana!", program);
 		}
@@ -181,8 +180,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(Namespace_Define namespace) // kraj namespace-a
 	{
-		Tab.chainLocalSymbols(namespace.getNamespaceName().obj);
-		Tab.closeScope();
+		//Tab.chainLocalSymbols(namespace.getNamespaceName().obj);
+		//Tab.closeScope();
 		
 		this.currentNamespace = "";
 	}
@@ -332,6 +331,19 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		element.obj = Tab.insert(Obj.Var, name, struct);
 		
+	}
+	
+	// FOR
+	
+	
+	public void visit(For_Header forHeader)
+	{
+		++loopCount;
+	}
+	
+	public void visit(Statement_For statement)
+	{
+		--loopCount;
 	}
 	
 	// STATEMENT
@@ -635,6 +647,99 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		{
 			reportError("Pogresan tip izraza, ocekivan int", null);
 			return;
+		}
+	}
+	
+	// DESIGNATOR STATEMENT
+	
+	public void visit(DesignatorStatement_Designator_With_Options designatorStatement)
+	{
+		DesignatorStatementOptions options = designatorStatement.getDesignatorStatementOptions();
+		Designator designator = designatorStatement.getDesignator();
+		int designatorKind = designator.obj.getKind();
+		
+		if(options instanceof DesignatorStatementOptions_AssignOpExpr)
+		{
+			ArrayList<Integer> allowedKinds = new ArrayList<>(Arrays.asList(Obj.Var, Obj.Elem));
+			//allowedKinds.addAll(Arrays.asList())
+			if(!allowedKinds.contains(designatorKind))
+			{
+				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+				return;
+			}
+			
+			DesignatorStatementOptions_AssignOpExpr optionsChild = (DesignatorStatementOptions_AssignOpExpr) options;
+			Expr expr = optionsChild.getExpr();
+			
+			if(designator.obj.getType() != expr.struct)
+			{
+				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+				return;
+			}
+		}
+		else if((options instanceof DesignatorStatementOptions_Inc) || (options instanceof DesignatorStatementOptions_Dec))
+		{
+			ArrayList<Integer> allowedKinds = new ArrayList<>(Arrays.asList(Obj.Var, Obj.Elem));
+			if(!allowedKinds.contains(designatorKind))
+			{
+				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+				return;
+			}
+			
+			if(designator.obj.getType() != Tab.intType)
+			{
+				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+				return;
+			}
+		}
+		else if(options instanceof DesignatorStatementOptions_ActPars)
+		{
+			if(designatorKind != Obj.Meth)
+			{
+				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+				return;
+			}
+		}
+		
+		
+	}
+	
+	// CONDITION
+	
+	public void visit(CondFact condFact)
+	{
+		Expr expr1 = condFact.getExpr();
+		ExprRelopOptional opt = condFact.getExprRelopOptional();
+		
+		if(opt instanceof ExprRelopOptional_Define)
+		{
+			ExprRelopOptional_Define def = (ExprRelopOptional_Define) opt;
+			Expr expr2 = def.getExpr();
+			
+			if(expr1.struct.getKind() != expr2.struct.getKind())
+			{
+				reportError("Izrazi nisu kompatibilni", condFact);
+				return;
+			}
+			
+			if(expr1.struct.getKind() == Struct.Array)
+			{
+				Relop relop = def.getRelop();
+				if((relop instanceof Relop_Double_Equal) || (relop instanceof Relop_Not_Equal))
+				{
+					return;
+				}
+				
+				reportError("Nevalidni relacioni operator za zadati tip! ", condFact);
+				return;
+			}
+		}
+		else if(opt instanceof ExprRelopOptional_Skip)
+		{
+			if(expr1.struct != TabCustom.boolType)
+			{
+				reportError("izraz mora da bude bool!", condFact);
+			}
 		}
 	}
 	

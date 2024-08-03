@@ -78,6 +78,7 @@ nonterminal FactorNew;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
 nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorStatementListOptional, DesignatorStatementList;
 nonterminal Members, MemberList, Member, ArrayOrVarMember;
+nonterminal For_Header;
 
 nonterminal ElseOptional, NumConstOptional;
 nonterminal Condition, CondTerm, CondFact, CondFactOptional;
@@ -219,10 +220,13 @@ Statement ::= (Statement_DesignatorStatement) DesignatorStatement SEMICOLON
 			  |
 			  (Statement_If) IF LPAREN Condition RPAREN Statement ElseOptional
 			  |
-			  (Statement_For) FOR LPAREN DesignatorStatementListOptional SEMICOLON CondFactOptional SEMICOLON DesignatorStatementListOptional RPAREN Statement
+			  (Statement_For) For_Header Statement
 			  |
 			  (Statement_Statements) LBRACE Statements RBRACE
 			  ;
+			  
+For_Header ::= (For_Header) FOR LPAREN DesignatorStatementListOptional SEMICOLON CondFactOptional SEMICOLON DesignatorStatementListOptional RPAREN
+			   ;
 			  
 ElseOptional ::= (ElseOptional_Define) ELSE Statement
 				 |

@@ -13,7 +13,7 @@ namespace Test
 }
 
 const int x = 4;
-int vx, vz[];
+int vx, vy, vz[];
 
 {
 
@@ -27,8 +27,8 @@ int vx, vz[];
 	}
 	
 	
-	int f2(int a, char b[])
+	int f2(int a, int b[])
 	{
-		return f1(true, 123 + 12);
+		Test::f1();
 	}
 }

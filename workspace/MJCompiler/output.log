@@ -1,340 +1,105 @@
-INFO  22:31:49,745 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  22:31:49,786 - #2 program
-INFO  22:31:49,786 - #48 p
-INFO  22:31:49,787 - #17 namespace
-INFO  22:31:49,787 - #48 Test
-INFO  22:31:49,787 - #18 {
-INFO  22:31:49,788 - #6 const
-INFO  22:31:49,789 - #48 int
-INFO  22:31:49,789 - #48 x
-INFO  22:31:49,789 - #29 =
-INFO  22:31:49,789 - #45 1
-INFO  22:31:49,789 - #40 ;
-INFO  22:31:49,791 - #18 {
-INFO  22:31:49,791 - #12 void
-INFO  22:31:49,792 - #48 f1
-INFO  22:31:49,792 - #20 (
-INFO  22:31:49,792 - #21 )
-INFO  22:31:49,793 - #18 {
-INFO  22:31:49,793 - #19 }
-INFO  22:31:49,794 - #19 }
-INFO  22:31:49,795 - #19 }
-INFO  22:31:49,795 - #6 const
-INFO  22:31:49,796 - #48 int
-INFO  22:31:49,796 - #48 x
-INFO  22:31:49,796 - #29 =
-INFO  22:31:49,796 - #45 4
-INFO  22:31:49,796 - #40 ;
-INFO  22:31:49,797 - #48 int
-INFO  22:31:49,797 - #48 vx
-INFO  22:31:49,797 - #43 ,
-INFO  22:31:49,798 - #48 vz
-INFO  22:31:49,798 - #22 [
-INFO  22:31:49,798 - #23 ]
-INFO  22:31:49,798 - #40 ;
-INFO  22:31:49,799 - #18 {
-INFO  22:31:49,799 - #12 void
-INFO  22:31:49,799 - #48 main
-INFO  22:31:49,799 - #20 (
-INFO  22:31:49,799 - #21 )
-INFO  22:31:49,799 - #18 {
-INFO  22:31:49,800 - #19 }
-INFO  22:31:49,800 - #48 int
-INFO  22:31:49,800 - #48 f1
-INFO  22:31:49,800 - #20 (
-INFO  22:31:49,801 - #48 bool
-INFO  22:31:49,801 - #48 b
-INFO  22:31:49,801 - #43 ,
-INFO  22:31:49,802 - #48 int
-INFO  22:31:49,802 - #48 a
-INFO  22:31:49,802 - #21 )
-INFO  22:31:49,802 - #18 {
-INFO  22:31:49,802 - #19 }
-INFO  22:31:49,803 - #48 int
-INFO  22:31:49,803 - #48 f2
-INFO  22:31:49,803 - #20 (
-INFO  22:31:49,803 - #48 int
-INFO  22:31:49,803 - #48 a
-INFO  22:31:49,803 - #43 ,
-INFO  22:31:49,803 - #48 char
-INFO  22:31:49,803 - #48 b
-INFO  22:31:49,803 - #22 [
-INFO  22:31:49,803 - #23 ]
-INFO  22:31:49,804 - #21 )
-INFO  22:31:49,804 - #18 {
-INFO  22:31:49,804 - #11 return
-INFO  22:31:49,804 - #48 f1
-INFO  22:31:49,804 - #20 (
-INFO  22:31:49,806 - #46 true
-INFO  22:31:49,806 - #43 ,
-INFO  22:31:49,806 - #45 123
-INFO  22:31:49,807 - #24 +
-INFO  22:31:49,807 - #45 12
-INFO  22:31:49,820 - #21 )
-INFO  22:31:49,820 - #40 ;
-INFO  22:31:49,821 - #19 }
-INFO  22:31:49,821 - #19 }
-INFO  22:31:49,822 - Program(
-  ProgramName(
-   p
-  ) [ProgramName]
-  Namespace_Define(
-    NamespaceName(
-     Test
-    ) [NamespaceName]
-    DeclarationList_Define(
-      DeclarationList_SKIP(
-      ) [DeclarationList_SKIP]
-      Declaration_Const(
-        ConstDeclaration(
-          Type_NoScope(
-           int
-          ) [Type_NoScope]
-          ConstDeclarationList_One(
-            ConstDeclarationElement(
-             x
-              ConstValue_INT(
-               1
-              ) [ConstValue_INT]
-            ) [ConstDeclarationElement]
-          ) [ConstDeclarationList_One]
-        ) [ConstDeclaration]
-      ) [Declaration_Const]
-    ) [DeclarationList_Define]
-    MethodsDeclarationList_OneOrMore(
-      MethodsDeclarationList_Skip(
-      ) [MethodsDeclarationList_Skip]
-      MethodDeclaration(
-        MethodDeclarationTypeAndName_Void(
-         f1
-        ) [MethodDeclarationTypeAndName_Void]
-        FormPars_None(
-        ) [FormPars_None]
-        VarDeclarationListOptional_Skip(
-        ) [VarDeclarationListOptional_Skip]
-        Statements_None(
-        ) [Statements_None]
-      ) [MethodDeclaration]
-    ) [MethodsDeclarationList_OneOrMore]
-  ) [Namespace_Define]
-  DeclarationList_Define(
-    DeclarationList_Define(
-      DeclarationList_SKIP(
-      ) [DeclarationList_SKIP]
-      Declaration_Const(
-        ConstDeclaration(
-          Type_NoScope(
-           int
-          ) [Type_NoScope]
-          ConstDeclarationList_One(
-            ConstDeclarationElement(
-             x
-              ConstValue_INT(
-               4
-              ) [ConstValue_INT]
-            ) [ConstDeclarationElement]
-          ) [ConstDeclarationList_One]
-        ) [ConstDeclaration]
-      ) [Declaration_Const]
-    ) [DeclarationList_Define]
-    Declaration_Var(
-      VarDeclaration_VarList(
-        Type_NoScope(
-         int
-        ) [Type_NoScope]
-        VarList_Multiple(
-          VarList_One(
-            VarListElement(
-             vx
-              VarOrArray_Var(
-              ) [VarOrArray_Var]
-            ) [VarListElement]
-          ) [VarList_One]
-          VarListElement(
-           vz
-            VarOrArray_Array(
-            ) [VarOrArray_Array]
-          ) [VarListElement]
-        ) [VarList_Multiple]
-      ) [VarDeclaration_VarList]
-    ) [Declaration_Var]
-  ) [DeclarationList_Define]
-  MethodsDeclarationList_OneOrMore(
-    MethodsDeclarationList_OneOrMore(
-      MethodsDeclarationList_OneOrMore(
-        MethodsDeclarationList_Skip(
-        ) [MethodsDeclarationList_Skip]
-        MethodDeclaration(
-          MethodDeclarationTypeAndName_Void(
-           main
-          ) [MethodDeclarationTypeAndName_Void]
-          FormPars_None(
-          ) [FormPars_None]
-          VarDeclarationListOptional_Skip(
-          ) [VarDeclarationListOptional_Skip]
-          Statements_None(
-          ) [Statements_None]
-        ) [MethodDeclaration]
-      ) [MethodsDeclarationList_OneOrMore]
-      MethodDeclaration(
-        MethodDeclarationTypeAndName_Type(
-          Type_NoScope(
-           int
-          ) [Type_NoScope]
-         f1
-        ) [MethodDeclarationTypeAndName_Type]
-        FormPars_OneOrMore(
-          FormParsList_Multiple(
-            FormParsList_One(
-              Parameter(
-                Type_NoScope(
-                 bool
-                ) [Type_NoScope]
-               b
-                VarOrArray_Var(
-                ) [VarOrArray_Var]
-              ) [Parameter]
-            ) [FormParsList_One]
-            Parameter(
-              Type_NoScope(
-               int
-              ) [Type_NoScope]
-             a
-              VarOrArray_Var(
-              ) [VarOrArray_Var]
-            ) [Parameter]
-          ) [FormParsList_Multiple]
-        ) [FormPars_OneOrMore]
-        VarDeclarationListOptional_Skip(
-        ) [VarDeclarationListOptional_Skip]
-        Statements_None(
-        ) [Statements_None]
-      ) [MethodDeclaration]
-    ) [MethodsDeclarationList_OneOrMore]
-    MethodDeclaration(
-      MethodDeclarationTypeAndName_Type(
-        Type_NoScope(
-         int
-        ) [Type_NoScope]
-       f2
-      ) [MethodDeclarationTypeAndName_Type]
-      FormPars_OneOrMore(
-        FormParsList_Multiple(
-          FormParsList_One(
-            Parameter(
-              Type_NoScope(
-               int
-              ) [Type_NoScope]
-             a
-              VarOrArray_Var(
-              ) [VarOrArray_Var]
-            ) [Parameter]
-          ) [FormParsList_One]
-          Parameter(
-            Type_NoScope(
-             char
-            ) [Type_NoScope]
-           b
-            VarOrArray_Array(
-            ) [VarOrArray_Array]
-          ) [Parameter]
-        ) [FormParsList_Multiple]
-      ) [FormPars_OneOrMore]
-      VarDeclarationListOptional_Skip(
-      ) [VarDeclarationListOptional_Skip]
-      Statements_OneOrMore(
-        Statements_None(
-        ) [Statements_None]
-        Statement_Return(
-          ExprOptional_Define(
-            Expr_TermOne(
-              Term_One(
-                Factor_Designator(
-                  Designator(
-                    Var_NoScope(
-                     f1
-                    ) [Var_NoScope]
-                    Members_Skip(
-                    ) [Members_Skip]
-                  ) [Designator]
-                  ActParsOptionalBrackets_Define(
-                    ActParsOptional_Define(
-                      ActPars_Multiple(
-                        ActPars_One(
-                          Argument(
-                            Expr_TermOne(
-                              Term_One(
-                                Factor_Const(
-                                  ConstValue_BOOL(
-                                   true
-                                  ) [ConstValue_BOOL]
-                                ) [Factor_Const]
-                              ) [Term_One]
-                            ) [Expr_TermOne]
-                          ) [Argument]
-                        ) [ActPars_One]
-                        Argument(
-                          Expr_TermMultiple(
-                            Expr_TermOne(
-                              Term_One(
-                                Factor_Const(
-                                  ConstValue_INT(
-                                   123
-                                  ) [ConstValue_INT]
-                                ) [Factor_Const]
-                              ) [Term_One]
-                            ) [Expr_TermOne]
-                            AddOp_Plus(
-                            ) [AddOp_Plus]
-                            Term_One(
-                              Factor_Const(
-                                ConstValue_INT(
-                                 12
-                                ) [ConstValue_INT]
-                              ) [Factor_Const]
-                            ) [Term_One]
-                          ) [Expr_TermMultiple]
-                        ) [Argument]
-                      ) [ActPars_Multiple]
-                    ) [ActParsOptional_Define]
-                  ) [ActParsOptionalBrackets_Define]
-                ) [Factor_Designator]
-              ) [Term_One]
-            ) [Expr_TermOne]
-          ) [ExprOptional_Define]
-        ) [Statement_Return]
-      ) [Statements_OneOrMore]
-    ) [MethodDeclaration]
-  ) [MethodsDeclarationList_OneOrMore]
-) [Program]
-INFO  22:31:49,823 - ===================================
-INFO  22:31:49,828 - Obrada programa p
-INFO  22:31:49,828 - Obrada namespacea: Test
-INFO  22:31:49,828 - Tip: int
-INFO  22:31:49,829 - Obrada konstante Test::x
-INFO  22:31:49,829 - Obrada metode Test::f1
-INFO  22:31:49,829 - Tip: int
-INFO  22:31:49,829 - Obrada konstante x
-INFO  22:31:49,829 - Tip: int
-INFO  22:31:49,829 - Obrada promenljive vx
-INFO  22:31:49,829 - Obrada niza vz
-INFO  22:31:49,830 - Obrada metode main
-INFO  22:31:49,830 - Tip: int
-INFO  22:31:49,830 - Obrada metode f1
-INFO  22:31:49,830 - Tip: bool
-INFO  22:31:49,830 - Obrada argumenta promenljive b
-INFO  22:31:49,830 - Tip: int
-INFO  22:31:49,830 - Obrada argumenta promenljive a
-INFO  22:31:49,830 - Tip: int
-INFO  22:31:49,830 - Obrada metode f2
-INFO  22:31:49,830 - Tip: int
-INFO  22:31:49,831 - Obrada argumenta promenljive a
-INFO  22:31:49,831 - Tip: char
-INFO  22:31:49,831 - Obrada argumenta niza b
-INFO  22:31:49,831 - Var: f1
-INFO  22:31:49,833 - Poziv funkcije f1
-INFO  22:31:49,833 - Povratak iz metode f2
+INFO  13:16:39,056 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  13:16:39,093 - #2 program
+INFO  13:16:39,093 - #48 p
+INFO  13:16:39,094 - #17 namespace
+INFO  13:16:39,094 - #48 Test
+INFO  13:16:39,094 - #18 {
+INFO  13:16:39,095 - #6 const
+INFO  13:16:39,095 - #48 int
+INFO  13:16:39,096 - #48 x
+INFO  13:16:39,096 - #29 =
+INFO  13:16:39,096 - #45 1
+INFO  13:16:39,096 - #40 ;
+INFO  13:16:39,098 - #18 {
+INFO  13:16:39,098 - #12 void
+INFO  13:16:39,099 - #48 f1
+INFO  13:16:39,099 - #20 (
+INFO  13:16:39,099 - #21 )
+INFO  13:16:39,100 - #18 {
+INFO  13:16:39,101 - #19 }
+INFO  13:16:39,101 - #19 }
+INFO  13:16:39,102 - #19 }
+INFO  13:16:39,103 - #6 const
+INFO  13:16:39,103 - #48 int
+INFO  13:16:39,103 - #48 x
+INFO  13:16:39,103 - #29 =
+INFO  13:16:39,103 - #45 4
+INFO  13:16:39,103 - #40 ;
+INFO  13:16:39,103 - #48 int
+INFO  13:16:39,104 - #48 vx
+INFO  13:16:39,104 - #43 ,
+INFO  13:16:39,105 - #48 vy
+INFO  13:16:39,105 - #43 ,
+INFO  13:16:39,106 - #48 vz
+INFO  13:16:39,106 - #22 [
+INFO  13:16:39,106 - #23 ]
+INFO  13:16:39,106 - #40 ;
+INFO  13:16:39,106 - #18 {
+INFO  13:16:39,107 - #12 void
+INFO  13:16:39,107 - #48 main
+INFO  13:16:39,107 - #20 (
+INFO  13:16:39,107 - #21 )
+INFO  13:16:39,107 - #18 {
+INFO  13:16:39,107 - #19 }
+INFO  13:16:39,107 - #48 int
+INFO  13:16:39,108 - #48 f1
+INFO  13:16:39,108 - #20 (
+INFO  13:16:39,108 - #48 bool
+INFO  13:16:39,108 - #48 b
+INFO  13:16:39,108 - #43 ,
+INFO  13:16:39,108 - #48 int
+INFO  13:16:39,109 - #48 a
+INFO  13:16:39,109 - #21 )
+INFO  13:16:39,109 - #18 {
+INFO  13:16:39,109 - #19 }
+INFO  13:16:39,109 - #48 int
+INFO  13:16:39,109 - #48 f2
+INFO  13:16:39,109 - #20 (
+INFO  13:16:39,109 - #48 int
+INFO  13:16:39,110 - #48 a
+INFO  13:16:39,110 - #43 ,
+INFO  13:16:39,110 - #48 int
+INFO  13:16:39,110 - #48 b
+INFO  13:16:39,110 - #22 [
+INFO  13:16:39,110 - #23 ]
+INFO  13:16:39,110 - #21 )
+INFO  13:16:39,110 - #18 {
+INFO  13:16:39,111 - #48 Test
+INFO  13:16:39,111 - #42 ::
+INFO  13:16:39,111 - #48 f1
+INFO  13:16:39,111 - #20 (
+INFO  13:16:39,112 - #21 )
+INFO  13:16:39,112 - #40 ;
+INFO  13:16:39,113 - #19 }
+INFO  13:16:39,113 - #19 }
+INFO  13:16:39,114 - ===================================
+INFO  13:16:39,134 - Obrada programa p
+INFO  13:16:39,134 - Obrada namespacea: Test
+INFO  13:16:39,135 - Tip: int
+INFO  13:16:39,135 - Obrada konstante Test::x
+INFO  13:16:39,135 - Obrada metode Test::f1
+INFO  13:16:39,135 - Tip: int
+INFO  13:16:39,135 - Obrada konstante x
+INFO  13:16:39,135 - Tip: int
+INFO  13:16:39,135 - Obrada promenljive vx
+INFO  13:16:39,136 - Obrada promenljive vy
+INFO  13:16:39,136 - Obrada niza vz
+INFO  13:16:39,136 - Obrada metode main
+INFO  13:16:39,136 - Tip: int
+INFO  13:16:39,136 - Obrada metode f1
+INFO  13:16:39,136 - Tip: bool
+INFO  13:16:39,137 - Obrada argumenta promenljive b
+INFO  13:16:39,137 - Tip: int
+INFO  13:16:39,137 - Obrada argumenta promenljive a
+INFO  13:16:39,137 - Tip: int
+INFO  13:16:39,137 - Obrada metode f2
+INFO  13:16:39,137 - Tip: int
+INFO  13:16:39,137 - Obrada argumenta promenljive a
+INFO  13:16:39,137 - Tip: int
+INFO  13:16:39,137 - Obrada argumenta niza b
+INFO  13:16:39,138 - Var: Test::f1
 =====================SYMBOL TABLE DUMP=========================
+Test: notype, 0, 0 
 Type int: int, -1, -1 
 Type char: char, -1, -1 
 Con eol: char, 10, 0 
@@ -350,22 +115,22 @@ Meth len: int, 0, 1
 
 Type bool: , -1, -1 
 Prog p: notype, 0, 1 
-   Test: notype, 0, 0    Con Test::x: int, 0, 1 
+   Con Test::x: int, 0, 1 
    Meth Test::f1: notype, 0, 1 
 
+   Con x: int, 0, 1 
+   Var vx: int, 0, 1 
+   Var vy: int, 1, 1 
+   Var vz: Arr of int, 2, 1 
+   Meth main: notype, 0, 1 
 
-   Con x: int, 0, 0 
-   Var vx: int, 0, 0 
-   Var vz: Arr of int, 1, 0 
-   Meth main: notype, 0, 0 
-
-   Meth f1: int, 0, 2 
+   Meth f1: int, 0, 3 
       Var b: , 0, 1 
       Var a: int, 1, 1 
 
-   Meth f2: int, 0, 2 
+   Meth f2: int, 0, 3 
       Var a: int, 0, 1 
-      Var b: Arr of char, 1, 1 
+      Var b: Arr of int, 1, 1 
 
 
 

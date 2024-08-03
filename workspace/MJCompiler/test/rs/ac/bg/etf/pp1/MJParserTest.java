@@ -46,16 +46,8 @@ public class MJParserTest {
 	        
 	        Program prog = (Program)(s.value); 
 			// ispis sintaksnog stabla
-			log.info(prog.toString(""));
+			//log.info(prog.toString(""));
 			log.info("===================================");
-
-			// ispis prepoznatih programskih konstrukcija
-			/*RuleVisitor v = new RuleVisitor();
-			prog.traverseBottomUp(v); 
-	      
-			log.info(" Print count calls = " + v.printCallCount);
-
-			log.info(" Deklarisanih promenljivih ima = " + v.varDeclCount);*/
 	        
 			SyntaxNode progNode = (SyntaxNode)(s.value);
 			TabCustom.init(); // Universe scope
