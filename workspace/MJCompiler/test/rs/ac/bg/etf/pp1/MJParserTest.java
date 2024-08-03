@@ -46,16 +46,16 @@ public class MJParserTest {
 	        
 	        Program prog = (Program)(s.value); 
 			// ispis sintaksnog stabla
-			//log.info(prog.toString(""));
-			log.info("===================================");
+			log.info(prog.toString(""));
+			System.out.println("===================================");
 	        
 			SyntaxNode progNode = (SyntaxNode)(s.value);
 			TabCustom.init(); // Universe scope
-			SemanticAnalyzer semanticCheck = new SemanticAnalyzer();
-			prog.traverseBottomUp(semanticCheck);
-			
-	       // log.info("Print calls = " + semanticCheck.printCallCount);
-			TabCustom.dump();
+			SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer();
+			prog.traverseBottomUp(semanticAnalyzer);
+		
+			semanticAnalyzer.dump();
+			//TabCustom.dump();
 	        
 	        /*if (!p.errorDetected && semanticCheck.passed()) {
 	        	File objFile = new File(args[1]);

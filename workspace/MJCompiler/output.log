@@ -1,136 +1,511 @@
-INFO  13:16:39,056 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  13:16:39,093 - #2 program
-INFO  13:16:39,093 - #48 p
-INFO  13:16:39,094 - #17 namespace
-INFO  13:16:39,094 - #48 Test
-INFO  13:16:39,094 - #18 {
-INFO  13:16:39,095 - #6 const
-INFO  13:16:39,095 - #48 int
-INFO  13:16:39,096 - #48 x
-INFO  13:16:39,096 - #29 =
-INFO  13:16:39,096 - #45 1
-INFO  13:16:39,096 - #40 ;
-INFO  13:16:39,098 - #18 {
-INFO  13:16:39,098 - #12 void
-INFO  13:16:39,099 - #48 f1
-INFO  13:16:39,099 - #20 (
-INFO  13:16:39,099 - #21 )
-INFO  13:16:39,100 - #18 {
-INFO  13:16:39,101 - #19 }
-INFO  13:16:39,101 - #19 }
-INFO  13:16:39,102 - #19 }
-INFO  13:16:39,103 - #6 const
-INFO  13:16:39,103 - #48 int
-INFO  13:16:39,103 - #48 x
-INFO  13:16:39,103 - #29 =
-INFO  13:16:39,103 - #45 4
-INFO  13:16:39,103 - #40 ;
-INFO  13:16:39,103 - #48 int
-INFO  13:16:39,104 - #48 vx
-INFO  13:16:39,104 - #43 ,
-INFO  13:16:39,105 - #48 vy
-INFO  13:16:39,105 - #43 ,
-INFO  13:16:39,106 - #48 vz
-INFO  13:16:39,106 - #22 [
-INFO  13:16:39,106 - #23 ]
-INFO  13:16:39,106 - #40 ;
-INFO  13:16:39,106 - #18 {
-INFO  13:16:39,107 - #12 void
-INFO  13:16:39,107 - #48 main
-INFO  13:16:39,107 - #20 (
-INFO  13:16:39,107 - #21 )
-INFO  13:16:39,107 - #18 {
-INFO  13:16:39,107 - #19 }
-INFO  13:16:39,107 - #48 int
-INFO  13:16:39,108 - #48 f1
-INFO  13:16:39,108 - #20 (
-INFO  13:16:39,108 - #48 bool
-INFO  13:16:39,108 - #48 b
-INFO  13:16:39,108 - #43 ,
-INFO  13:16:39,108 - #48 int
-INFO  13:16:39,109 - #48 a
-INFO  13:16:39,109 - #21 )
-INFO  13:16:39,109 - #18 {
-INFO  13:16:39,109 - #19 }
-INFO  13:16:39,109 - #48 int
-INFO  13:16:39,109 - #48 f2
-INFO  13:16:39,109 - #20 (
-INFO  13:16:39,109 - #48 int
-INFO  13:16:39,110 - #48 a
-INFO  13:16:39,110 - #43 ,
-INFO  13:16:39,110 - #48 int
-INFO  13:16:39,110 - #48 b
-INFO  13:16:39,110 - #22 [
-INFO  13:16:39,110 - #23 ]
-INFO  13:16:39,110 - #21 )
-INFO  13:16:39,110 - #18 {
-INFO  13:16:39,111 - #48 Test
-INFO  13:16:39,111 - #42 ::
-INFO  13:16:39,111 - #48 f1
-INFO  13:16:39,111 - #20 (
-INFO  13:16:39,112 - #21 )
-INFO  13:16:39,112 - #40 ;
-INFO  13:16:39,113 - #19 }
-INFO  13:16:39,113 - #19 }
-INFO  13:16:39,114 - ===================================
-INFO  13:16:39,134 - Obrada programa p
-INFO  13:16:39,134 - Obrada namespacea: Test
-INFO  13:16:39,135 - Tip: int
-INFO  13:16:39,135 - Obrada konstante Test::x
-INFO  13:16:39,135 - Obrada metode Test::f1
-INFO  13:16:39,135 - Tip: int
-INFO  13:16:39,135 - Obrada konstante x
-INFO  13:16:39,135 - Tip: int
-INFO  13:16:39,135 - Obrada promenljive vx
-INFO  13:16:39,136 - Obrada promenljive vy
-INFO  13:16:39,136 - Obrada niza vz
-INFO  13:16:39,136 - Obrada metode main
-INFO  13:16:39,136 - Tip: int
-INFO  13:16:39,136 - Obrada metode f1
-INFO  13:16:39,136 - Tip: bool
-INFO  13:16:39,137 - Obrada argumenta promenljive b
-INFO  13:16:39,137 - Tip: int
-INFO  13:16:39,137 - Obrada argumenta promenljive a
-INFO  13:16:39,137 - Tip: int
-INFO  13:16:39,137 - Obrada metode f2
-INFO  13:16:39,137 - Tip: int
-INFO  13:16:39,137 - Obrada argumenta promenljive a
-INFO  13:16:39,137 - Tip: int
-INFO  13:16:39,137 - Obrada argumenta niza b
-INFO  13:16:39,138 - Var: Test::f1
-=====================SYMBOL TABLE DUMP=========================
-Test: notype, 0, 0 
-Type int: int, -1, -1 
-Type char: char, -1, -1 
-Con eol: char, 10, 0 
-Con null: Class [], 0, 0 
-Meth chr: char, 0, 1 
-   Var i: int, 0, 1 
-
-Meth ord: int, 0, 1 
-   Var ch: char, 0, 1 
-
-Meth len: int, 0, 1 
-   Var arr: Arr of notype, 0, 1 
-
-Type bool: , -1, -1 
-Prog p: notype, 0, 1 
-   Con Test::x: int, 0, 1 
-   Meth Test::f1: notype, 0, 1 
-
-   Con x: int, 0, 1 
-   Var vx: int, 0, 1 
-   Var vy: int, 1, 1 
-   Var vz: Arr of int, 2, 1 
-   Meth main: notype, 0, 1 
-
-   Meth f1: int, 0, 3 
-      Var b: , 0, 1 
-      Var a: int, 1, 1 
-
-   Meth f2: int, 0, 3 
-      Var a: int, 0, 1 
-      Var b: Arr of int, 1, 1 
-
-
+Could not rename log file!
+INFO  21:12:42,736 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  21:12:42,777 - #2 program
+INFO  21:12:42,778 - #48 p
+INFO  21:12:42,778 - #17 namespace
+INFO  21:12:42,778 - #48 Test
+INFO  21:12:42,778 - #18 {
+INFO  21:12:42,779 - #48 int
+INFO  21:12:42,779 - #48 z
+INFO  21:12:42,779 - #40 ;
+INFO  21:12:42,781 - #18 {
+INFO  21:12:42,781 - #12 void
+INFO  21:12:42,782 - #48 f1
+INFO  21:12:42,782 - #20 (
+INFO  21:12:42,783 - #21 )
+INFO  21:12:42,783 - #18 {
+INFO  21:12:42,784 - #19 }
+INFO  21:12:42,784 - #19 }
+INFO  21:12:42,785 - #19 }
+INFO  21:12:42,785 - #48 int
+INFO  21:12:42,785 - #48 vx
+INFO  21:12:42,785 - #43 ,
+INFO  21:12:42,785 - #48 vy
+INFO  21:12:42,785 - #43 ,
+INFO  21:12:42,785 - #48 vz
+INFO  21:12:42,785 - #22 [
+INFO  21:12:42,785 - #23 ]
+INFO  21:12:42,786 - #40 ;
+INFO  21:12:42,786 - #18 {
+INFO  21:12:42,786 - #12 void
+INFO  21:12:42,786 - #48 main
+INFO  21:12:42,786 - #20 (
+INFO  21:12:42,786 - #21 )
+INFO  21:12:42,786 - #18 {
+INFO  21:12:42,786 - #19 }
+INFO  21:12:42,787 - #48 int
+INFO  21:12:42,787 - #48 f1
+INFO  21:12:42,787 - #20 (
+INFO  21:12:42,787 - #48 bool
+INFO  21:12:42,787 - #48 b
+INFO  21:12:42,787 - #43 ,
+INFO  21:12:42,788 - #48 int
+INFO  21:12:42,788 - #48 a
+INFO  21:12:42,788 - #21 )
+INFO  21:12:42,789 - #18 {
+INFO  21:12:42,789 - #48 a
+INFO  21:12:42,789 - #29 =
+INFO  21:12:42,790 - #45 2
+INFO  21:12:42,791 - #40 ;
+INFO  21:12:42,791 - #19 }
+INFO  21:12:42,791 - #48 int
+INFO  21:12:42,791 - #48 f2
+INFO  21:12:42,792 - #20 (
+INFO  21:12:42,792 - #48 int
+INFO  21:12:42,792 - #48 a
+INFO  21:12:42,792 - #43 ,
+INFO  21:12:42,792 - #48 int
+INFO  21:12:42,792 - #48 b
+INFO  21:12:42,792 - #22 [
+INFO  21:12:42,792 - #23 ]
+INFO  21:12:42,792 - #21 )
+INFO  21:12:42,792 - #18 {
+INFO  21:12:42,792 - #48 Test
+INFO  21:12:42,792 - #42 ::
+INFO  21:12:42,792 - #48 f1
+INFO  21:12:42,792 - #20 (
+INFO  21:12:42,793 - #21 )
+INFO  21:12:42,793 - #40 ;
+INFO  21:12:42,794 - #48 f1
+INFO  21:12:42,794 - #20 (
+INFO  21:12:42,794 - #46 true
+INFO  21:12:42,794 - #43 ,
+INFO  21:12:42,795 - #48 vz
+INFO  21:12:42,795 - #22 [
+INFO  21:12:42,795 - #45 1
+INFO  21:12:42,795 - #23 ]
+INFO  21:12:42,795 - #21 )
+INFO  21:12:42,796 - #40 ;
+INFO  21:12:42,796 - #48 vz
+INFO  21:12:42,796 - #22 [
+INFO  21:12:42,796 - #45 2
+INFO  21:12:42,796 - #23 ]
+INFO  21:12:42,796 - #29 =
+INFO  21:12:42,796 - #45 5
+INFO  21:12:42,797 - #40 ;
+INFO  21:12:42,797 - #48 a
+INFO  21:12:42,797 - #29 =
+INFO  21:12:42,797 - #45 2
+INFO  21:12:42,797 - #40 ;
+INFO  21:12:42,797 - #48 b
+INFO  21:12:42,797 - #22 [
+INFO  21:12:42,797 - #45 2
+INFO  21:12:42,798 - #23 ]
+INFO  21:12:42,798 - #29 =
+INFO  21:12:42,798 - #45 6
+INFO  21:12:42,798 - #40 ;
+INFO  21:12:42,798 - #19 }
+INFO  21:12:42,799 - #19 }
+INFO  21:12:42,801 - Program(
+  ProgramName(
+   p
+  ) [ProgramName]
+  Namespace_Define(
+    NamespaceName(
+     Test
+    ) [NamespaceName]
+    DeclarationList_Define(
+      DeclarationList_SKIP(
+      ) [DeclarationList_SKIP]
+      Declaration_Var(
+        VarDeclaration_VarList(
+          Type_NoScope(
+           int
+          ) [Type_NoScope]
+          VarList_One(
+            VarListElement(
+             z
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [VarListElement]
+          ) [VarList_One]
+        ) [VarDeclaration_VarList]
+      ) [Declaration_Var]
+    ) [DeclarationList_Define]
+    MethodsDeclarationList_OneOrMore(
+      MethodsDeclarationList_Skip(
+      ) [MethodsDeclarationList_Skip]
+      MethodDeclaration(
+        MethodDeclarationTypeAndName_Void(
+         f1
+        ) [MethodDeclarationTypeAndName_Void]
+        FormPars_None(
+        ) [FormPars_None]
+        VarDeclarationListOptional_Skip(
+        ) [VarDeclarationListOptional_Skip]
+        Statements_None(
+        ) [Statements_None]
+      ) [MethodDeclaration]
+    ) [MethodsDeclarationList_OneOrMore]
+  ) [Namespace_Define]
+  DeclarationList_Define(
+    DeclarationList_SKIP(
+    ) [DeclarationList_SKIP]
+    Declaration_Var(
+      VarDeclaration_VarList(
+        Type_NoScope(
+         int
+        ) [Type_NoScope]
+        VarList_Multiple(
+          VarList_Multiple(
+            VarList_One(
+              VarListElement(
+               vx
+                VarOrArray_Var(
+                ) [VarOrArray_Var]
+              ) [VarListElement]
+            ) [VarList_One]
+            VarListElement(
+             vy
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [VarListElement]
+          ) [VarList_Multiple]
+          VarListElement(
+           vz
+            VarOrArray_Array(
+            ) [VarOrArray_Array]
+          ) [VarListElement]
+        ) [VarList_Multiple]
+      ) [VarDeclaration_VarList]
+    ) [Declaration_Var]
+  ) [DeclarationList_Define]
+  MethodsDeclarationList_OneOrMore(
+    MethodsDeclarationList_OneOrMore(
+      MethodsDeclarationList_OneOrMore(
+        MethodsDeclarationList_Skip(
+        ) [MethodsDeclarationList_Skip]
+        MethodDeclaration(
+          MethodDeclarationTypeAndName_Void(
+           main
+          ) [MethodDeclarationTypeAndName_Void]
+          FormPars_None(
+          ) [FormPars_None]
+          VarDeclarationListOptional_Skip(
+          ) [VarDeclarationListOptional_Skip]
+          Statements_None(
+          ) [Statements_None]
+        ) [MethodDeclaration]
+      ) [MethodsDeclarationList_OneOrMore]
+      MethodDeclaration(
+        MethodDeclarationTypeAndName_Type(
+          Type_NoScope(
+           int
+          ) [Type_NoScope]
+         f1
+        ) [MethodDeclarationTypeAndName_Type]
+        FormPars_OneOrMore(
+          FormParsList_Multiple(
+            FormParsList_One(
+              Parameter(
+                Type_NoScope(
+                 bool
+                ) [Type_NoScope]
+               b
+                VarOrArray_Var(
+                ) [VarOrArray_Var]
+              ) [Parameter]
+            ) [FormParsList_One]
+            Parameter(
+              Type_NoScope(
+               int
+              ) [Type_NoScope]
+             a
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [Parameter]
+          ) [FormParsList_Multiple]
+        ) [FormPars_OneOrMore]
+        VarDeclarationListOptional_Skip(
+        ) [VarDeclarationListOptional_Skip]
+        Statements_OneOrMore(
+          Statements_None(
+          ) [Statements_None]
+          Statement_DesignatorStatement(
+            DesignatorStatement_Designator_With_Options(
+              Designator(
+                Var_NoScope(
+                 a
+                ) [Var_NoScope]
+                Members_Skip(
+                ) [Members_Skip]
+              ) [Designator]
+              DesignatorStatementOptions_AssignOpExpr(
+                AssignOp_EQUAL(
+                ) [AssignOp_EQUAL]
+                Expr_TermOne(
+                  Term_One(
+                    Factor_Const(
+                      ConstValue_INT(
+                       2
+                      ) [ConstValue_INT]
+                    ) [Factor_Const]
+                  ) [Term_One]
+                ) [Expr_TermOne]
+              ) [DesignatorStatementOptions_AssignOpExpr]
+            ) [DesignatorStatement_Designator_With_Options]
+          ) [Statement_DesignatorStatement]
+        ) [Statements_OneOrMore]
+      ) [MethodDeclaration]
+    ) [MethodsDeclarationList_OneOrMore]
+    MethodDeclaration(
+      MethodDeclarationTypeAndName_Type(
+        Type_NoScope(
+         int
+        ) [Type_NoScope]
+       f2
+      ) [MethodDeclarationTypeAndName_Type]
+      FormPars_OneOrMore(
+        FormParsList_Multiple(
+          FormParsList_One(
+            Parameter(
+              Type_NoScope(
+               int
+              ) [Type_NoScope]
+             a
+              VarOrArray_Var(
+              ) [VarOrArray_Var]
+            ) [Parameter]
+          ) [FormParsList_One]
+          Parameter(
+            Type_NoScope(
+             int
+            ) [Type_NoScope]
+           b
+            VarOrArray_Array(
+            ) [VarOrArray_Array]
+          ) [Parameter]
+        ) [FormParsList_Multiple]
+      ) [FormPars_OneOrMore]
+      VarDeclarationListOptional_Skip(
+      ) [VarDeclarationListOptional_Skip]
+      Statements_OneOrMore(
+        Statements_OneOrMore(
+          Statements_OneOrMore(
+            Statements_OneOrMore(
+              Statements_OneOrMore(
+                Statements_None(
+                ) [Statements_None]
+                Statement_DesignatorStatement(
+                  DesignatorStatement_Designator_With_Options(
+                    Designator(
+                      Var_Scope(
+                       Test
+                       f1
+                      ) [Var_Scope]
+                      Members_Skip(
+                      ) [Members_Skip]
+                    ) [Designator]
+                    DesignatorStatementOptions_ActPars(
+                      ActParsOptional_Skip(
+                      ) [ActParsOptional_Skip]
+                    ) [DesignatorStatementOptions_ActPars]
+                  ) [DesignatorStatement_Designator_With_Options]
+                ) [Statement_DesignatorStatement]
+              ) [Statements_OneOrMore]
+              Statement_DesignatorStatement(
+                DesignatorStatement_Designator_With_Options(
+                  Designator(
+                    Var_NoScope(
+                     f1
+                    ) [Var_NoScope]
+                    Members_Skip(
+                    ) [Members_Skip]
+                  ) [Designator]
+                  DesignatorStatementOptions_ActPars(
+                    ActParsOptional_Define(
+                      ActPars_Multiple(
+                        ActPars_One(
+                          Argument(
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Const(
+                                  ConstValue_BOOL(
+                                   true
+                                  ) [ConstValue_BOOL]
+                                ) [Factor_Const]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                          ) [Argument]
+                        ) [ActPars_One]
+                        Argument(
+                          Expr_TermOne(
+                            Term_One(
+                              Factor_Designator(
+                                Designator(
+                                  Var_NoScope(
+                                   vz
+                                  ) [Var_NoScope]
+                                  Members_Define(
+                                    MemberList_One(
+                                      Member_Array(
+                                        Expr_TermOne(
+                                          Term_One(
+                                            Factor_Const(
+                                              ConstValue_INT(
+                                               1
+                                              ) [ConstValue_INT]
+                                            ) [Factor_Const]
+                                          ) [Term_One]
+                                        ) [Expr_TermOne]
+                                      ) [Member_Array]
+                                    ) [MemberList_One]
+                                  ) [Members_Define]
+                                ) [Designator]
+                                ActParsOptionalBrackets_Skip(
+                                ) [ActParsOptionalBrackets_Skip]
+                              ) [Factor_Designator]
+                            ) [Term_One]
+                          ) [Expr_TermOne]
+                        ) [Argument]
+                      ) [ActPars_Multiple]
+                    ) [ActParsOptional_Define]
+                  ) [DesignatorStatementOptions_ActPars]
+                ) [DesignatorStatement_Designator_With_Options]
+              ) [Statement_DesignatorStatement]
+            ) [Statements_OneOrMore]
+            Statement_DesignatorStatement(
+              DesignatorStatement_Designator_With_Options(
+                Designator(
+                  Var_NoScope(
+                   vz
+                  ) [Var_NoScope]
+                  Members_Define(
+                    MemberList_One(
+                      Member_Array(
+                        Expr_TermOne(
+                          Term_One(
+                            Factor_Const(
+                              ConstValue_INT(
+                               2
+                              ) [ConstValue_INT]
+                            ) [Factor_Const]
+                          ) [Term_One]
+                        ) [Expr_TermOne]
+                      ) [Member_Array]
+                    ) [MemberList_One]
+                  ) [Members_Define]
+                ) [Designator]
+                DesignatorStatementOptions_AssignOpExpr(
+                  AssignOp_EQUAL(
+                  ) [AssignOp_EQUAL]
+                  Expr_TermOne(
+                    Term_One(
+                      Factor_Const(
+                        ConstValue_INT(
+                         5
+                        ) [ConstValue_INT]
+                      ) [Factor_Const]
+                    ) [Term_One]
+                  ) [Expr_TermOne]
+                ) [DesignatorStatementOptions_AssignOpExpr]
+              ) [DesignatorStatement_Designator_With_Options]
+            ) [Statement_DesignatorStatement]
+          ) [Statements_OneOrMore]
+          Statement_DesignatorStatement(
+            DesignatorStatement_Designator_With_Options(
+              Designator(
+                Var_NoScope(
+                 a
+                ) [Var_NoScope]
+                Members_Skip(
+                ) [Members_Skip]
+              ) [Designator]
+              DesignatorStatementOptions_AssignOpExpr(
+                AssignOp_EQUAL(
+                ) [AssignOp_EQUAL]
+                Expr_TermOne(
+                  Term_One(
+                    Factor_Const(
+                      ConstValue_INT(
+                       2
+                      ) [ConstValue_INT]
+                    ) [Factor_Const]
+                  ) [Term_One]
+                ) [Expr_TermOne]
+              ) [DesignatorStatementOptions_AssignOpExpr]
+            ) [DesignatorStatement_Designator_With_Options]
+          ) [Statement_DesignatorStatement]
+        ) [Statements_OneOrMore]
+        Statement_DesignatorStatement(
+          DesignatorStatement_Designator_With_Options(
+            Designator(
+              Var_NoScope(
+               b
+              ) [Var_NoScope]
+              Members_Define(
+                MemberList_One(
+                  Member_Array(
+                    Expr_TermOne(
+                      Term_One(
+                        Factor_Const(
+                          ConstValue_INT(
+                           2
+                          ) [ConstValue_INT]
+                        ) [Factor_Const]
+                      ) [Term_One]
+                    ) [Expr_TermOne]
+                  ) [Member_Array]
+                ) [MemberList_One]
+              ) [Members_Define]
+            ) [Designator]
+            DesignatorStatementOptions_AssignOpExpr(
+              AssignOp_EQUAL(
+              ) [AssignOp_EQUAL]
+              Expr_TermOne(
+                Term_One(
+                  Factor_Const(
+                    ConstValue_INT(
+                     6
+                    ) [ConstValue_INT]
+                  ) [Factor_Const]
+                ) [Term_One]
+              ) [Expr_TermOne]
+            ) [DesignatorStatementOptions_AssignOpExpr]
+          ) [DesignatorStatement_Designator_With_Options]
+        ) [Statement_DesignatorStatement]
+      ) [Statements_OneOrMore]
+    ) [MethodDeclaration]
+  ) [MethodsDeclarationList_OneOrMore]
+) [Program]
+===================================
+INFO  21:12:42,808 - Obrada programa p
+INFO  21:12:42,808 - Obrada namespacea: Test
+INFO  21:12:42,808 - Tip: int
+INFO  21:12:42,808 - Obrada promenljive Test::z
+INFO  21:12:42,808 - Obrada metode Test::f1
+INFO  21:12:42,808 - Tip: int
+INFO  21:12:42,808 - Obrada promenljive vx
+INFO  21:12:42,808 - Obrada promenljive vy
+INFO  21:12:42,808 - Obrada niza vz
+INFO  21:12:42,809 - Obrada metode main
+INFO  21:12:42,809 - Tip: int
+INFO  21:12:42,809 - Obrada metode f1
+INFO  21:12:42,809 - Tip: bool
+INFO  21:12:42,809 - Obrada argumenta promenljive b
+INFO  21:12:42,809 - Tip: int
+INFO  21:12:42,809 - Obrada argumenta promenljive a
+INFO  21:12:42,809 - Var: a
+INFO  21:12:42,809 - Tip: int
+INFO  21:12:42,809 - Obrada metode f2
+INFO  21:12:42,809 - Tip: int
+INFO  21:12:42,809 - Obrada argumenta promenljive a
+INFO  21:12:42,809 - Tip: int
+INFO  21:12:42,809 - Obrada argumenta niza b
+INFO  21:12:42,810 - Var: Test::f1
+INFO  21:12:42,812 - Poziv funkcije Test::f1
+INFO  21:12:42,812 - Var: f1
+INFO  21:12:42,812 - Var: vz
+INFO  21:12:42,812 - Poziv funkcije f1
+INFO  21:12:42,812 - Var: vz
+INFO  21:12:42,812 - Var: a
+INFO  21:12:42,812 - Var: b
+=====================================
+Broj Konstanti: 0
+Broj globalnih promenljivih: 4
+Broj lokalnih promenljivih: 0
+Broj poziva funkcija: 2
+Broj pristupa nizovima: 3
+Broj koriscenja argumenata: 3
+=====================================
 

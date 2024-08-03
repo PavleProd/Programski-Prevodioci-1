@@ -17,6 +17,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	private Obj currentMethod = null;
 	private String currentNamespace = "";
 	private int loopCount = 0;
+	
+	private ArrayList<Struct> args = new ArrayList<Struct>(); // argumenti funkcije koja ce biti pozvana
+	private ArrayList<Obj> pars = new ArrayList<Obj>(); // paramtri trenutne funkcije
 
 	Logger log = Logger.getLogger(getClass());
 
@@ -35,6 +38,33 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		if (line != 0)
 			msg.append (" na liniji ").append(line);
 		log.info(msg.toString());
+	}
+	
+	// STATISTIKA
+	
+	private int constCount = 0, globalVarCount = 0, localVarCount = 0, callsCount = 0;
+	private int arrayAccessCount = 0, argumentUsageCount = 0;
+	
+	public void dump()
+	{
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("=====================================\n");
+		sb.append("Broj Konstanti: ");
+		sb.append(constCount);
+		sb.append("\nBroj globalnih promenljivih: ");
+		sb.append(globalVarCount);
+		sb.append("\nBroj lokalnih promenljivih: ");
+		sb.append(localVarCount);
+		sb.append("\nBroj poziva funkcija: ");
+		sb.append(callsCount);
+		sb.append("\nBroj pristupa nizovima: ");
+		sb.append(arrayAccessCount);
+		sb.append("\nBroj koriscenja argumenata: ");
+		sb.append(argumentUsageCount);
+		sb.append("\n=====================================\n");
+
+		System.out.println(sb);
 	}
 	
 	// TYPE
@@ -83,7 +113,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			reportError("Ime " + namespaceName + " ne predstavlja namespace!", type);
 		}
 		
-		// provera da li namesapce nije dobrog tipa?
+		// provera da li namespace nije dobrog tipa?
 		
 		Obj typeNode = Tab.find(typeFullName);
 		
@@ -118,6 +148,11 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		var.obj = varNode;
 		
+		if (this.pars.contains(var.obj))
+		{
+			++argumentUsageCount;
+		}
+			
 		log.info("Var: " + varName);
 	}
 	
@@ -146,7 +181,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Obj mainMethod = Tab.find("main");
 		if(mainMethod == Tab.noObj
 					  || mainMethod.getKind() != Obj.Meth 
-					  || mainMethod.getType() != Tab.noType)
+					  || mainMethod.getType() != Tab.noType
+					  || mainMethod.getLevel() != 0)
 		{
 			reportError("Metoda main nije definisana!", program);
 		}
@@ -201,6 +237,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Tab.chainLocalSymbols(currentMethod);
 		Tab.closeScope();
 		
+		this.pars.clear(); // brisanje parametara jer je kraj funkcije
 		currentMethod = null;
 	}
 	
@@ -216,6 +253,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		log.info("Obrada metode " + methodName);
 		currentMethod = Tab.insert(Obj.Meth, methodName, this.currentType.struct);
+		currentMethod.setLevel(0);
 		typeAndName.obj = currentMethod;
 		
 		Tab.openScope();
@@ -232,6 +270,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		log.info("Obrada metode " + methodName);
 		currentMethod = Tab.insert(Obj.Meth, methodName, Tab.noType);
+		currentMethod.setLevel(0);
 		typeAndName.obj = currentMethod;
 		
 		Tab.openScope();
@@ -263,6 +302,8 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		// Povecavamo broj argumenata za 1
 		this.currentMethod.setLevel(this.currentMethod.getLevel() + 1);
+		
+		this.pars.add(parameter.obj);
 	}
 	
 	// CONST DECLARATION
@@ -286,6 +327,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		}
 		
 		constDecl.obj = Tab.insert(Obj.Con, name, actualType);
+		++this.constCount;
 	}
 	
 	@Override
@@ -331,6 +373,14 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		element.obj = Tab.insert(Obj.Var, name, struct);
 		
+		if(this.currentMethod == null)
+		{
+			++globalVarCount;
+		}
+		else
+		{
+			++localVarCount;
+		}
 	}
 	
 	// FOR
@@ -513,26 +563,32 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	// POZIV FUNCKCIJE
 	
-	private ArrayList<Struct> args = new ArrayList<Struct>();
+	public void visit (ActParsOptional_Define actPars)
+	{
+		++callsCount;
+	}
+	
+	public void visit(ActParsOptional_Skip actPars)
+	{
+		++callsCount;
+	}
 	
 	@Override
-	public void visit(Argument argument)
+	public void visit(Argument argument) // jedan argument funkcije
 	{
 		argument.struct = argument.getExpr().struct;
 		this.args.add(argument.getExpr().struct);
 	}
-		
 	
-	public void visit(Factor_Designator factor)
+	public void visit(Factor_Designator factor) // opciono poziv funkcije
 	{
 		factor.struct = factor.getDesignator().obj.getType();
+		Obj methodToBeCalled = factor.getDesignator().obj;
 		
 		if(factor.getActParsOptionalBrackets() instanceof ActParsOptionalBrackets_Skip)
 		{
 			return;
 		}
-		
-		Obj methodToBeCalled = factor.getDesignator().obj;
 		
 		// ako je poziv f-je
 		if(methodToBeCalled.getKind() != Obj.Meth)
@@ -543,7 +599,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		if(this.args.size() != methodToBeCalled.getLevel())
 		{
-			reportError("Razlicit broj argumenata metode i poziva metode!", null);
+			reportError("Razlicit broj argumenata metode i poziva metode!", factor);
 			return;
 		}
 		
@@ -562,6 +618,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			}
 		}
 		
+		this.args.clear();
 		log.info("Poziv funkcije " + methodToBeCalled.getName());
 
 	}
@@ -634,6 +691,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				return;
 			}
 			
+			++this.arrayAccessCount;
 			designator.obj = new Obj(Obj.Elem, "", type.getElemType());
 		}
 		
@@ -692,13 +750,40 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				return;
 			}
 		}
-		else if(options instanceof DesignatorStatementOptions_ActPars)
+		else if(options instanceof DesignatorStatementOptions_ActPars) // POZIV FUNKCIJE
 		{
 			if(designatorKind != Obj.Meth)
 			{
 				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
 				return;
+			}			
+				
+			Obj methodToBeCalled = designator.obj;
+			
+			if(this.args.size() != methodToBeCalled.getLevel())
+			{
+				reportError("Razlicit broj argumenata metode i poziva metode!", designatorStatement);
+				return;
 			}
+			
+			// dohvatamo prvih getLevel (broj parametara) lokalnih simbola -> sve parametre
+			List<Obj> params = methodToBeCalled.getLocalSymbols()
+					.stream().limit(methodToBeCalled.getLevel()).toList();
+			
+			for(int i = 0; i < params.size(); ++i)
+			{
+				Struct argType = args.get(i);
+				Struct paramType = params.get(i).getType();
+				
+				if(argType != paramType)
+				{
+					reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", designatorStatement);
+				}
+			}
+
+			this.args.clear();
+			log.info("Poziv funkcije " + methodToBeCalled.getName());
+			
 		}
 		
 		

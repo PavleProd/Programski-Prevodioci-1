@@ -2,7 +2,7 @@ program p
 
 namespace Test
 {
-	const int x = 1;
+	int z;
 	{
 		void f1()
 		{
@@ -12,7 +12,6 @@ namespace Test
 	}
 }
 
-const int x = 4;
 int vx, vy, vz[];
 
 {
@@ -23,12 +22,16 @@ int vx, vy, vz[];
 	
 	int f1(bool b, int a)
 	{
-	
+		a = 2;
 	}
 	
 	
 	int f2(int a, int b[])
 	{
 		Test::f1();
+		f1(true, vz[1]);
+		vz[2] = 5;
+		a = 2;
+		b[2] =  6;
 	}
 }

@@ -6,29 +6,29 @@ Warning: Terminal "CLASS" was declared but never used
 Warning: Terminal "COLON" was declared but never used
 Warning: Terminal "EXTENDS" was declared but never used
 Warning: Non terminal "ArrayOrVarMember" was declared but never used
-Building parse tables...------- ast extension v0.8 summary -------
-
-  Computing non-terminal nullability...  Generated 46 base classes
-
-  Computing first sets...  Generated 110 derived classes
-  Building state machine...
-
-  Filling in tables...
-  Generated 13 record classes
-  Checking for non-reduced productions...
-*** Production "Label ::= IDENT " never reduced  Generated interface SyntaxNode
-
-*** Production "MinusOptional ::= " never reduced
-*** Production "MinusOptional ::= MINUS " never reduced  Generated interface Visitor
-
-Writing parser...
+------- ast extension v0.8 summary -------
+  Generated 46 base classes
+  Generated 110 derived classes
+  Generated 13 record classesBuilding parse tables...
+  Computing non-terminal nullability...
+  Generated interface SyntaxNode
+  Generated interface Visitor
   Generated adapter class VisitorAdaptor
+-----------------------------------------------
+
+  Computing first sets...
+  Building state machine...
+  Filling in tables...
+  Checking for non-reduced productions...
+*** Production "Label ::= IDENT " never reduced
+*** Production "MinusOptional ::= " never reduced
+*** Production "MinusOptional ::= MINUS " never reduced
+Writing parser...
 ===== Viable Prefix Recognizer =====
 START lalr_state [0]: {
   [$START ::= (*) Program EOF , {EOF }]
   [Program ::= (*) PROGRAM ProgramName Namespace DeclarationList LBRACE MethodsDeclarationList RBRACE , {EOF }]
 }
------------------------------------------------
 transition on PROGRAM to state [2]
 transition on Program to state [1]
 
