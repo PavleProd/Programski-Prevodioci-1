@@ -11,11 +11,11 @@ import org.apache.log4j.xml.DOMConfigurator;
 import java_cup.runtime.Symbol;
 //import rs.ac.bg.etf.pp1.ast.SyntaxNode;
 import rs.ac.bg.etf.pp1.util.Log4JUtils;
-//import rs.etf.pp1.mj.runtime.Code;
+import rs.etf.pp1.mj.runtime.Code;
 //import rs.etf.pp1.symboltable.Tab;
 import rs.etf.pp1.symboltable.Tab;
 import rs.ac.bg.etf.pp1.ast.*;
-//import rs.ac.bg.etf.pp1.RuleVisitor;
+import rs.ac.bg.etf.pp1.CodeGenerator;
 
 public class MJParserTest {
 
@@ -55,25 +55,25 @@ public class MJParserTest {
 			prog.traverseBottomUp(semanticAnalyzer);
 		
 			semanticAnalyzer.dump();
-			//TabCustom.dump();
 	        
-	        /*if (!p.errorDetected && semanticCheck.passed()) {
+	        if (!p.errorDetected && semanticAnalyzer.passed()) {
 	        	File objFile = new File(args[1]);
-	        	log.info("Generating bytecode file: " + objFile.getAbsolutePath());
+	        	log.info("Generacija bytecode fajla: " + objFile.getAbsolutePath());
 	        	if (objFile.exists())
+	        	{
 	        		objFile.delete();
+	        	}	
 	        	
 	        	// Code generation...
 	        	CodeGenerator codeGenerator = new CodeGenerator();
 	        	prog.traverseBottomUp(codeGenerator);
-	        	Code.dataSize = semanticCheck.nVars;
-	        	Code.mainPc = codeGenerator.getMainPc();
+	        	
 	        	Code.write(new FileOutputStream(objFile));
-	        	log.info("Parsiranje uspesno zavrseno!");
+	        	log.info("Prevodjenje uspesno zavrseno!");
 	        }
 	        else {
 	        	log.error("Parsiranje NIJE uspesno zavrseno!");
-	        }*/
+	        }
 		}
 	}
 }

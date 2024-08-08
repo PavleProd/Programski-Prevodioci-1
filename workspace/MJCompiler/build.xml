@@ -7,11 +7,9 @@
 				<exclude name="sym_old.java"/>
 				<exclude name="util/Log4JUtils.java"/>
 				<exclude name="Yylex.java"/>
-				<exclude name="RuleVisitor.java"/>
 				<exclude name="SemanticAnalyzer.java"/>
 				<exclude name="MyTab.java"/>
 				<exclude name="CodeGenerator.java"/>
-				<exclude name="CounterVisitor.java"/>
 				<exclude name="MyDumpSymbolTableVisitor.java"/>
 				<exclude name="StructCustom.java"/>
 				<exclude name="TabCustom.java"/>

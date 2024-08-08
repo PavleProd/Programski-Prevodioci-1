@@ -1,37 +1,21 @@
 program p
-
-namespace Test
-{
-	int z;
-	{
-		void f1()
-		{
-		
-		}
-		
-	}
-}
-
-int vx, vy, vz[];
-
 {
 
 	void main()
 	{
+		return;
 	}
 	
 	int f1(bool b, int a)
 	{
 		a = 2;
+		return 1;
 	}
 	
 	
 	int f2(int a, int b[])
 	{
-		Test::f1();
-		f1(true, vz[1]);
-		vz[2] = 5;
-		a = 2;
-		b[2] =  6;
+		f1(true, b[1]);
+		return 1;
 	}
 }

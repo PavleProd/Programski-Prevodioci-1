@@ -140,11 +140,11 @@ ConstDeclarationList ::= (ConstDeclarationList_One) ConstDeclarationElement
 ConstDeclarationElement ::= (ConstDeclarationElement) IDENT:varName EQUAL ConstValue
 							;
 						
-ConstValue ::= (ConstValue_INT) INT
+ConstValue ::= (ConstValue_INT) INT:value
 			   |
-			   (ConstValue_BOOL) BOOL
+			   (ConstValue_BOOL) BOOL:value
 			   |
-			   (ConstValue_CHAR) CHAR
+			   (ConstValue_CHAR) CHAR:value
 			   ;
 
 /* VAR DECLARATION */
@@ -233,7 +233,7 @@ ElseOptional ::= (ElseOptional_Define) ELSE Statement
 				 (ElseOptional_Skip) /* EPSILON */
 				 ;
 			  
-NumConstOptional ::= (NumConstOptional_Define) COMMA INT
+NumConstOptional ::= (NumConstOptional_Define) COMMA INT:value
 				     |
 				     (NumConstOptional_Skip) /* EPSILON */
 				     ;
