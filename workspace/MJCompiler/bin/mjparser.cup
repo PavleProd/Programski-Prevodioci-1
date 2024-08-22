@@ -3,7 +3,6 @@ package rs.ac.bg.etf.pp1;
 import java_cup.runtime.*;
 import org.apache.log4j.*;
 
-// import java.io.*;
 import rs.ac.bg.etf.pp1.ast.*;
 
 
@@ -77,11 +76,12 @@ nonterminal ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional
 nonterminal FactorNew;
 nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
 nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorStatementListOptional, DesignatorStatementList;
-nonterminal Members, MemberList, Member, ArrayOrVarMember;
-nonterminal For_Header;
+nonterminal Member;
+nonterminal ForHeader, ForBeforeCondition, ForAfterCondition;
 
 nonterminal ElseOptional, NumConstOptional;
-nonterminal Condition, CondTerm, CondFact, CondFactOptional;
+nonterminal IfAfterCondition, IfBeforeCondition, Condition, CondTerm, CondFact, CondFactOptional;
+nonterminal IfThenStart, IfThenEnd;
 
 nonterminal rs.etf.pp1.symboltable.concepts.Obj Program, ProgramName, MethodDeclaration, MethodDeclarationTypeAndName, NamespaceName;
 nonterminal rs.etf.pp1.symboltable.concepts.Obj ConstDeclarationElement, VarListElement, Parameter;
@@ -218,17 +218,35 @@ Statement ::= (Statement_DesignatorStatement) DesignatorStatement SEMICOLON
 			  |
 			  (Statement_Print) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON
 			  |
-			  (Statement_If) IF LPAREN Condition RPAREN Statement ElseOptional
+			  (Statement_If) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional
 			  |
-			  (Statement_For) For_Header Statement
+			  (Statement_For) ForHeader Statement
 			  |
 			  (Statement_Statements) LBRACE Statements RBRACE
 			  ;
-			  
-For_Header ::= (For_Header) FOR LPAREN DesignatorStatementListOptional SEMICOLON CondFactOptional SEMICOLON DesignatorStatementListOptional RPAREN
+
+IfBeforeCondition ::= (IfBeforeCondition) /* EPSILON */
+					  ;
+					  
+IfThenStart ::= (IfThenStart) /* EPSILON */
+				;
+				
+IfThenEnd ::= (IfThenEnd) /* EPSILON */
+			  ;
+
+IfAfterCondition ::= (IfAfterCondition) /* EPSILON */
+					 ;
+  
+ForHeader ::= (ForHeader) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN
 			   ;
+			   
+ForBeforeCondition ::= (ForBeforeCondition) /* EPSILON */
+					   ;
+
+ForAfterCondition ::= (ForAfterCondition) /* EPSILON */
+				      ;
 			  
-ElseOptional ::= (ElseOptional_Define) ELSE Statement
+ElseOptional ::= (ElseOptional_Define) ELSE Statement ElseEnd
 				 |
 				 (ElseOptional_Skip) /* EPSILON */
 				 ;
@@ -361,22 +379,14 @@ DesignatorStatementList ::= (DesignatorStatementList_More) DesignatorStatementLi
 					(DesignatorStatementList_One) DesignatorStatement
 					;
 
-Designator ::= (Designator) Var Members
-			   ;
-			   
-Members ::= (Members_Define) MemberList
-			|
-			(Members_Skip) /* EPSILON */
-			;
-			  
-MemberList ::= (MemberList_Multiple) MemberList Member
-			   |
-			   (MemberList_One) Member
+Designator ::= (Designator) Var Member
 			   ;
 
-Member ::= (Member_Value) DOT IDENT:member
+Member ::= (Member_Obj) DOT IDENT:member
 		   |
 		   (Member_Array) LBRACK Expr RBRACK
+		   |
+		   (Member_Skip) /* EPSILON */
 		   ;
 
 Label ::= (Label) IDENT:label

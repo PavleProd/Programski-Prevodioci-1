@@ -386,7 +386,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	// FOR
 	
 	
-	public void visit(For_Header forHeader)
+	public void visit(ForHeader forHeader)
 	{
 		++loopCount;
 	}
@@ -657,9 +657,9 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	
 	public void visit(Designator designator)
 	{
-		Members members = designator.getMembers();
+		Member member = designator.getMember();
 		
-		if(members instanceof Members_Skip) // designator je const, promenljiva, metoda
+		if(member instanceof Member_Skip) // designator je const, promenljiva, metoda
 		{
 			int[] allowedKinds = {Obj.Con, Obj.Var, Obj.Meth};
 			int kind = designator.getVar().obj.getKind();
@@ -681,7 +681,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				return;
 			}
 		}
-		else // designator je niz
+		else if(member instanceof Member_Array) // designator je niz
 		{
 			Struct type = designator.getVar().obj.getType();
 			
