@@ -1,134 +1,1925 @@
-INFO  15:04:04,535 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
-INFO  15:04:05,373 - #2 program
-INFO  15:04:05,374 - #48 p
-INFO  15:04:05,374 - #18 {
-INFO  15:04:05,396 - #12 void
-INFO  15:04:05,404 - #48 main
-INFO  15:04:05,404 - #20 (
-INFO  15:04:05,405 - #21 )
-INFO  15:04:05,413 - #18 {
-INFO  15:04:05,421 - #11 return
-INFO  15:04:05,429 - #40 ;
-INFO  15:04:05,437 - #19 }
-INFO  15:04:05,438 - #48 int
-INFO  15:04:05,448 - #48 f1
-INFO  15:04:05,449 - #20 (
-INFO  15:04:05,449 - #48 bool
-INFO  15:04:05,449 - #48 b
-INFO  15:04:05,449 - #43 ,
-INFO  15:04:05,474 - #48 int
-INFO  15:04:05,474 - #48 a
-INFO  15:04:05,474 - #21 )
-INFO  15:04:05,475 - #18 {
-INFO  15:04:05,476 - #48 a
-INFO  15:04:05,476 - #29 =
-INFO  15:04:05,493 - #45 2
-INFO  15:04:05,508 - #40 ;
-INFO  15:04:05,508 - #11 return
-INFO  15:04:05,509 - #45 1
-INFO  15:04:05,509 - #40 ;
-INFO  15:04:05,509 - #19 }
-INFO  15:04:05,509 - #48 int
-INFO  15:04:05,509 - #48 f2
-INFO  15:04:05,510 - #20 (
-INFO  15:04:05,510 - #48 int
-INFO  15:04:05,510 - #48 a
-INFO  15:04:05,510 - #43 ,
-INFO  15:04:05,510 - #48 int
-INFO  15:04:05,510 - #48 b
-INFO  15:04:05,510 - #22 [
-INFO  15:04:05,511 - #23 ]
-INFO  15:04:05,511 - #21 )
-INFO  15:04:05,519 - #18 {
-INFO  15:04:05,519 - #48 f1
-INFO  15:04:05,519 - #20 (
-INFO  15:04:05,519 - #46 true
-INFO  15:04:05,520 - #43 ,
-INFO  15:04:05,529 - #48 b
-INFO  15:04:05,529 - #22 [
-INFO  15:04:05,529 - #45 1
-INFO  15:04:05,529 - #23 ]
-INFO  15:04:05,529 - #21 )
-INFO  15:04:05,537 - #40 ;
-INFO  15:04:05,537 - #11 return
-INFO  15:04:05,538 - #45 1
-INFO  15:04:05,538 - #40 ;
-INFO  15:04:05,538 - #19 }
-INFO  15:04:05,538 - #19 }
-INFO  15:04:05,549 - Program(
+INFO  23:03:15,877 - Compiling source file: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.mj
+INFO  23:03:15,916 - #2 program
+INFO  23:03:15,917 - #48 test301
+INFO  23:03:15,917 - #6 const
+INFO  23:03:15,919 - #48 int
+INFO  23:03:15,919 - #48 nula
+INFO  23:03:15,919 - #29 =
+INFO  23:03:15,919 - #45 0
+INFO  23:03:15,920 - #40 ;
+INFO  23:03:15,921 - #6 const
+INFO  23:03:15,922 - #48 int
+INFO  23:03:15,922 - #48 jedan
+INFO  23:03:15,922 - #29 =
+INFO  23:03:15,922 - #45 1
+INFO  23:03:15,922 - #40 ;
+INFO  23:03:15,923 - #6 const
+INFO  23:03:15,923 - #48 int
+INFO  23:03:15,923 - #48 pet
+INFO  23:03:15,923 - #29 =
+INFO  23:03:15,923 - #45 5
+INFO  23:03:15,923 - #40 ;
+INFO  23:03:15,923 - #48 int
+INFO  23:03:15,924 - #48 niz
+INFO  23:03:15,924 - #22 [
+INFO  23:03:15,925 - #23 ]
+INFO  23:03:15,925 - #40 ;
+INFO  23:03:15,926 - #48 char
+INFO  23:03:15,926 - #48 nizch
+INFO  23:03:15,927 - #22 [
+INFO  23:03:15,927 - #23 ]
+INFO  23:03:15,927 - #40 ;
+INFO  23:03:15,927 - #48 int
+INFO  23:03:15,927 - #48 mat
+INFO  23:03:15,927 - #22 [
+INFO  23:03:15,927 - #23 ]
+INFO  23:03:15,927 - #22 [
+INFO  23:03:15,927 - #23 ]
+INFO  23:03:15,928 - #40 ;
+INFO  23:03:15,929 - #48 int
+INFO  23:03:15,929 - #48 a
+INFO  23:03:15,929 - #40 ;
+INFO  23:03:15,930 - #18 {
+INFO  23:03:15,930 - #12 void
+INFO  23:03:15,931 - #48 main
+INFO  23:03:15,931 - #20 (
+INFO  23:03:15,931 - #21 )
+INFO  23:03:15,932 - #48 int
+INFO  23:03:15,932 - #48 bodovi
+INFO  23:03:15,932 - #40 ;
+INFO  23:03:15,932 - #48 bool
+INFO  23:03:15,932 - #48 bt
+INFO  23:03:15,932 - #40 ;
+INFO  23:03:15,932 - #18 {
+INFO  23:03:15,933 - #48 bodovi
+INFO  23:03:15,933 - #29 =
+INFO  23:03:15,934 - #45 0
+INFO  23:03:15,935 - #40 ;
+INFO  23:03:15,936 - #48 bodovi
+INFO  23:03:15,936 - #38 ++
+INFO  23:03:15,937 - #40 ;
+INFO  23:03:15,938 - #48 bodovi
+INFO  23:03:15,938 - #29 =
+INFO  23:03:15,938 - #48 bodovi
+INFO  23:03:15,938 - #24 +
+INFO  23:03:15,939 - #48 jedan
+INFO  23:03:15,940 - #40 ;
+INFO  23:03:15,940 - #48 bodovi
+INFO  23:03:15,941 - #29 =
+INFO  23:03:15,941 - #48 bodovi
+INFO  23:03:15,941 - #26 *
+INFO  23:03:15,941 - #48 pet
+INFO  23:03:15,942 - #40 ;
+INFO  23:03:15,942 - #48 bodovi
+INFO  23:03:15,943 - #39 --
+INFO  23:03:15,943 - #40 ;
+INFO  23:03:15,944 - #9 print
+INFO  23:03:15,944 - #20 (
+INFO  23:03:15,944 - #48 bodovi
+INFO  23:03:15,944 - #21 )
+INFO  23:03:15,947 - #40 ;
+INFO  23:03:15,948 - #48 niz
+INFO  23:03:15,948 - #29 =
+INFO  23:03:15,949 - #8 new
+INFO  23:03:15,949 - #48 int
+INFO  23:03:15,949 - #22 [
+INFO  23:03:15,950 - #45 3
+INFO  23:03:15,950 - #23 ]
+INFO  23:03:15,951 - #40 ;
+INFO  23:03:15,951 - #48 niz
+INFO  23:03:15,952 - #22 [
+INFO  23:03:15,952 - #48 nula
+INFO  23:03:15,952 - #23 ]
+INFO  23:03:15,952 - #29 =
+INFO  23:03:15,952 - #48 jedan
+INFO  23:03:15,952 - #40 ;
+INFO  23:03:15,953 - #48 niz
+INFO  23:03:15,953 - #22 [
+INFO  23:03:15,953 - #45 1
+INFO  23:03:15,953 - #23 ]
+INFO  23:03:15,953 - #29 =
+INFO  23:03:15,953 - #45 2
+INFO  23:03:15,953 - #40 ;
+INFO  23:03:15,953 - #48 niz
+INFO  23:03:15,953 - #22 [
+INFO  23:03:15,953 - #48 niz
+INFO  23:03:15,953 - #22 [
+INFO  23:03:15,953 - #48 jedan
+INFO  23:03:15,953 - #23 ]
+INFO  23:03:15,953 - #23 ]
+INFO  23:03:15,954 - #29 =
+INFO  23:03:15,954 - #48 niz
+INFO  23:03:15,954 - #22 [
+INFO  23:03:15,954 - #48 niz
+INFO  23:03:15,954 - #22 [
+INFO  23:03:15,954 - #45 0
+INFO  23:03:15,954 - #23 ]
+INFO  23:03:15,954 - #23 ]
+INFO  23:03:15,954 - #26 *
+INFO  23:03:15,954 - #45 3
+INFO  23:03:15,954 - #40 ;
+INFO  23:03:15,954 - #48 bodovi
+INFO  23:03:15,954 - #29 =
+INFO  23:03:15,954 - #48 niz
+INFO  23:03:15,954 - #22 [
+INFO  23:03:15,955 - #45 2
+INFO  23:03:15,955 - #23 ]
+INFO  23:03:15,956 - #27 /
+INFO  23:03:15,956 - #48 niz
+INFO  23:03:15,957 - #22 [
+INFO  23:03:15,957 - #45 0
+INFO  23:03:15,957 - #23 ]
+INFO  23:03:15,957 - #40 ;
+INFO  23:03:15,957 - #9 print
+INFO  23:03:15,957 - #20 (
+INFO  23:03:15,957 - #48 bodovi
+INFO  23:03:15,957 - #21 )
+INFO  23:03:15,957 - #40 ;
+INFO  23:03:15,957 - #9 print
+INFO  23:03:15,957 - #20 (
+INFO  23:03:15,957 - #48 niz
+INFO  23:03:15,957 - #22 [
+INFO  23:03:15,957 - #45 2
+INFO  23:03:15,958 - #23 ]
+INFO  23:03:15,958 - #21 )
+INFO  23:03:15,958 - #40 ;
+INFO  23:03:15,958 - #48 nizch
+INFO  23:03:15,958 - #29 =
+INFO  23:03:15,958 - #8 new
+INFO  23:03:15,958 - #48 char
+INFO  23:03:15,958 - #22 [
+INFO  23:03:15,958 - #45 3
+INFO  23:03:15,958 - #23 ]
+INFO  23:03:15,958 - #40 ;
+INFO  23:03:15,958 - #48 nizch
+INFO  23:03:15,958 - #22 [
+INFO  23:03:15,958 - #45 0
+INFO  23:03:15,958 - #23 ]
+INFO  23:03:15,958 - #29 =
+INFO  23:03:15,958 - #47 a
+INFO  23:03:15,959 - #40 ;
+INFO  23:03:15,959 - #48 nizch
+INFO  23:03:15,959 - #22 [
+INFO  23:03:15,959 - #48 jedan
+INFO  23:03:15,959 - #23 ]
+INFO  23:03:15,959 - #29 =
+INFO  23:03:15,959 - #47 b
+INFO  23:03:15,959 - #40 ;
+INFO  23:03:15,959 - #48 nizch
+INFO  23:03:15,959 - #22 [
+INFO  23:03:15,959 - #48 pet
+INFO  23:03:15,959 - #25 -
+INFO  23:03:15,959 - #45 3
+INFO  23:03:15,960 - #23 ]
+INFO  23:03:15,960 - #29 =
+INFO  23:03:15,960 - #47 c
+INFO  23:03:15,960 - #40 ;
+INFO  23:03:15,960 - #9 print
+INFO  23:03:15,960 - #20 (
+INFO  23:03:15,960 - #48 nizch
+INFO  23:03:15,960 - #22 [
+INFO  23:03:15,960 - #45 1
+INFO  23:03:15,960 - #23 ]
+INFO  23:03:15,960 - #21 )
+INFO  23:03:15,960 - #40 ;
+INFO  23:03:15,960 - #9 print
+INFO  23:03:15,960 - #20 (
+INFO  23:03:15,960 - #48 nizch
+INFO  23:03:15,961 - #22 [
+INFO  23:03:15,961 - #48 jedan
+INFO  23:03:15,961 - #26 *
+INFO  23:03:15,961 - #45 2
+INFO  23:03:15,961 - #23 ]
+INFO  23:03:15,961 - #21 )
+INFO  23:03:15,961 - #40 ;
+INFO  23:03:15,961 - #48 a
+INFO  23:03:15,961 - #29 =
+INFO  23:03:15,961 - #45 1
+INFO  23:03:15,961 - #40 ;
+INFO  23:03:15,961 - #10 read
+INFO  23:03:15,962 - #20 (
+INFO  23:03:15,962 - #48 bodovi
+INFO  23:03:15,962 - #21 )
+INFO  23:03:15,962 - #40 ;
+INFO  23:03:15,962 - #48 bodovi
+INFO  23:03:15,962 - #29 =
+INFO  23:03:15,962 - #25 -
+INFO  23:03:15,962 - #48 bodovi
+INFO  23:03:15,962 - #24 +
+INFO  23:03:15,962 - #20 (
+INFO  23:03:15,962 - #48 pet
+INFO  23:03:15,962 - #26 *
+INFO  23:03:15,962 - #48 a
+INFO  23:03:15,962 - #27 /
+INFO  23:03:15,963 - #45 2
+INFO  23:03:15,963 - #25 -
+INFO  23:03:15,963 - #48 jedan
+INFO  23:03:15,963 - #21 )
+INFO  23:03:15,963 - #26 *
+INFO  23:03:15,963 - #48 bodovi
+INFO  23:03:15,963 - #25 -
+INFO  23:03:15,963 - #20 (
+INFO  23:03:15,964 - #45 3
+INFO  23:03:15,964 - #28 %
+INFO  23:03:15,964 - #45 2
+INFO  23:03:15,965 - #24 +
+INFO  23:03:15,965 - #45 3
+INFO  23:03:15,965 - #26 *
+INFO  23:03:15,965 - #45 2
+INFO  23:03:15,965 - #25 -
+INFO  23:03:15,965 - #45 3
+INFO  23:03:15,965 - #21 )
+INFO  23:03:15,965 - #40 ;
+INFO  23:03:15,965 - #9 print
+INFO  23:03:15,965 - #20 (
+INFO  23:03:15,965 - #48 bodovi
+INFO  23:03:15,965 - #21 )
+INFO  23:03:15,969 - #40 ;
+INFO  23:03:15,969 - #48 mat
+INFO  23:03:15,969 - #29 =
+INFO  23:03:15,969 - #8 new
+INFO  23:03:15,969 - #48 int
+INFO  23:03:15,969 - #22 [
+INFO  23:03:15,969 - #45 2
+INFO  23:03:15,969 - #23 ]
+INFO  23:03:15,969 - #22 [
+INFO  23:03:15,969 - #45 3
+INFO  23:03:15,970 - #23 ]
+INFO  23:03:15,970 - #40 ;
+INFO  23:03:15,970 - #48 mat
+INFO  23:03:15,970 - #22 [
+INFO  23:03:15,970 - #48 nula
+INFO  23:03:15,970 - #23 ]
+INFO  23:03:15,970 - #22 [
+INFO  23:03:15,970 - #48 jedan
+INFO  23:03:15,970 - #25 -
+INFO  23:03:15,970 - #45 1
+INFO  23:03:15,970 - #23 ]
+INFO  23:03:15,970 - #29 =
+INFO  23:03:15,970 - #48 jedan
+INFO  23:03:15,971 - #40 ;
+INFO  23:03:15,971 - #48 mat
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,971 - #45 0
+INFO  23:03:15,971 - #23 ]
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,971 - #48 mat
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,971 - #45 0
+INFO  23:03:15,971 - #23 ]
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,971 - #45 0
+INFO  23:03:15,971 - #23 ]
+INFO  23:03:15,971 - #23 ]
+INFO  23:03:15,971 - #29 =
+INFO  23:03:15,971 - #45 2
+INFO  23:03:15,971 - #40 ;
+INFO  23:03:15,971 - #48 mat
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,971 - #45 0
+INFO  23:03:15,971 - #23 ]
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,971 - #48 mat
+INFO  23:03:15,971 - #22 [
+INFO  23:03:15,972 - #45 0
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #22 [
+INFO  23:03:15,972 - #45 1
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #29 =
+INFO  23:03:15,972 - #45 5
+INFO  23:03:15,972 - #40 ;
+INFO  23:03:15,972 - #48 mat
+INFO  23:03:15,972 - #22 [
+INFO  23:03:15,972 - #45 1
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #22 [
+INFO  23:03:15,972 - #48 mat
+INFO  23:03:15,972 - #22 [
+INFO  23:03:15,972 - #45 0
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #22 [
+INFO  23:03:15,972 - #45 0
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #26 *
+INFO  23:03:15,972 - #45 2
+INFO  23:03:15,972 - #23 ]
+INFO  23:03:15,972 - #29 =
+INFO  23:03:15,973 - #45 4
+INFO  23:03:15,973 - #40 ;
+INFO  23:03:15,973 - #48 mat
+INFO  23:03:15,973 - #22 [
+INFO  23:03:15,973 - #48 mat
+INFO  23:03:15,973 - #22 [
+INFO  23:03:15,973 - #45 0
+INFO  23:03:15,973 - #23 ]
+INFO  23:03:15,973 - #22 [
+INFO  23:03:15,973 - #45 0
+INFO  23:03:15,973 - #23 ]
+INFO  23:03:15,973 - #23 ]
+INFO  23:03:15,973 - #22 [
+INFO  23:03:15,973 - #45 1
+INFO  23:03:15,973 - #23 ]
+INFO  23:03:15,973 - #29 =
+INFO  23:03:15,973 - #45 3
+INFO  23:03:15,973 - #40 ;
+INFO  23:03:15,973 - #48 mat
+INFO  23:03:15,973 - #22 [
+INFO  23:03:15,973 - #45 1
+INFO  23:03:15,973 - #23 ]
+INFO  23:03:15,973 - #22 [
+INFO  23:03:15,974 - #45 0
+INFO  23:03:15,974 - #23 ]
+INFO  23:03:15,974 - #29 =
+INFO  23:03:15,974 - #45 2
+INFO  23:03:15,974 - #40 ;
+INFO  23:03:15,974 - #9 print
+INFO  23:03:15,974 - #20 (
+INFO  23:03:15,974 - #48 mat
+INFO  23:03:15,974 - #22 [
+INFO  23:03:15,974 - #45 1
+INFO  23:03:15,974 - #23 ]
+INFO  23:03:15,974 - #22 [
+INFO  23:03:15,974 - #45 2
+INFO  23:03:15,974 - #23 ]
+INFO  23:03:15,974 - #21 )
+INFO  23:03:15,974 - #40 ;
+INFO  23:03:15,974 - #9 print
+INFO  23:03:15,974 - #20 (
+INFO  23:03:15,974 - #48 mat
+INFO  23:03:15,974 - #22 [
+INFO  23:03:15,974 - #45 0
+INFO  23:03:15,974 - #23 ]
+INFO  23:03:15,974 - #22 [
+INFO  23:03:15,974 - #45 2
+INFO  23:03:15,974 - #23 ]
+INFO  23:03:15,975 - #21 )
+INFO  23:03:15,975 - #40 ;
+INFO  23:03:15,975 - #19 }
+INFO  23:03:15,975 - #19 }
+INFO  23:03:15,987 - Program(
   ProgramName(
-   p
+   test301
   ) [ProgramName]
   Namespace_Skip(
   ) [Namespace_Skip]
-  DeclarationList_SKIP(
-  ) [DeclarationList_SKIP]
-  MethodsDeclarationList_OneOrMore(
-    MethodsDeclarationList_OneOrMore(
-      MethodsDeclarationList_OneOrMore(
-        MethodsDeclarationList_Skip(
-        ) [MethodsDeclarationList_Skip]
-        MethodDeclaration(
-          MethodDeclarationTypeAndName_Void(
-           main
-          ) [MethodDeclarationTypeAndName_Void]
-          FormPars_None(
-          ) [FormPars_None]
-          VarDeclarationListOptional_Skip(
-          ) [VarDeclarationListOptional_Skip]
-          Statements_OneOrMore(
-            Statements_None(
-            ) [Statements_None]
-            Statement_Return(
-              ExprOptional_Skip(
-              ) [ExprOptional_Skip]
-            ) [Statement_Return]
-          ) [Statements_OneOrMore]
-        ) [MethodDeclaration]
-      ) [MethodsDeclarationList_OneOrMore]
-      MethodDeclaration(
-        MethodDeclarationTypeAndName_Type(
-          Type_NoScope(
-           int
-          ) [Type_NoScope]
-         f1
-        ) [MethodDeclarationTypeAndName_Type]
-        FormPars_OneOrMore(
-          FormParsList_Multiple(
-            FormParsList_One(
-              Parameter(
+  DeclarationList_Define(
+    DeclarationList_Define(
+      DeclarationList_Define(
+        DeclarationList_Define(
+          DeclarationList_Define(
+            DeclarationList_Define(
+              DeclarationList_Define(
+                DeclarationList_SKIP(
+                ) [DeclarationList_SKIP]
+                Declaration_Const(
+                  ConstDeclaration(
+                    Type_NoScope(
+                     int
+                    ) [Type_NoScope]
+                    ConstDeclarationList_One(
+                      ConstDeclarationElement(
+                       nula
+                        ConstValue_INT(
+                         0
+                        ) [ConstValue_INT]
+                      ) [ConstDeclarationElement]
+                    ) [ConstDeclarationList_One]
+                  ) [ConstDeclaration]
+                ) [Declaration_Const]
+              ) [DeclarationList_Define]
+              Declaration_Const(
+                ConstDeclaration(
+                  Type_NoScope(
+                   int
+                  ) [Type_NoScope]
+                  ConstDeclarationList_One(
+                    ConstDeclarationElement(
+                     jedan
+                      ConstValue_INT(
+                       1
+                      ) [ConstValue_INT]
+                    ) [ConstDeclarationElement]
+                  ) [ConstDeclarationList_One]
+                ) [ConstDeclaration]
+              ) [Declaration_Const]
+            ) [DeclarationList_Define]
+            Declaration_Const(
+              ConstDeclaration(
                 Type_NoScope(
-                 bool
+                 int
                 ) [Type_NoScope]
-               b
-                VarOrArray_Var(
-                ) [VarOrArray_Var]
-              ) [Parameter]
-            ) [FormParsList_One]
-            Parameter(
+                ConstDeclarationList_One(
+                  ConstDeclarationElement(
+                   pet
+                    ConstValue_INT(
+                     5
+                    ) [ConstValue_INT]
+                  ) [ConstDeclarationElement]
+                ) [ConstDeclarationList_One]
+              ) [ConstDeclaration]
+            ) [Declaration_Const]
+          ) [DeclarationList_Define]
+          Declaration_Var(
+            VarDeclaration_VarList(
               Type_NoScope(
                int
               ) [Type_NoScope]
-             a
+              VarList_One(
+                VarListElement(
+                 niz
+                  VarOrArray_Array(
+                  ) [VarOrArray_Array]
+                ) [VarListElement]
+              ) [VarList_One]
+            ) [VarDeclaration_VarList]
+          ) [Declaration_Var]
+        ) [DeclarationList_Define]
+        Declaration_Var(
+          VarDeclaration_VarList(
+            Type_NoScope(
+             char
+            ) [Type_NoScope]
+            VarList_One(
+              VarListElement(
+               nizch
+                VarOrArray_Array(
+                ) [VarOrArray_Array]
+              ) [VarListElement]
+            ) [VarList_One]
+          ) [VarDeclaration_VarList]
+        ) [Declaration_Var]
+      ) [DeclarationList_Define]
+      Declaration_Var(
+        VarDeclaration_VarList(
+          Type_NoScope(
+           int
+          ) [Type_NoScope]
+          VarList_One(
+            VarListElement(
+             mat
+              VarOrArray_Matrix(
+              ) [VarOrArray_Matrix]
+            ) [VarListElement]
+          ) [VarList_One]
+        ) [VarDeclaration_VarList]
+      ) [Declaration_Var]
+    ) [DeclarationList_Define]
+    Declaration_Var(
+      VarDeclaration_VarList(
+        Type_NoScope(
+         int
+        ) [Type_NoScope]
+        VarList_One(
+          VarListElement(
+           a
+            VarOrArray_Var(
+            ) [VarOrArray_Var]
+          ) [VarListElement]
+        ) [VarList_One]
+      ) [VarDeclaration_VarList]
+    ) [Declaration_Var]
+  ) [DeclarationList_Define]
+  MethodsDeclarationList_OneOrMore(
+    MethodsDeclarationList_Skip(
+    ) [MethodsDeclarationList_Skip]
+    MethodDeclaration(
+      MethodDeclarationTypeAndName_Void(
+       main
+      ) [MethodDeclarationTypeAndName_Void]
+      FormPars_None(
+      ) [FormPars_None]
+      VarDeclarationListOptional_OneOrMore(
+        VarDeclaration_VarList(
+          Type_NoScope(
+           int
+          ) [Type_NoScope]
+          VarList_One(
+            VarListElement(
+             bodovi
               VarOrArray_Var(
               ) [VarOrArray_Var]
-            ) [Parameter]
-          ) [FormParsList_Multiple]
-        ) [FormPars_OneOrMore]
-        VarDeclarationListOptional_Skip(
-        ) [VarDeclarationListOptional_Skip]
+            ) [VarListElement]
+          ) [VarList_One]
+        ) [VarDeclaration_VarList]
+        VarDeclarationListOptional_OneOrMore(
+          VarDeclaration_VarList(
+            Type_NoScope(
+             bool
+            ) [Type_NoScope]
+            VarList_One(
+              VarListElement(
+               bt
+                VarOrArray_Var(
+                ) [VarOrArray_Var]
+              ) [VarListElement]
+            ) [VarList_One]
+          ) [VarDeclaration_VarList]
+          VarDeclarationListOptional_Skip(
+          ) [VarDeclarationListOptional_Skip]
+        ) [VarDeclarationListOptional_OneOrMore]
+      ) [VarDeclarationListOptional_OneOrMore]
+      Statements_OneOrMore(
         Statements_OneOrMore(
           Statements_OneOrMore(
-            Statements_None(
-            ) [Statements_None]
+            Statements_OneOrMore(
+              Statements_OneOrMore(
+                Statements_OneOrMore(
+                  Statements_OneOrMore(
+                    Statements_OneOrMore(
+                      Statements_OneOrMore(
+                        Statements_OneOrMore(
+                          Statements_OneOrMore(
+                            Statements_OneOrMore(
+                              Statements_OneOrMore(
+                                Statements_OneOrMore(
+                                  Statements_OneOrMore(
+                                    Statements_OneOrMore(
+                                      Statements_OneOrMore(
+                                        Statements_OneOrMore(
+                                          Statements_OneOrMore(
+                                            Statements_OneOrMore(
+                                              Statements_OneOrMore(
+                                                Statements_OneOrMore(
+                                                  Statements_OneOrMore(
+                                                    Statements_OneOrMore(
+                                                      Statements_OneOrMore(
+                                                        Statements_OneOrMore(
+                                                          Statements_OneOrMore(
+                                                            Statements_OneOrMore(
+                                                              Statements_OneOrMore(
+                                                                Statements_OneOrMore(
+                                                                  Statements_OneOrMore(
+                                                                    Statements_OneOrMore(
+                                                                      Statements_None(
+                                                                      ) [Statements_None]
+                                                                      Statement_DesignatorStatement(
+                                                                        DesignatorStatement_Designator_With_Options(
+                                                                          Designator(
+                                                                            Var_NoScope(
+                                                                             bodovi
+                                                                            ) [Var_NoScope]
+                                                                            Member_Skip(
+                                                                            ) [Member_Skip]
+                                                                          ) [Designator]
+                                                                          DesignatorStatementOptions_AssignOpExpr(
+                                                                            AssignOp_EQUAL(
+                                                                            ) [AssignOp_EQUAL]
+                                                                            Expr_TermOne(
+                                                                              Term_One(
+                                                                                Factor_Const(
+                                                                                  ConstValue_INT(
+                                                                                   0
+                                                                                  ) [ConstValue_INT]
+                                                                                ) [Factor_Const]
+                                                                              ) [Term_One]
+                                                                            ) [Expr_TermOne]
+                                                                          ) [DesignatorStatementOptions_AssignOpExpr]
+                                                                        ) [DesignatorStatement_Designator_With_Options]
+                                                                      ) [Statement_DesignatorStatement]
+                                                                    ) [Statements_OneOrMore]
+                                                                    Statement_DesignatorStatement(
+                                                                      DesignatorStatement_Designator_With_Options(
+                                                                        Designator(
+                                                                          Var_NoScope(
+                                                                           bodovi
+                                                                          ) [Var_NoScope]
+                                                                          Member_Skip(
+                                                                          ) [Member_Skip]
+                                                                        ) [Designator]
+                                                                        DesignatorStatementOptions_Inc(
+                                                                        ) [DesignatorStatementOptions_Inc]
+                                                                      ) [DesignatorStatement_Designator_With_Options]
+                                                                    ) [Statement_DesignatorStatement]
+                                                                  ) [Statements_OneOrMore]
+                                                                  Statement_DesignatorStatement(
+                                                                    DesignatorStatement_Designator_With_Options(
+                                                                      Designator(
+                                                                        Var_NoScope(
+                                                                         bodovi
+                                                                        ) [Var_NoScope]
+                                                                        Member_Skip(
+                                                                        ) [Member_Skip]
+                                                                      ) [Designator]
+                                                                      DesignatorStatementOptions_AssignOpExpr(
+                                                                        AssignOp_EQUAL(
+                                                                        ) [AssignOp_EQUAL]
+                                                                        Expr_TermMultiple(
+                                                                          Expr_TermOne(
+                                                                            Term_One(
+                                                                              Factor_Designator(
+                                                                                Designator(
+                                                                                  Var_NoScope(
+                                                                                   bodovi
+                                                                                  ) [Var_NoScope]
+                                                                                  Member_Skip(
+                                                                                  ) [Member_Skip]
+                                                                                ) [Designator]
+                                                                                ActParsOptionalBrackets_Skip(
+                                                                                ) [ActParsOptionalBrackets_Skip]
+                                                                              ) [Factor_Designator]
+                                                                            ) [Term_One]
+                                                                          ) [Expr_TermOne]
+                                                                          AddOp_Plus(
+                                                                          ) [AddOp_Plus]
+                                                                          Term_One(
+                                                                            Factor_Designator(
+                                                                              Designator(
+                                                                                Var_NoScope(
+                                                                                 jedan
+                                                                                ) [Var_NoScope]
+                                                                                Member_Skip(
+                                                                                ) [Member_Skip]
+                                                                              ) [Designator]
+                                                                              ActParsOptionalBrackets_Skip(
+                                                                              ) [ActParsOptionalBrackets_Skip]
+                                                                            ) [Factor_Designator]
+                                                                          ) [Term_One]
+                                                                        ) [Expr_TermMultiple]
+                                                                      ) [DesignatorStatementOptions_AssignOpExpr]
+                                                                    ) [DesignatorStatement_Designator_With_Options]
+                                                                  ) [Statement_DesignatorStatement]
+                                                                ) [Statements_OneOrMore]
+                                                                Statement_DesignatorStatement(
+                                                                  DesignatorStatement_Designator_With_Options(
+                                                                    Designator(
+                                                                      Var_NoScope(
+                                                                       bodovi
+                                                                      ) [Var_NoScope]
+                                                                      Member_Skip(
+                                                                      ) [Member_Skip]
+                                                                    ) [Designator]
+                                                                    DesignatorStatementOptions_AssignOpExpr(
+                                                                      AssignOp_EQUAL(
+                                                                      ) [AssignOp_EQUAL]
+                                                                      Expr_TermOne(
+                                                                        Term_MultipleMulOp(
+                                                                          Term_One(
+                                                                            Factor_Designator(
+                                                                              Designator(
+                                                                                Var_NoScope(
+                                                                                 bodovi
+                                                                                ) [Var_NoScope]
+                                                                                Member_Skip(
+                                                                                ) [Member_Skip]
+                                                                              ) [Designator]
+                                                                              ActParsOptionalBrackets_Skip(
+                                                                              ) [ActParsOptionalBrackets_Skip]
+                                                                            ) [Factor_Designator]
+                                                                          ) [Term_One]
+                                                                          MulOp_Mul(
+                                                                          ) [MulOp_Mul]
+                                                                          Factor_Designator(
+                                                                            Designator(
+                                                                              Var_NoScope(
+                                                                               pet
+                                                                              ) [Var_NoScope]
+                                                                              Member_Skip(
+                                                                              ) [Member_Skip]
+                                                                            ) [Designator]
+                                                                            ActParsOptionalBrackets_Skip(
+                                                                            ) [ActParsOptionalBrackets_Skip]
+                                                                          ) [Factor_Designator]
+                                                                        ) [Term_MultipleMulOp]
+                                                                      ) [Expr_TermOne]
+                                                                    ) [DesignatorStatementOptions_AssignOpExpr]
+                                                                  ) [DesignatorStatement_Designator_With_Options]
+                                                                ) [Statement_DesignatorStatement]
+                                                              ) [Statements_OneOrMore]
+                                                              Statement_DesignatorStatement(
+                                                                DesignatorStatement_Designator_With_Options(
+                                                                  Designator(
+                                                                    Var_NoScope(
+                                                                     bodovi
+                                                                    ) [Var_NoScope]
+                                                                    Member_Skip(
+                                                                    ) [Member_Skip]
+                                                                  ) [Designator]
+                                                                  DesignatorStatementOptions_Dec(
+                                                                  ) [DesignatorStatementOptions_Dec]
+                                                                ) [DesignatorStatement_Designator_With_Options]
+                                                              ) [Statement_DesignatorStatement]
+                                                            ) [Statements_OneOrMore]
+                                                            Statement_Print(
+                                                              Expr_TermOne(
+                                                                Term_One(
+                                                                  Factor_Designator(
+                                                                    Designator(
+                                                                      Var_NoScope(
+                                                                       bodovi
+                                                                      ) [Var_NoScope]
+                                                                      Member_Skip(
+                                                                      ) [Member_Skip]
+                                                                    ) [Designator]
+                                                                    ActParsOptionalBrackets_Skip(
+                                                                    ) [ActParsOptionalBrackets_Skip]
+                                                                  ) [Factor_Designator]
+                                                                ) [Term_One]
+                                                              ) [Expr_TermOne]
+                                                              NumConstOptional_Skip(
+                                                              ) [NumConstOptional_Skip]
+                                                            ) [Statement_Print]
+                                                          ) [Statements_OneOrMore]
+                                                          Statement_DesignatorStatement(
+                                                            DesignatorStatement_Designator_With_Options(
+                                                              Designator(
+                                                                Var_NoScope(
+                                                                 niz
+                                                                ) [Var_NoScope]
+                                                                Member_Skip(
+                                                                ) [Member_Skip]
+                                                              ) [Designator]
+                                                              DesignatorStatementOptions_AssignOpExpr(
+                                                                AssignOp_EQUAL(
+                                                                ) [AssignOp_EQUAL]
+                                                                Expr_TermOne(
+                                                                  Term_One(
+                                                                    Factor_New(
+                                                                      Type_NoScope(
+                                                                       int
+                                                                      ) [Type_NoScope]
+                                                                      FactorNew_Array(
+                                                                        Expr_TermOne(
+                                                                          Term_One(
+                                                                            Factor_Const(
+                                                                              ConstValue_INT(
+                                                                               3
+                                                                              ) [ConstValue_INT]
+                                                                            ) [Factor_Const]
+                                                                          ) [Term_One]
+                                                                        ) [Expr_TermOne]
+                                                                      ) [FactorNew_Array]
+                                                                    ) [Factor_New]
+                                                                  ) [Term_One]
+                                                                ) [Expr_TermOne]
+                                                              ) [DesignatorStatementOptions_AssignOpExpr]
+                                                            ) [DesignatorStatement_Designator_With_Options]
+                                                          ) [Statement_DesignatorStatement]
+                                                        ) [Statements_OneOrMore]
+                                                        Statement_DesignatorStatement(
+                                                          DesignatorStatement_Designator_With_Options(
+                                                            Designator(
+                                                              Var_NoScope(
+                                                               niz
+                                                              ) [Var_NoScope]
+                                                              Member_Array(
+                                                                Expr_TermOne(
+                                                                  Term_One(
+                                                                    Factor_Designator(
+                                                                      Designator(
+                                                                        Var_NoScope(
+                                                                         nula
+                                                                        ) [Var_NoScope]
+                                                                        Member_Skip(
+                                                                        ) [Member_Skip]
+                                                                      ) [Designator]
+                                                                      ActParsOptionalBrackets_Skip(
+                                                                      ) [ActParsOptionalBrackets_Skip]
+                                                                    ) [Factor_Designator]
+                                                                  ) [Term_One]
+                                                                ) [Expr_TermOne]
+                                                              ) [Member_Array]
+                                                            ) [Designator]
+                                                            DesignatorStatementOptions_AssignOpExpr(
+                                                              AssignOp_EQUAL(
+                                                              ) [AssignOp_EQUAL]
+                                                              Expr_TermOne(
+                                                                Term_One(
+                                                                  Factor_Designator(
+                                                                    Designator(
+                                                                      Var_NoScope(
+                                                                       jedan
+                                                                      ) [Var_NoScope]
+                                                                      Member_Skip(
+                                                                      ) [Member_Skip]
+                                                                    ) [Designator]
+                                                                    ActParsOptionalBrackets_Skip(
+                                                                    ) [ActParsOptionalBrackets_Skip]
+                                                                  ) [Factor_Designator]
+                                                                ) [Term_One]
+                                                              ) [Expr_TermOne]
+                                                            ) [DesignatorStatementOptions_AssignOpExpr]
+                                                          ) [DesignatorStatement_Designator_With_Options]
+                                                        ) [Statement_DesignatorStatement]
+                                                      ) [Statements_OneOrMore]
+                                                      Statement_DesignatorStatement(
+                                                        DesignatorStatement_Designator_With_Options(
+                                                          Designator(
+                                                            Var_NoScope(
+                                                             niz
+                                                            ) [Var_NoScope]
+                                                            Member_Array(
+                                                              Expr_TermOne(
+                                                                Term_One(
+                                                                  Factor_Const(
+                                                                    ConstValue_INT(
+                                                                     1
+                                                                    ) [ConstValue_INT]
+                                                                  ) [Factor_Const]
+                                                                ) [Term_One]
+                                                              ) [Expr_TermOne]
+                                                            ) [Member_Array]
+                                                          ) [Designator]
+                                                          DesignatorStatementOptions_AssignOpExpr(
+                                                            AssignOp_EQUAL(
+                                                            ) [AssignOp_EQUAL]
+                                                            Expr_TermOne(
+                                                              Term_One(
+                                                                Factor_Const(
+                                                                  ConstValue_INT(
+                                                                   2
+                                                                  ) [ConstValue_INT]
+                                                                ) [Factor_Const]
+                                                              ) [Term_One]
+                                                            ) [Expr_TermOne]
+                                                          ) [DesignatorStatementOptions_AssignOpExpr]
+                                                        ) [DesignatorStatement_Designator_With_Options]
+                                                      ) [Statement_DesignatorStatement]
+                                                    ) [Statements_OneOrMore]
+                                                    Statement_DesignatorStatement(
+                                                      DesignatorStatement_Designator_With_Options(
+                                                        Designator(
+                                                          Var_NoScope(
+                                                           niz
+                                                          ) [Var_NoScope]
+                                                          Member_Array(
+                                                            Expr_TermOne(
+                                                              Term_One(
+                                                                Factor_Designator(
+                                                                  Designator(
+                                                                    Var_NoScope(
+                                                                     niz
+                                                                    ) [Var_NoScope]
+                                                                    Member_Array(
+                                                                      Expr_TermOne(
+                                                                        Term_One(
+                                                                          Factor_Designator(
+                                                                            Designator(
+                                                                              Var_NoScope(
+                                                                               jedan
+                                                                              ) [Var_NoScope]
+                                                                              Member_Skip(
+                                                                              ) [Member_Skip]
+                                                                            ) [Designator]
+                                                                            ActParsOptionalBrackets_Skip(
+                                                                            ) [ActParsOptionalBrackets_Skip]
+                                                                          ) [Factor_Designator]
+                                                                        ) [Term_One]
+                                                                      ) [Expr_TermOne]
+                                                                    ) [Member_Array]
+                                                                  ) [Designator]
+                                                                  ActParsOptionalBrackets_Skip(
+                                                                  ) [ActParsOptionalBrackets_Skip]
+                                                                ) [Factor_Designator]
+                                                              ) [Term_One]
+                                                            ) [Expr_TermOne]
+                                                          ) [Member_Array]
+                                                        ) [Designator]
+                                                        DesignatorStatementOptions_AssignOpExpr(
+                                                          AssignOp_EQUAL(
+                                                          ) [AssignOp_EQUAL]
+                                                          Expr_TermOne(
+                                                            Term_MultipleMulOp(
+                                                              Term_One(
+                                                                Factor_Designator(
+                                                                  Designator(
+                                                                    Var_NoScope(
+                                                                     niz
+                                                                    ) [Var_NoScope]
+                                                                    Member_Array(
+                                                                      Expr_TermOne(
+                                                                        Term_One(
+                                                                          Factor_Designator(
+                                                                            Designator(
+                                                                              Var_NoScope(
+                                                                               niz
+                                                                              ) [Var_NoScope]
+                                                                              Member_Array(
+                                                                                Expr_TermOne(
+                                                                                  Term_One(
+                                                                                    Factor_Const(
+                                                                                      ConstValue_INT(
+                                                                                       0
+                                                                                      ) [ConstValue_INT]
+                                                                                    ) [Factor_Const]
+                                                                                  ) [Term_One]
+                                                                                ) [Expr_TermOne]
+                                                                              ) [Member_Array]
+                                                                            ) [Designator]
+                                                                            ActParsOptionalBrackets_Skip(
+                                                                            ) [ActParsOptionalBrackets_Skip]
+                                                                          ) [Factor_Designator]
+                                                                        ) [Term_One]
+                                                                      ) [Expr_TermOne]
+                                                                    ) [Member_Array]
+                                                                  ) [Designator]
+                                                                  ActParsOptionalBrackets_Skip(
+                                                                  ) [ActParsOptionalBrackets_Skip]
+                                                                ) [Factor_Designator]
+                                                              ) [Term_One]
+                                                              MulOp_Mul(
+                                                              ) [MulOp_Mul]
+                                                              Factor_Const(
+                                                                ConstValue_INT(
+                                                                 3
+                                                                ) [ConstValue_INT]
+                                                              ) [Factor_Const]
+                                                            ) [Term_MultipleMulOp]
+                                                          ) [Expr_TermOne]
+                                                        ) [DesignatorStatementOptions_AssignOpExpr]
+                                                      ) [DesignatorStatement_Designator_With_Options]
+                                                    ) [Statement_DesignatorStatement]
+                                                  ) [Statements_OneOrMore]
+                                                  Statement_DesignatorStatement(
+                                                    DesignatorStatement_Designator_With_Options(
+                                                      Designator(
+                                                        Var_NoScope(
+                                                         bodovi
+                                                        ) [Var_NoScope]
+                                                        Member_Skip(
+                                                        ) [Member_Skip]
+                                                      ) [Designator]
+                                                      DesignatorStatementOptions_AssignOpExpr(
+                                                        AssignOp_EQUAL(
+                                                        ) [AssignOp_EQUAL]
+                                                        Expr_TermOne(
+                                                          Term_MultipleMulOp(
+                                                            Term_One(
+                                                              Factor_Designator(
+                                                                Designator(
+                                                                  Var_NoScope(
+                                                                   niz
+                                                                  ) [Var_NoScope]
+                                                                  Member_Array(
+                                                                    Expr_TermOne(
+                                                                      Term_One(
+                                                                        Factor_Const(
+                                                                          ConstValue_INT(
+                                                                           2
+                                                                          ) [ConstValue_INT]
+                                                                        ) [Factor_Const]
+                                                                      ) [Term_One]
+                                                                    ) [Expr_TermOne]
+                                                                  ) [Member_Array]
+                                                                ) [Designator]
+                                                                ActParsOptionalBrackets_Skip(
+                                                                ) [ActParsOptionalBrackets_Skip]
+                                                              ) [Factor_Designator]
+                                                            ) [Term_One]
+                                                            MulOp_Div(
+                                                            ) [MulOp_Div]
+                                                            Factor_Designator(
+                                                              Designator(
+                                                                Var_NoScope(
+                                                                 niz
+                                                                ) [Var_NoScope]
+                                                                Member_Array(
+                                                                  Expr_TermOne(
+                                                                    Term_One(
+                                                                      Factor_Const(
+                                                                        ConstValue_INT(
+                                                                         0
+                                                                        ) [ConstValue_INT]
+                                                                      ) [Factor_Const]
+                                                                    ) [Term_One]
+                                                                  ) [Expr_TermOne]
+                                                                ) [Member_Array]
+                                                              ) [Designator]
+                                                              ActParsOptionalBrackets_Skip(
+                                                              ) [ActParsOptionalBrackets_Skip]
+                                                            ) [Factor_Designator]
+                                                          ) [Term_MultipleMulOp]
+                                                        ) [Expr_TermOne]
+                                                      ) [DesignatorStatementOptions_AssignOpExpr]
+                                                    ) [DesignatorStatement_Designator_With_Options]
+                                                  ) [Statement_DesignatorStatement]
+                                                ) [Statements_OneOrMore]
+                                                Statement_Print(
+                                                  Expr_TermOne(
+                                                    Term_One(
+                                                      Factor_Designator(
+                                                        Designator(
+                                                          Var_NoScope(
+                                                           bodovi
+                                                          ) [Var_NoScope]
+                                                          Member_Skip(
+                                                          ) [Member_Skip]
+                                                        ) [Designator]
+                                                        ActParsOptionalBrackets_Skip(
+                                                        ) [ActParsOptionalBrackets_Skip]
+                                                      ) [Factor_Designator]
+                                                    ) [Term_One]
+                                                  ) [Expr_TermOne]
+                                                  NumConstOptional_Skip(
+                                                  ) [NumConstOptional_Skip]
+                                                ) [Statement_Print]
+                                              ) [Statements_OneOrMore]
+                                              Statement_Print(
+                                                Expr_TermOne(
+                                                  Term_One(
+                                                    Factor_Designator(
+                                                      Designator(
+                                                        Var_NoScope(
+                                                         niz
+                                                        ) [Var_NoScope]
+                                                        Member_Array(
+                                                          Expr_TermOne(
+                                                            Term_One(
+                                                              Factor_Const(
+                                                                ConstValue_INT(
+                                                                 2
+                                                                ) [ConstValue_INT]
+                                                              ) [Factor_Const]
+                                                            ) [Term_One]
+                                                          ) [Expr_TermOne]
+                                                        ) [Member_Array]
+                                                      ) [Designator]
+                                                      ActParsOptionalBrackets_Skip(
+                                                      ) [ActParsOptionalBrackets_Skip]
+                                                    ) [Factor_Designator]
+                                                  ) [Term_One]
+                                                ) [Expr_TermOne]
+                                                NumConstOptional_Skip(
+                                                ) [NumConstOptional_Skip]
+                                              ) [Statement_Print]
+                                            ) [Statements_OneOrMore]
+                                            Statement_DesignatorStatement(
+                                              DesignatorStatement_Designator_With_Options(
+                                                Designator(
+                                                  Var_NoScope(
+                                                   nizch
+                                                  ) [Var_NoScope]
+                                                  Member_Skip(
+                                                  ) [Member_Skip]
+                                                ) [Designator]
+                                                DesignatorStatementOptions_AssignOpExpr(
+                                                  AssignOp_EQUAL(
+                                                  ) [AssignOp_EQUAL]
+                                                  Expr_TermOne(
+                                                    Term_One(
+                                                      Factor_New(
+                                                        Type_NoScope(
+                                                         char
+                                                        ) [Type_NoScope]
+                                                        FactorNew_Array(
+                                                          Expr_TermOne(
+                                                            Term_One(
+                                                              Factor_Const(
+                                                                ConstValue_INT(
+                                                                 3
+                                                                ) [ConstValue_INT]
+                                                              ) [Factor_Const]
+                                                            ) [Term_One]
+                                                          ) [Expr_TermOne]
+                                                        ) [FactorNew_Array]
+                                                      ) [Factor_New]
+                                                    ) [Term_One]
+                                                  ) [Expr_TermOne]
+                                                ) [DesignatorStatementOptions_AssignOpExpr]
+                                              ) [DesignatorStatement_Designator_With_Options]
+                                            ) [Statement_DesignatorStatement]
+                                          ) [Statements_OneOrMore]
+                                          Statement_DesignatorStatement(
+                                            DesignatorStatement_Designator_With_Options(
+                                              Designator(
+                                                Var_NoScope(
+                                                 nizch
+                                                ) [Var_NoScope]
+                                                Member_Array(
+                                                  Expr_TermOne(
+                                                    Term_One(
+                                                      Factor_Const(
+                                                        ConstValue_INT(
+                                                         0
+                                                        ) [ConstValue_INT]
+                                                      ) [Factor_Const]
+                                                    ) [Term_One]
+                                                  ) [Expr_TermOne]
+                                                ) [Member_Array]
+                                              ) [Designator]
+                                              DesignatorStatementOptions_AssignOpExpr(
+                                                AssignOp_EQUAL(
+                                                ) [AssignOp_EQUAL]
+                                                Expr_TermOne(
+                                                  Term_One(
+                                                    Factor_Const(
+                                                      ConstValue_CHAR(
+                                                       a
+                                                      ) [ConstValue_CHAR]
+                                                    ) [Factor_Const]
+                                                  ) [Term_One]
+                                                ) [Expr_TermOne]
+                                              ) [DesignatorStatementOptions_AssignOpExpr]
+                                            ) [DesignatorStatement_Designator_With_Options]
+                                          ) [Statement_DesignatorStatement]
+                                        ) [Statements_OneOrMore]
+                                        Statement_DesignatorStatement(
+                                          DesignatorStatement_Designator_With_Options(
+                                            Designator(
+                                              Var_NoScope(
+                                               nizch
+                                              ) [Var_NoScope]
+                                              Member_Array(
+                                                Expr_TermOne(
+                                                  Term_One(
+                                                    Factor_Designator(
+                                                      Designator(
+                                                        Var_NoScope(
+                                                         jedan
+                                                        ) [Var_NoScope]
+                                                        Member_Skip(
+                                                        ) [Member_Skip]
+                                                      ) [Designator]
+                                                      ActParsOptionalBrackets_Skip(
+                                                      ) [ActParsOptionalBrackets_Skip]
+                                                    ) [Factor_Designator]
+                                                  ) [Term_One]
+                                                ) [Expr_TermOne]
+                                              ) [Member_Array]
+                                            ) [Designator]
+                                            DesignatorStatementOptions_AssignOpExpr(
+                                              AssignOp_EQUAL(
+                                              ) [AssignOp_EQUAL]
+                                              Expr_TermOne(
+                                                Term_One(
+                                                  Factor_Const(
+                                                    ConstValue_CHAR(
+                                                     b
+                                                    ) [ConstValue_CHAR]
+                                                  ) [Factor_Const]
+                                                ) [Term_One]
+                                              ) [Expr_TermOne]
+                                            ) [DesignatorStatementOptions_AssignOpExpr]
+                                          ) [DesignatorStatement_Designator_With_Options]
+                                        ) [Statement_DesignatorStatement]
+                                      ) [Statements_OneOrMore]
+                                      Statement_DesignatorStatement(
+                                        DesignatorStatement_Designator_With_Options(
+                                          Designator(
+                                            Var_NoScope(
+                                             nizch
+                                            ) [Var_NoScope]
+                                            Member_Array(
+                                              Expr_TermMultiple(
+                                                Expr_TermOne(
+                                                  Term_One(
+                                                    Factor_Designator(
+                                                      Designator(
+                                                        Var_NoScope(
+                                                         pet
+                                                        ) [Var_NoScope]
+                                                        Member_Skip(
+                                                        ) [Member_Skip]
+                                                      ) [Designator]
+                                                      ActParsOptionalBrackets_Skip(
+                                                      ) [ActParsOptionalBrackets_Skip]
+                                                    ) [Factor_Designator]
+                                                  ) [Term_One]
+                                                ) [Expr_TermOne]
+                                                AddOp_Minus(
+                                                ) [AddOp_Minus]
+                                                Term_One(
+                                                  Factor_Const(
+                                                    ConstValue_INT(
+                                                     3
+                                                    ) [ConstValue_INT]
+                                                  ) [Factor_Const]
+                                                ) [Term_One]
+                                              ) [Expr_TermMultiple]
+                                            ) [Member_Array]
+                                          ) [Designator]
+                                          DesignatorStatementOptions_AssignOpExpr(
+                                            AssignOp_EQUAL(
+                                            ) [AssignOp_EQUAL]
+                                            Expr_TermOne(
+                                              Term_One(
+                                                Factor_Const(
+                                                  ConstValue_CHAR(
+                                                   c
+                                                  ) [ConstValue_CHAR]
+                                                ) [Factor_Const]
+                                              ) [Term_One]
+                                            ) [Expr_TermOne]
+                                          ) [DesignatorStatementOptions_AssignOpExpr]
+                                        ) [DesignatorStatement_Designator_With_Options]
+                                      ) [Statement_DesignatorStatement]
+                                    ) [Statements_OneOrMore]
+                                    Statement_Print(
+                                      Expr_TermOne(
+                                        Term_One(
+                                          Factor_Designator(
+                                            Designator(
+                                              Var_NoScope(
+                                               nizch
+                                              ) [Var_NoScope]
+                                              Member_Array(
+                                                Expr_TermOne(
+                                                  Term_One(
+                                                    Factor_Const(
+                                                      ConstValue_INT(
+                                                       1
+                                                      ) [ConstValue_INT]
+                                                    ) [Factor_Const]
+                                                  ) [Term_One]
+                                                ) [Expr_TermOne]
+                                              ) [Member_Array]
+                                            ) [Designator]
+                                            ActParsOptionalBrackets_Skip(
+                                            ) [ActParsOptionalBrackets_Skip]
+                                          ) [Factor_Designator]
+                                        ) [Term_One]
+                                      ) [Expr_TermOne]
+                                      NumConstOptional_Skip(
+                                      ) [NumConstOptional_Skip]
+                                    ) [Statement_Print]
+                                  ) [Statements_OneOrMore]
+                                  Statement_Print(
+                                    Expr_TermOne(
+                                      Term_One(
+                                        Factor_Designator(
+                                          Designator(
+                                            Var_NoScope(
+                                             nizch
+                                            ) [Var_NoScope]
+                                            Member_Array(
+                                              Expr_TermOne(
+                                                Term_MultipleMulOp(
+                                                  Term_One(
+                                                    Factor_Designator(
+                                                      Designator(
+                                                        Var_NoScope(
+                                                         jedan
+                                                        ) [Var_NoScope]
+                                                        Member_Skip(
+                                                        ) [Member_Skip]
+                                                      ) [Designator]
+                                                      ActParsOptionalBrackets_Skip(
+                                                      ) [ActParsOptionalBrackets_Skip]
+                                                    ) [Factor_Designator]
+                                                  ) [Term_One]
+                                                  MulOp_Mul(
+                                                  ) [MulOp_Mul]
+                                                  Factor_Const(
+                                                    ConstValue_INT(
+                                                     2
+                                                    ) [ConstValue_INT]
+                                                  ) [Factor_Const]
+                                                ) [Term_MultipleMulOp]
+                                              ) [Expr_TermOne]
+                                            ) [Member_Array]
+                                          ) [Designator]
+                                          ActParsOptionalBrackets_Skip(
+                                          ) [ActParsOptionalBrackets_Skip]
+                                        ) [Factor_Designator]
+                                      ) [Term_One]
+                                    ) [Expr_TermOne]
+                                    NumConstOptional_Skip(
+                                    ) [NumConstOptional_Skip]
+                                  ) [Statement_Print]
+                                ) [Statements_OneOrMore]
+                                Statement_DesignatorStatement(
+                                  DesignatorStatement_Designator_With_Options(
+                                    Designator(
+                                      Var_NoScope(
+                                       a
+                                      ) [Var_NoScope]
+                                      Member_Skip(
+                                      ) [Member_Skip]
+                                    ) [Designator]
+                                    DesignatorStatementOptions_AssignOpExpr(
+                                      AssignOp_EQUAL(
+                                      ) [AssignOp_EQUAL]
+                                      Expr_TermOne(
+                                        Term_One(
+                                          Factor_Const(
+                                            ConstValue_INT(
+                                             1
+                                            ) [ConstValue_INT]
+                                          ) [Factor_Const]
+                                        ) [Term_One]
+                                      ) [Expr_TermOne]
+                                    ) [DesignatorStatementOptions_AssignOpExpr]
+                                  ) [DesignatorStatement_Designator_With_Options]
+                                ) [Statement_DesignatorStatement]
+                              ) [Statements_OneOrMore]
+                              Statement_Read(
+                                Designator(
+                                  Var_NoScope(
+                                   bodovi
+                                  ) [Var_NoScope]
+                                  Member_Skip(
+                                  ) [Member_Skip]
+                                ) [Designator]
+                              ) [Statement_Read]
+                            ) [Statements_OneOrMore]
+                            Statement_DesignatorStatement(
+                              DesignatorStatement_Designator_With_Options(
+                                Designator(
+                                  Var_NoScope(
+                                   bodovi
+                                  ) [Var_NoScope]
+                                  Member_Skip(
+                                  ) [Member_Skip]
+                                ) [Designator]
+                                DesignatorStatementOptions_AssignOpExpr(
+                                  AssignOp_EQUAL(
+                                  ) [AssignOp_EQUAL]
+                                  Expr_TermMultiple(
+                                    Expr_TermMultiple(
+                                      Expr_MinusTermOne(
+                                        Term_One(
+                                          Factor_Designator(
+                                            Designator(
+                                              Var_NoScope(
+                                               bodovi
+                                              ) [Var_NoScope]
+                                              Member_Skip(
+                                              ) [Member_Skip]
+                                            ) [Designator]
+                                            ActParsOptionalBrackets_Skip(
+                                            ) [ActParsOptionalBrackets_Skip]
+                                          ) [Factor_Designator]
+                                        ) [Term_One]
+                                      ) [Expr_MinusTermOne]
+                                      AddOp_Plus(
+                                      ) [AddOp_Plus]
+                                      Term_MultipleMulOp(
+                                        Term_One(
+                                          Factor_Expr(
+                                            Expr_TermMultiple(
+                                              Expr_TermOne(
+                                                Term_MultipleMulOp(
+                                                  Term_MultipleMulOp(
+                                                    Term_One(
+                                                      Factor_Designator(
+                                                        Designator(
+                                                          Var_NoScope(
+                                                           pet
+                                                          ) [Var_NoScope]
+                                                          Member_Skip(
+                                                          ) [Member_Skip]
+                                                        ) [Designator]
+                                                        ActParsOptionalBrackets_Skip(
+                                                        ) [ActParsOptionalBrackets_Skip]
+                                                      ) [Factor_Designator]
+                                                    ) [Term_One]
+                                                    MulOp_Mul(
+                                                    ) [MulOp_Mul]
+                                                    Factor_Designator(
+                                                      Designator(
+                                                        Var_NoScope(
+                                                         a
+                                                        ) [Var_NoScope]
+                                                        Member_Skip(
+                                                        ) [Member_Skip]
+                                                      ) [Designator]
+                                                      ActParsOptionalBrackets_Skip(
+                                                      ) [ActParsOptionalBrackets_Skip]
+                                                    ) [Factor_Designator]
+                                                  ) [Term_MultipleMulOp]
+                                                  MulOp_Div(
+                                                  ) [MulOp_Div]
+                                                  Factor_Const(
+                                                    ConstValue_INT(
+                                                     2
+                                                    ) [ConstValue_INT]
+                                                  ) [Factor_Const]
+                                                ) [Term_MultipleMulOp]
+                                              ) [Expr_TermOne]
+                                              AddOp_Minus(
+                                              ) [AddOp_Minus]
+                                              Term_One(
+                                                Factor_Designator(
+                                                  Designator(
+                                                    Var_NoScope(
+                                                     jedan
+                                                    ) [Var_NoScope]
+                                                    Member_Skip(
+                                                    ) [Member_Skip]
+                                                  ) [Designator]
+                                                  ActParsOptionalBrackets_Skip(
+                                                  ) [ActParsOptionalBrackets_Skip]
+                                                ) [Factor_Designator]
+                                              ) [Term_One]
+                                            ) [Expr_TermMultiple]
+                                          ) [Factor_Expr]
+                                        ) [Term_One]
+                                        MulOp_Mul(
+                                        ) [MulOp_Mul]
+                                        Factor_Designator(
+                                          Designator(
+                                            Var_NoScope(
+                                             bodovi
+                                            ) [Var_NoScope]
+                                            Member_Skip(
+                                            ) [Member_Skip]
+                                          ) [Designator]
+                                          ActParsOptionalBrackets_Skip(
+                                          ) [ActParsOptionalBrackets_Skip]
+                                        ) [Factor_Designator]
+                                      ) [Term_MultipleMulOp]
+                                    ) [Expr_TermMultiple]
+                                    AddOp_Minus(
+                                    ) [AddOp_Minus]
+                                    Term_One(
+                                      Factor_Expr(
+                                        Expr_TermMultiple(
+                                          Expr_TermMultiple(
+                                            Expr_TermOne(
+                                              Term_MultipleMulOp(
+                                                Term_One(
+                                                  Factor_Const(
+                                                    ConstValue_INT(
+                                                     3
+                                                    ) [ConstValue_INT]
+                                                  ) [Factor_Const]
+                                                ) [Term_One]
+                                                MulOp_Mod(
+                                                ) [MulOp_Mod]
+                                                Factor_Const(
+                                                  ConstValue_INT(
+                                                   2
+                                                  ) [ConstValue_INT]
+                                                ) [Factor_Const]
+                                              ) [Term_MultipleMulOp]
+                                            ) [Expr_TermOne]
+                                            AddOp_Plus(
+                                            ) [AddOp_Plus]
+                                            Term_MultipleMulOp(
+                                              Term_One(
+                                                Factor_Const(
+                                                  ConstValue_INT(
+                                                   3
+                                                  ) [ConstValue_INT]
+                                                ) [Factor_Const]
+                                              ) [Term_One]
+                                              MulOp_Mul(
+                                              ) [MulOp_Mul]
+                                              Factor_Const(
+                                                ConstValue_INT(
+                                                 2
+                                                ) [ConstValue_INT]
+                                              ) [Factor_Const]
+                                            ) [Term_MultipleMulOp]
+                                          ) [Expr_TermMultiple]
+                                          AddOp_Minus(
+                                          ) [AddOp_Minus]
+                                          Term_One(
+                                            Factor_Const(
+                                              ConstValue_INT(
+                                               3
+                                              ) [ConstValue_INT]
+                                            ) [Factor_Const]
+                                          ) [Term_One]
+                                        ) [Expr_TermMultiple]
+                                      ) [Factor_Expr]
+                                    ) [Term_One]
+                                  ) [Expr_TermMultiple]
+                                ) [DesignatorStatementOptions_AssignOpExpr]
+                              ) [DesignatorStatement_Designator_With_Options]
+                            ) [Statement_DesignatorStatement]
+                          ) [Statements_OneOrMore]
+                          Statement_Print(
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Designator(
+                                  Designator(
+                                    Var_NoScope(
+                                     bodovi
+                                    ) [Var_NoScope]
+                                    Member_Skip(
+                                    ) [Member_Skip]
+                                  ) [Designator]
+                                  ActParsOptionalBrackets_Skip(
+                                  ) [ActParsOptionalBrackets_Skip]
+                                ) [Factor_Designator]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                            NumConstOptional_Skip(
+                            ) [NumConstOptional_Skip]
+                          ) [Statement_Print]
+                        ) [Statements_OneOrMore]
+                        Statement_DesignatorStatement(
+                          DesignatorStatement_Designator_With_Options(
+                            Designator(
+                              Var_NoScope(
+                               mat
+                              ) [Var_NoScope]
+                              Member_Skip(
+                              ) [Member_Skip]
+                            ) [Designator]
+                            DesignatorStatementOptions_AssignOpExpr(
+                              AssignOp_EQUAL(
+                              ) [AssignOp_EQUAL]
+                              Expr_TermOne(
+                                Term_One(
+                                  Factor_New(
+                                    Type_NoScope(
+                                     int
+                                    ) [Type_NoScope]
+                                    FactorNew_Matrix(
+                                      Expr_TermOne(
+                                        Term_One(
+                                          Factor_Const(
+                                            ConstValue_INT(
+                                             2
+                                            ) [ConstValue_INT]
+                                          ) [Factor_Const]
+                                        ) [Term_One]
+                                      ) [Expr_TermOne]
+                                      Expr_TermOne(
+                                        Term_One(
+                                          Factor_Const(
+                                            ConstValue_INT(
+                                             3
+                                            ) [ConstValue_INT]
+                                          ) [Factor_Const]
+                                        ) [Term_One]
+                                      ) [Expr_TermOne]
+                                    ) [FactorNew_Matrix]
+                                  ) [Factor_New]
+                                ) [Term_One]
+                              ) [Expr_TermOne]
+                            ) [DesignatorStatementOptions_AssignOpExpr]
+                          ) [DesignatorStatement_Designator_With_Options]
+                        ) [Statement_DesignatorStatement]
+                      ) [Statements_OneOrMore]
+                      Statement_DesignatorStatement(
+                        DesignatorStatement_Designator_With_Options(
+                          Designator(
+                            Var_NoScope(
+                             mat
+                            ) [Var_NoScope]
+                            Member_Matrix(
+                              Expr_TermOne(
+                                Term_One(
+                                  Factor_Designator(
+                                    Designator(
+                                      Var_NoScope(
+                                       nula
+                                      ) [Var_NoScope]
+                                      Member_Skip(
+                                      ) [Member_Skip]
+                                    ) [Designator]
+                                    ActParsOptionalBrackets_Skip(
+                                    ) [ActParsOptionalBrackets_Skip]
+                                  ) [Factor_Designator]
+                                ) [Term_One]
+                              ) [Expr_TermOne]
+                              Expr_TermMultiple(
+                                Expr_TermOne(
+                                  Term_One(
+                                    Factor_Designator(
+                                      Designator(
+                                        Var_NoScope(
+                                         jedan
+                                        ) [Var_NoScope]
+                                        Member_Skip(
+                                        ) [Member_Skip]
+                                      ) [Designator]
+                                      ActParsOptionalBrackets_Skip(
+                                      ) [ActParsOptionalBrackets_Skip]
+                                    ) [Factor_Designator]
+                                  ) [Term_One]
+                                ) [Expr_TermOne]
+                                AddOp_Minus(
+                                ) [AddOp_Minus]
+                                Term_One(
+                                  Factor_Const(
+                                    ConstValue_INT(
+                                     1
+                                    ) [ConstValue_INT]
+                                  ) [Factor_Const]
+                                ) [Term_One]
+                              ) [Expr_TermMultiple]
+                            ) [Member_Matrix]
+                          ) [Designator]
+                          DesignatorStatementOptions_AssignOpExpr(
+                            AssignOp_EQUAL(
+                            ) [AssignOp_EQUAL]
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Designator(
+                                  Designator(
+                                    Var_NoScope(
+                                     jedan
+                                    ) [Var_NoScope]
+                                    Member_Skip(
+                                    ) [Member_Skip]
+                                  ) [Designator]
+                                  ActParsOptionalBrackets_Skip(
+                                  ) [ActParsOptionalBrackets_Skip]
+                                ) [Factor_Designator]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                          ) [DesignatorStatementOptions_AssignOpExpr]
+                        ) [DesignatorStatement_Designator_With_Options]
+                      ) [Statement_DesignatorStatement]
+                    ) [Statements_OneOrMore]
+                    Statement_DesignatorStatement(
+                      DesignatorStatement_Designator_With_Options(
+                        Designator(
+                          Var_NoScope(
+                           mat
+                          ) [Var_NoScope]
+                          Member_Matrix(
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Const(
+                                  ConstValue_INT(
+                                   0
+                                  ) [ConstValue_INT]
+                                ) [Factor_Const]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                            Expr_TermOne(
+                              Term_One(
+                                Factor_Designator(
+                                  Designator(
+                                    Var_NoScope(
+                                     mat
+                                    ) [Var_NoScope]
+                                    Member_Matrix(
+                                      Expr_TermOne(
+                                        Term_One(
+                                          Factor_Const(
+                                            ConstValue_INT(
+                                             0
+                                            ) [ConstValue_INT]
+                                          ) [Factor_Const]
+                                        ) [Term_One]
+                                      ) [Expr_TermOne]
+                                      Expr_TermOne(
+                                        Term_One(
+                                          Factor_Const(
+                                            ConstValue_INT(
+                                             0
+                                            ) [ConstValue_INT]
+                                          ) [Factor_Const]
+                                        ) [Term_One]
+                                      ) [Expr_TermOne]
+                                    ) [Member_Matrix]
+                                  ) [Designator]
+                                  ActParsOptionalBrackets_Skip(
+                                  ) [ActParsOptionalBrackets_Skip]
+                                ) [Factor_Designator]
+                              ) [Term_One]
+                            ) [Expr_TermOne]
+                          ) [Member_Matrix]
+                        ) [Designator]
+                        DesignatorStatementOptions_AssignOpExpr(
+                          AssignOp_EQUAL(
+                          ) [AssignOp_EQUAL]
+                          Expr_TermOne(
+                            Term_One(
+                              Factor_Const(
+                                ConstValue_INT(
+                                 2
+                                ) [ConstValue_INT]
+                              ) [Factor_Const]
+                            ) [Term_One]
+                          ) [Expr_TermOne]
+                        ) [DesignatorStatementOptions_AssignOpExpr]
+                      ) [DesignatorStatement_Designator_With_Options]
+                    ) [Statement_DesignatorStatement]
+                  ) [Statements_OneOrMore]
+                  Statement_DesignatorStatement(
+                    DesignatorStatement_Designator_With_Options(
+                      Designator(
+                        Var_NoScope(
+                         mat
+                        ) [Var_NoScope]
+                        Member_Matrix(
+                          Expr_TermOne(
+                            Term_One(
+                              Factor_Const(
+                                ConstValue_INT(
+                                 0
+                                ) [ConstValue_INT]
+                              ) [Factor_Const]
+                            ) [Term_One]
+                          ) [Expr_TermOne]
+                          Expr_TermOne(
+                            Term_One(
+                              Factor_Designator(
+                                Designator(
+                                  Var_NoScope(
+                                   mat
+                                  ) [Var_NoScope]
+                                  Member_Matrix(
+                                    Expr_TermOne(
+                                      Term_One(
+                                        Factor_Const(
+                                          ConstValue_INT(
+                                           0
+                                          ) [ConstValue_INT]
+                                        ) [Factor_Const]
+                                      ) [Term_One]
+                                    ) [Expr_TermOne]
+                                    Expr_TermOne(
+                                      Term_One(
+                                        Factor_Const(
+                                          ConstValue_INT(
+                                           1
+                                          ) [ConstValue_INT]
+                                        ) [Factor_Const]
+                                      ) [Term_One]
+                                    ) [Expr_TermOne]
+                                  ) [Member_Matrix]
+                                ) [Designator]
+                                ActParsOptionalBrackets_Skip(
+                                ) [ActParsOptionalBrackets_Skip]
+                              ) [Factor_Designator]
+                            ) [Term_One]
+                          ) [Expr_TermOne]
+                        ) [Member_Matrix]
+                      ) [Designator]
+                      DesignatorStatementOptions_AssignOpExpr(
+                        AssignOp_EQUAL(
+                        ) [AssignOp_EQUAL]
+                        Expr_TermOne(
+                          Term_One(
+                            Factor_Const(
+                              ConstValue_INT(
+                               5
+                              ) [ConstValue_INT]
+                            ) [Factor_Const]
+                          ) [Term_One]
+                        ) [Expr_TermOne]
+                      ) [DesignatorStatementOptions_AssignOpExpr]
+                    ) [DesignatorStatement_Designator_With_Options]
+                  ) [Statement_DesignatorStatement]
+                ) [Statements_OneOrMore]
+                Statement_DesignatorStatement(
+                  DesignatorStatement_Designator_With_Options(
+                    Designator(
+                      Var_NoScope(
+                       mat
+                      ) [Var_NoScope]
+                      Member_Matrix(
+                        Expr_TermOne(
+                          Term_One(
+                            Factor_Const(
+                              ConstValue_INT(
+                               1
+                              ) [ConstValue_INT]
+                            ) [Factor_Const]
+                          ) [Term_One]
+                        ) [Expr_TermOne]
+                        Expr_TermOne(
+                          Term_MultipleMulOp(
+                            Term_One(
+                              Factor_Designator(
+                                Designator(
+                                  Var_NoScope(
+                                   mat
+                                  ) [Var_NoScope]
+                                  Member_Matrix(
+                                    Expr_TermOne(
+                                      Term_One(
+                                        Factor_Const(
+                                          ConstValue_INT(
+                                           0
+                                          ) [ConstValue_INT]
+                                        ) [Factor_Const]
+                                      ) [Term_One]
+                                    ) [Expr_TermOne]
+                                    Expr_TermOne(
+                                      Term_One(
+                                        Factor_Const(
+                                          ConstValue_INT(
+                                           0
+                                          ) [ConstValue_INT]
+                                        ) [Factor_Const]
+                                      ) [Term_One]
+                                    ) [Expr_TermOne]
+                                  ) [Member_Matrix]
+                                ) [Designator]
+                                ActParsOptionalBrackets_Skip(
+                                ) [ActParsOptionalBrackets_Skip]
+                              ) [Factor_Designator]
+                            ) [Term_One]
+                            MulOp_Mul(
+                            ) [MulOp_Mul]
+                            Factor_Const(
+                              ConstValue_INT(
+                               2
+                              ) [ConstValue_INT]
+                            ) [Factor_Const]
+                          ) [Term_MultipleMulOp]
+                        ) [Expr_TermOne]
+                      ) [Member_Matrix]
+                    ) [Designator]
+                    DesignatorStatementOptions_AssignOpExpr(
+                      AssignOp_EQUAL(
+                      ) [AssignOp_EQUAL]
+                      Expr_TermOne(
+                        Term_One(
+                          Factor_Const(
+                            ConstValue_INT(
+                             4
+                            ) [ConstValue_INT]
+                          ) [Factor_Const]
+                        ) [Term_One]
+                      ) [Expr_TermOne]
+                    ) [DesignatorStatementOptions_AssignOpExpr]
+                  ) [DesignatorStatement_Designator_With_Options]
+                ) [Statement_DesignatorStatement]
+              ) [Statements_OneOrMore]
+              Statement_DesignatorStatement(
+                DesignatorStatement_Designator_With_Options(
+                  Designator(
+                    Var_NoScope(
+                     mat
+                    ) [Var_NoScope]
+                    Member_Matrix(
+                      Expr_TermOne(
+                        Term_One(
+                          Factor_Designator(
+                            Designator(
+                              Var_NoScope(
+                               mat
+                              ) [Var_NoScope]
+                              Member_Matrix(
+                                Expr_TermOne(
+                                  Term_One(
+                                    Factor_Const(
+                                      ConstValue_INT(
+                                       0
+                                      ) [ConstValue_INT]
+                                    ) [Factor_Const]
+                                  ) [Term_One]
+                                ) [Expr_TermOne]
+                                Expr_TermOne(
+                                  Term_One(
+                                    Factor_Const(
+                                      ConstValue_INT(
+                                       0
+                                      ) [ConstValue_INT]
+                                    ) [Factor_Const]
+                                  ) [Term_One]
+                                ) [Expr_TermOne]
+                              ) [Member_Matrix]
+                            ) [Designator]
+                            ActParsOptionalBrackets_Skip(
+                            ) [ActParsOptionalBrackets_Skip]
+                          ) [Factor_Designator]
+                        ) [Term_One]
+                      ) [Expr_TermOne]
+                      Expr_TermOne(
+                        Term_One(
+                          Factor_Const(
+                            ConstValue_INT(
+                             1
+                            ) [ConstValue_INT]
+                          ) [Factor_Const]
+                        ) [Term_One]
+                      ) [Expr_TermOne]
+                    ) [Member_Matrix]
+                  ) [Designator]
+                  DesignatorStatementOptions_AssignOpExpr(
+                    AssignOp_EQUAL(
+                    ) [AssignOp_EQUAL]
+                    Expr_TermOne(
+                      Term_One(
+                        Factor_Const(
+                          ConstValue_INT(
+                           3
+                          ) [ConstValue_INT]
+                        ) [Factor_Const]
+                      ) [Term_One]
+                    ) [Expr_TermOne]
+                  ) [DesignatorStatementOptions_AssignOpExpr]
+                ) [DesignatorStatement_Designator_With_Options]
+              ) [Statement_DesignatorStatement]
+            ) [Statements_OneOrMore]
             Statement_DesignatorStatement(
               DesignatorStatement_Designator_With_Options(
                 Designator(
                   Var_NoScope(
-                   a
+                   mat
                   ) [Var_NoScope]
-                  Member_Skip(
-                  ) [Member_Skip]
+                  Member_Matrix(
+                    Expr_TermOne(
+                      Term_One(
+                        Factor_Const(
+                          ConstValue_INT(
+                           1
+                          ) [ConstValue_INT]
+                        ) [Factor_Const]
+                      ) [Term_One]
+                    ) [Expr_TermOne]
+                    Expr_TermOne(
+                      Term_One(
+                        Factor_Const(
+                          ConstValue_INT(
+                           0
+                          ) [ConstValue_INT]
+                        ) [Factor_Const]
+                      ) [Term_One]
+                    ) [Expr_TermOne]
+                  ) [Member_Matrix]
                 ) [Designator]
                 DesignatorStatementOptions_AssignOpExpr(
                   AssignOp_EQUAL(
@@ -146,147 +1937,143 @@ INFO  15:04:05,549 - Program(
               ) [DesignatorStatement_Designator_With_Options]
             ) [Statement_DesignatorStatement]
           ) [Statements_OneOrMore]
-          Statement_Return(
-            ExprOptional_Define(
-              Expr_TermOne(
-                Term_One(
-                  Factor_Const(
-                    ConstValue_INT(
-                     1
-                    ) [ConstValue_INT]
-                  ) [Factor_Const]
-                ) [Term_One]
-              ) [Expr_TermOne]
-            ) [ExprOptional_Define]
-          ) [Statement_Return]
-        ) [Statements_OneOrMore]
-      ) [MethodDeclaration]
-    ) [MethodsDeclarationList_OneOrMore]
-    MethodDeclaration(
-      MethodDeclarationTypeAndName_Type(
-        Type_NoScope(
-         int
-        ) [Type_NoScope]
-       f2
-      ) [MethodDeclarationTypeAndName_Type]
-      FormPars_OneOrMore(
-        FormParsList_Multiple(
-          FormParsList_One(
-            Parameter(
-              Type_NoScope(
-               int
-              ) [Type_NoScope]
-             a
-              VarOrArray_Var(
-              ) [VarOrArray_Var]
-            ) [Parameter]
-          ) [FormParsList_One]
-          Parameter(
-            Type_NoScope(
-             int
-            ) [Type_NoScope]
-           b
-            VarOrArray_Array(
-            ) [VarOrArray_Array]
-          ) [Parameter]
-        ) [FormParsList_Multiple]
-      ) [FormPars_OneOrMore]
-      VarDeclarationListOptional_Skip(
-      ) [VarDeclarationListOptional_Skip]
-      Statements_OneOrMore(
-        Statements_OneOrMore(
-          Statements_None(
-          ) [Statements_None]
-          Statement_DesignatorStatement(
-            DesignatorStatement_Designator_With_Options(
-              Designator(
-                Var_NoScope(
-                 f1
-                ) [Var_NoScope]
-                Member_Skip(
-                ) [Member_Skip]
-              ) [Designator]
-              DesignatorStatementOptions_ActPars(
-                ActParsOptional_Define(
-                  ActPars_Multiple(
-                    ActPars_One(
-                      Argument(
-                        Expr_TermOne(
-                          Term_One(
-                            Factor_Const(
-                              ConstValue_BOOL(
-                               true
-                              ) [ConstValue_BOOL]
-                            ) [Factor_Const]
-                          ) [Term_One]
-                        ) [Expr_TermOne]
-                      ) [Argument]
-                    ) [ActPars_One]
-                    Argument(
-                      Expr_TermOne(
-                        Term_One(
-                          Factor_Designator(
-                            Designator(
-                              Var_NoScope(
-                               b
-                              ) [Var_NoScope]
-                              Member_Array(
-                                Expr_TermOne(
-                                  Term_One(
-                                    Factor_Const(
-                                      ConstValue_INT(
-                                       1
-                                      ) [ConstValue_INT]
-                                    ) [Factor_Const]
-                                  ) [Term_One]
-                                ) [Expr_TermOne]
-                              ) [Member_Array]
-                            ) [Designator]
-                            ActParsOptionalBrackets_Skip(
-                            ) [ActParsOptionalBrackets_Skip]
-                          ) [Factor_Designator]
-                        ) [Term_One]
-                      ) [Expr_TermOne]
-                    ) [Argument]
-                  ) [ActPars_Multiple]
-                ) [ActParsOptional_Define]
-              ) [DesignatorStatementOptions_ActPars]
-            ) [DesignatorStatement_Designator_With_Options]
-          ) [Statement_DesignatorStatement]
-        ) [Statements_OneOrMore]
-        Statement_Return(
-          ExprOptional_Define(
+          Statement_Print(
             Expr_TermOne(
               Term_One(
-                Factor_Const(
-                  ConstValue_INT(
-                   1
-                  ) [ConstValue_INT]
-                ) [Factor_Const]
+                Factor_Designator(
+                  Designator(
+                    Var_NoScope(
+                     mat
+                    ) [Var_NoScope]
+                    Member_Matrix(
+                      Expr_TermOne(
+                        Term_One(
+                          Factor_Const(
+                            ConstValue_INT(
+                             1
+                            ) [ConstValue_INT]
+                          ) [Factor_Const]
+                        ) [Term_One]
+                      ) [Expr_TermOne]
+                      Expr_TermOne(
+                        Term_One(
+                          Factor_Const(
+                            ConstValue_INT(
+                             2
+                            ) [ConstValue_INT]
+                          ) [Factor_Const]
+                        ) [Term_One]
+                      ) [Expr_TermOne]
+                    ) [Member_Matrix]
+                  ) [Designator]
+                  ActParsOptionalBrackets_Skip(
+                  ) [ActParsOptionalBrackets_Skip]
+                ) [Factor_Designator]
               ) [Term_One]
             ) [Expr_TermOne]
-          ) [ExprOptional_Define]
-        ) [Statement_Return]
+            NumConstOptional_Skip(
+            ) [NumConstOptional_Skip]
+          ) [Statement_Print]
+        ) [Statements_OneOrMore]
+        Statement_Print(
+          Expr_TermOne(
+            Term_One(
+              Factor_Designator(
+                Designator(
+                  Var_NoScope(
+                   mat
+                  ) [Var_NoScope]
+                  Member_Matrix(
+                    Expr_TermOne(
+                      Term_One(
+                        Factor_Const(
+                          ConstValue_INT(
+                           0
+                          ) [ConstValue_INT]
+                        ) [Factor_Const]
+                      ) [Term_One]
+                    ) [Expr_TermOne]
+                    Expr_TermOne(
+                      Term_One(
+                        Factor_Const(
+                          ConstValue_INT(
+                           2
+                          ) [ConstValue_INT]
+                        ) [Factor_Const]
+                      ) [Term_One]
+                    ) [Expr_TermOne]
+                  ) [Member_Matrix]
+                ) [Designator]
+                ActParsOptionalBrackets_Skip(
+                ) [ActParsOptionalBrackets_Skip]
+              ) [Factor_Designator]
+            ) [Term_One]
+          ) [Expr_TermOne]
+          NumConstOptional_Skip(
+          ) [NumConstOptional_Skip]
+        ) [Statement_Print]
       ) [Statements_OneOrMore]
     ) [MethodDeclaration]
   ) [MethodsDeclarationList_OneOrMore]
 ) [Program]
-INFO  15:04:05,602 - Obrada programa p
-INFO  15:04:05,603 - Obrada metode main
-INFO  15:04:05,603 - Povratak iz metode main
-INFO  15:04:05,603 - Tip: int
-INFO  15:04:05,604 - Obrada metode f1
-INFO  15:04:05,604 - Tip: bool
-INFO  15:04:05,604 - Obrada argumenta promenljive b
-INFO  15:04:05,605 - Tip: int
-INFO  15:04:05,605 - Obrada argumenta promenljive a
-INFO  15:04:05,605 - Var: a
-INFO  15:04:05,605 - Povratak iz metode f1
-INFO  15:04:05,605 - Tip: int
-INFO  15:04:05,605 - Obrada metode f2
-INFO  15:04:05,605 - Tip: int
-INFO  15:04:05,605 - Obrada argumenta promenljive a
-INFO  15:04:05,605 - Tip: int
-INFO  15:04:05,605 - Obrada argumenta niza b
-INFO  15:04:05,605 - Var: f1
-INFO  15:04:05,605 - Var: b
+INFO  23:03:16,002 - Pretraga na 20(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,002 - Pretraga na 21(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,003 - Pretraga na 22(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,003 - Pretraga na 22(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,003 - Pretraga na 22(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,003 - Pretraga na 23(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,003 - Pretraga na 23(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,003 - Pretraga na 23(pet). Vrsta: Con, Tip: Int
+INFO  23:03:16,003 - Pretraga na 24(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,003 - Pretraga na 25(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,004 - Pretraga na 27(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 28(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 28(nula). Vrsta: Con, Tip: Int
+INFO  23:03:16,004 - Pretraga na 28(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,004 - Pretraga na 29(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 30(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 30(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 30(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,004 - Pretraga na 30(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 30(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,004 - Pretraga na 31(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,005 - Pretraga na 31(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 31(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 32(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,005 - Pretraga na 33(niz). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 36(nizch). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 37(nizch). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 38(nizch). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 38(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,005 - Pretraga na 39(nizch). Vrsta: Var, Tip: Array
+INFO  23:03:16,005 - Pretraga na 39(pet). Vrsta: Con, Tip: Int
+INFO  23:03:16,006 - Pretraga na 40(nizch). Vrsta: Var, Tip: Array
+INFO  23:03:16,006 - Pretraga na 41(nizch). Vrsta: Var, Tip: Array
+INFO  23:03:16,006 - Pretraga na 41(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,006 - Pretraga na 43(a). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 44(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 45(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 45(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 45(pet). Vrsta: Con, Tip: Int
+INFO  23:03:16,006 - Pretraga na 45(a). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 45(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,006 - Pretraga na 45(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 46(bodovi). Vrsta: Var, Tip: Int
+INFO  23:03:16,006 - Pretraga na 48(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,006 - Pretraga na 49(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 49(nula). Vrsta: Con, Tip: Int
+INFO  23:03:16,007 - Pretraga na 49(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,007 - Pretraga na 49(jedan). Vrsta: Con, Tip: Int
+INFO  23:03:16,007 - Pretraga na 50(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 50(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 51(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 51(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 52(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 52(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 53(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 53(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 54(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 56(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,007 - Pretraga na 57(mat). Vrsta: Var, Tip: Array
+INFO  23:03:16,008 - Generacija bytecode fajla: C:\Users\Administrator\Desktop\PP1\GitHub\PP1\workspace\MJCompiler\test\program.obj
+INFO  23:03:16,012 - Prevodjenje uspesno zavrseno!

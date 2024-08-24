@@ -6,8 +6,10 @@ import java.util.Stack;
 import rs.ac.bg.etf.pp1.SemanticAnalyzer.*;
 import rs.ac.bg.etf.pp1.ast.*;
 import rs.etf.pp1.mj.runtime.Code;
+import rs.etf.pp1.mj.runtime.Run;
 import rs.etf.pp1.symboltable.Tab;
 import rs.etf.pp1.symboltable.concepts.Obj;
+import rs.etf.pp1.symboltable.concepts.Struct;
 
 public class CodeGenerator extends VisitorAdaptor {
 	
@@ -35,6 +37,23 @@ public class CodeGenerator extends VisitorAdaptor {
 	public void visit(Program prog) // kraj programa
 	{
 		Code.dataSize = prog.getProgramName().obj.getLocalSymbols().size(); // broj simbola
+	}
+	
+	// KRAJ METODE
+	
+	@Override
+	public void visit(MethodDeclaration declaration)
+	{
+		if(declaration.getMethodDeclarationTypeAndName() instanceof MethodDeclarationTypeAndName_Void)
+		{
+			Code.put(Code.exit);
+			Code.put(Code.return_);
+		}
+		else
+		{
+			Code.put(Code.trap);
+			Code.put(1);
+		}
 	}
 	
 	// POCETAK METODE
@@ -115,7 +134,55 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		else if(option instanceof DesignatorStatementOptions_AssignOpExpr) // designator = expr
 		{
-			Code.store(designator.obj);
+			Expr expr = ((DesignatorStatementOptions_AssignOpExpr)option).getExpr();
+			if(expr.struct.getKind() == Struct.Array && expr.struct.getElemType().getKind() == Struct.Array) // !! matrice
+			{
+				Code.put(Code.dup_x1);
+				Code.put(Code.pop);
+				Code.put(Code.dup);
+				Code.put(Code.newarray);
+				Code.put(1);
+				
+				Code.store(designator.obj); // skidamo vrednost sa steka, smestamo u designator
+				
+				int loopStart = 0, patchPlace = 0;
+				
+				Code.loadConst(0);
+				loopStart = Code.pc;
+				Code.put(Code.dup2); // POCETAK
+				patchPlace = Code.pc;
+				Code.putFalseJump(Code.ne, 0);
+				Code.put(Code.dup_x2);
+				Code.put(Code.pop);
+				Code.put(Code.dup_x2);
+				Code.put(Code.pop);
+				Code.put(Code.dup2);
+				Code.load(designator.obj);
+				Code.put(Code.dup_x2);
+				Code.put(Code.pop);
+				
+				Code.put(Code.newarray);
+				if(expr.struct.getElemType().getElemType() == Tab.charType)
+				{
+					Code.put(0);
+				}
+				else
+				{
+					Code.put(1);
+				}
+				Code.put(Code.astore);
+				Code.put(Code.dup_x2);
+				Code.put(Code.pop);
+				Code.loadConst(1); // inkrementiramo
+				Code.put(Code.add);
+
+				Code.putJump(loopStart);
+				Code.fixup(patchPlace + 1); // fix sa krajem petlje
+			}
+			else
+			{
+				Code.store(designator.obj);
+			}
 		}
 	}
 	
@@ -203,7 +270,7 @@ public class CodeGenerator extends VisitorAdaptor {
 		}
 		else
 		{
-			Code.loadConst(0);
+			Code.loadConst(5); // podrazumevana sirina
 		}
 
 		if(print.getExpr().struct == Tab.intType)
@@ -246,7 +313,7 @@ public class CodeGenerator extends VisitorAdaptor {
 			FactorNew_Array newArray = (FactorNew_Array)factorNew;
 			
 			Code.put(Code.newarray);
-			// kako se ubacuje velicina niza??
+			
 			// po dokumentaciji: niz velicine n, 0 - 1 bajt, 1 - velicina reci
 			if(type.struct == Tab.charType)
 			{
@@ -303,43 +370,44 @@ public class CodeGenerator extends VisitorAdaptor {
 	
 	// ARITMETICKE OPERACIJE
 	
-	@Override
-	public void visit(AddOp_Plus operation)
+	public void visit(Expr_TermMultiple expr) // ulazi se kad se zavrsi expresion
 	{
-		Code.put(Code.add);
+		AddOp op = expr.getAddOp();
+		if(op instanceof AddOp_Plus)
+		{
+			Code.put(Code.add);
+		}
+		else if(op instanceof AddOp_Minus)
+		{
+			Code.put(Code.sub);
+		}
+	}
+	
+	public void visit(Term_MultipleMulOp term)
+	{
+		MulOp op = term.getMulOp();
+		
+		if(op instanceof MulOp_Mul)
+		{
+			Code.put(Code.mul);
+		}
+		else if(op instanceof MulOp_Div)
+		{
+			Code.put(Code.div);
+		}
+		else if(op instanceof MulOp_Mod)
+		{
+			Code.put(Code.rem);
+		}
 	}
 	
 	@Override
-	public void visit(AddOp_Minus operation)
-	{
-		Code.put(Code.sub);
-	}
-	
-	@Override
-	public void visit(MulOp_Mul operation)
-	{
-		Code.put(Code.mul);
-	}
-	
-	@Override
-	public void visit(MulOp_Div operation)
-	{
-		Code.put(Code.div);
-	}
-	
-	@Override
-	public void visit(MulOp_Mod operation)
-	{
-		Code.put(Code.rem);
-	}
-	
-	@Override
-	public void visit(MinusOptional_Define operation)
+	public void visit(Expr_MinusTermOne expr)
 	{
 		Code.put(Code.neg);
 	}
 	
-	// NIZOVI	
+	// NIZOVI
 	
 	@Override
 	public void visit(Member_Array arr)
@@ -354,9 +422,30 @@ public class CodeGenerator extends VisitorAdaptor {
 			
 			if((option instanceof DesignatorStatementOptions_Inc) || (option instanceof DesignatorStatementOptions_Dec))
 			{
-				Code.put(Code.dup2); // dupliraju se poslednje dve reci na steku(arr i indeks) ??
+				Code.put(Code.dup2); // dupliraju se poslednje dve reci na steku(arr i indeks) za aload i astore
 			}
 		}
+	}
+	
+	public void visit(Member_Matrix mtx) // !! matrice
+	{
+		Designator designator = (Designator)mtx.getParent();
+		if(designator.getParent() instanceof DesignatorStatement_Designator_With_Options)
+		{
+			DesignatorStatement_Designator_With_Options options =
+					(DesignatorStatement_Designator_With_Options)designator.getParent();
+			
+			DesignatorStatementOptions option = options.getDesignatorStatementOptions();
+			
+			
+			
+			if((option instanceof DesignatorStatementOptions_Inc) || (option instanceof DesignatorStatementOptions_Dec))
+			{
+				Code.put(Code.dup2); // mora zato sto se prvo radi load pa store inkrementirane vrendosti
+			}
+			
+		}
+		
 	}
 	
 	@Override
@@ -365,7 +454,11 @@ public class CodeGenerator extends VisitorAdaptor {
 		Designator designator = (Designator)var.getParent();
 		if(designator.getMember() instanceof Member_Array)
 		{
-			Code.load(var.obj); // niz, gde element??
+			Code.load(var.obj);
+		}
+		else if(designator.getMember() instanceof Member_Matrix)
+		{
+			Code.load(var.obj);
 		}
 	}
 	
@@ -375,8 +468,79 @@ public class CodeGenerator extends VisitorAdaptor {
 		Designator designator = (Designator)var.getParent();
 		if(designator.getMember() instanceof Member_Array)
 		{
-			Code.load(var.obj); // niz, gde element??
+			Code.load(var.obj);
 		}
+		else if(designator.getMember() instanceof Member_Matrix)
+		{
+			Code.load(var.obj);
+		}
+	}
+	
+	@Override
+	public void visit(Designator designator)
+	{
+		SyntaxNode parent = designator.getParent();
+		
+		if(designator.getMember() instanceof Member_Matrix)
+		{
+			if(designator.getMember() instanceof Member_Matrix)
+			{
+				/* 
+				 pocetni stack: MTX M N
+				 dup_x2 		| N MTX M N
+				 pop			| N MTX M
+				 aload		    | N ARR
+				 dup_x1		    | ARR N ARR
+				 pop			| ARR N
+				 * */
+				
+				Code.put(Code.dup_x2);
+				Code.put(Code.pop);
+				Code.put(Code.aload);
+				Code.put(Code.dup_x1);
+				Code.put(Code.pop);
+			}
+		}
+		
+		if(parent instanceof Statement_Read)
+		{
+			return;
+		}
+		else if(parent instanceof DesignatorList_One)
+		{
+			return;
+		}
+		else if(parent instanceof DesignatorList_Multiple)
+		{
+			return;
+		}
+		else if(parent instanceof DesignatorStatement_Designator_With_Options)
+		{
+			DesignatorStatement_Designator_With_Options options = (DesignatorStatement_Designator_With_Options)parent;
+			DesignatorStatementOptions option = options.getDesignatorStatementOptions();
+			
+			if(option instanceof DesignatorStatementOptions_AssignOpExpr) // dodela vrednosti, nije potreban load
+			{
+				return;
+			}
+			else if(option instanceof DesignatorStatementOptions_ActPars)
+			{
+				return;
+			}
+		}
+		else if(parent instanceof Factor_Designator)
+		{
+			Factor_Designator factor = (Factor_Designator) parent;
+			ActParsOptionalBrackets actPars = factor.getActParsOptionalBrackets();
+			
+			if(actPars instanceof ActParsOptionalBrackets_Define)
+			{
+				return;
+			}
+		}
+		
+		Code.load(designator.obj); // citanje vrednosti
+		
 	}
 	
 	// FOR PETLJA
@@ -468,24 +632,16 @@ public class CodeGenerator extends VisitorAdaptor {
 	}
 	
 	@Override
-	public void visit(IfThenStart start)
-	{
-		
-	}
-	
-	@Override
 	public void visit(IfThenEnd end) // kraj if-a (pocetak else-a opciono)
 	{
-		Condition currentCondition = conditionStack.peak();
+		Condition currentCondition = conditionStack.peek();
 		
 		for(int elseLocation : currentCondition.elseLocations)
 		{
 			Code.fixup(elseLocation);
 		}
-		currentCondition.thenLocations.add(Code.pc - 2);
+		//currentCondition.thenLocations.add(Code.pc - 2); // ??? valjda ne treba
 	}
-	
-	@Override
-	public void visit()
+
 	
 }

@@ -5,10 +5,11 @@ Warning: Terminal "STATIC" was declared but never used
 Warning: Terminal "CLASS" was declared but never used
 Warning: Terminal "COLON" was declared but never used
 Warning: Terminal "EXTENDS" was declared but never used
+Warning: Non terminal "IfThenStart" was declared but never used
 ------- ast extension v0.8 summary -------
   Generated 43 base classes
-  Generated 107 derived classes
-  Generated 19 record classes
+  Generated 108 derived classes
+  Generated 18 record classes
   Generated interface SyntaxNode
   Generated interface Visitor
   Generated adapter class VisitorAdaptor
@@ -20,8 +21,6 @@ Building parse tables...
   Filling in tables...
   Checking for non-reduced productions...
 *** Production "Label ::= IDENT " never reduced
-*** Production "MinusOptional ::= " never reduced
-*** Production "MinusOptional ::= MINUS " never reduced
 Writing parser...
 ===== Viable Prefix Recognizer =====
 START lalr_state [0]: {
@@ -35,7 +34,7 @@ transition on Program to state [1]
 lalr_state [1]: {
   [$START ::= Program (*) EOF , {EOF }]
 }
-transition on EOF to state [216]
+transition on EOF to state [223]
 
 -------------------
 lalr_state [2]: {
@@ -64,8 +63,8 @@ lalr_state [5]: {
   [Namespace ::= NAMESPACE (*) NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE , {error CONST LBRACE IDENT }]
   [NamespaceName ::= (*) IDENT , {LBRACE }]
 }
-transition on NamespaceName to state [209]
-transition on IDENT to state [208]
+transition on NamespaceName to state [216]
+transition on IDENT to state [215]
 
 -------------------
 lalr_state [6]: {
@@ -100,7 +99,7 @@ transition on ConstDeclaration to state [8]
 lalr_state [8]: {
   [Declaration ::= ConstDeclaration (*) SEMICOLON , {error CONST LBRACE IDENT }]
 }
-transition on SEMICOLON to state [207]
+transition on SEMICOLON to state [214]
 
 -------------------
 lalr_state [9]: {
@@ -109,15 +108,15 @@ lalr_state [9]: {
   [Type ::= (*) IDENT , {IDENT }]
 }
 transition on IDENT to state [15]
-transition on Type to state [199]
+transition on Type to state [206]
 
 -------------------
 lalr_state [10]: {
-  [MethodsDeclarationList ::= (*) MethodsDeclarationList MethodDeclaration , {VOID RBRACE IDENT }]
-  [Program ::= PROGRAM ProgramName Namespace DeclarationList LBRACE (*) MethodsDeclarationList RBRACE , {EOF }]
   [MethodsDeclarationList ::= (*) , {VOID RBRACE IDENT }]
+  [Program ::= PROGRAM ProgramName Namespace DeclarationList LBRACE (*) MethodsDeclarationList RBRACE , {EOF }]
+  [MethodsDeclarationList ::= (*) MethodsDeclarationList MethodDeclaration , {VOID RBRACE IDENT }]
 }
-transition on MethodsDeclarationList to state [27]
+transition on MethodsDeclarationList to state [29]
 
 -------------------
 lalr_state [11]: {
@@ -176,8 +175,9 @@ lalr_state [19]: {
 
 -------------------
 lalr_state [20]: {
-  [VarListElement ::= IDENT (*) VarOrArray , {SEMICOLON COMMA }]
   [VarOrArray ::= (*) , {SEMICOLON COMMA }]
+  [VarListElement ::= IDENT (*) VarOrArray , {SEMICOLON COMMA }]
+  [VarOrArray ::= (*) LBRACK RBRACK LBRACK RBRACK , {SEMICOLON COMMA }]
   [VarOrArray ::= (*) LBRACK RBRACK , {SEMICOLON COMMA }]
 }
 transition on LBRACK to state [25]
@@ -210,143 +210,157 @@ lalr_state [24]: {
 
 -------------------
 lalr_state [25]: {
+  [VarOrArray ::= LBRACK (*) RBRACK LBRACK RBRACK , {RPAREN SEMICOLON COMMA }]
   [VarOrArray ::= LBRACK (*) RBRACK , {RPAREN SEMICOLON COMMA }]
 }
 transition on RBRACK to state [26]
 
 -------------------
 lalr_state [26]: {
+  [VarOrArray ::= LBRACK RBRACK (*) LBRACK RBRACK , {RPAREN SEMICOLON COMMA }]
   [VarOrArray ::= LBRACK RBRACK (*) , {RPAREN SEMICOLON COMMA }]
 }
+transition on LBRACK to state [27]
 
 -------------------
 lalr_state [27]: {
-  [MethodDeclaration ::= (*) MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
-  [Program ::= PROGRAM ProgramName Namespace DeclarationList LBRACE MethodsDeclarationList (*) RBRACE , {EOF }]
-  [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
-  [MethodDeclarationTypeAndName ::= (*) VOID IDENT , {LPAREN }]
-  [Type ::= (*) IDENT , {IDENT }]
-  [MethodDeclarationTypeAndName ::= (*) Type IDENT , {LPAREN }]
-  [MethodsDeclarationList ::= MethodsDeclarationList (*) MethodDeclaration , {VOID RBRACE IDENT }]
+  [VarOrArray ::= LBRACK RBRACK LBRACK (*) RBRACK , {RPAREN SEMICOLON COMMA }]
 }
-transition on VOID to state [32]
-transition on MethodDeclarationTypeAndName to state [31]
-transition on IDENT to state [15]
-transition on RBRACE to state [30]
-transition on MethodDeclaration to state [29]
-transition on Type to state [28]
+transition on RBRACK to state [28]
 
 -------------------
 lalr_state [28]: {
-  [MethodDeclarationTypeAndName ::= Type (*) IDENT , {LPAREN }]
+  [VarOrArray ::= LBRACK RBRACK LBRACK RBRACK (*) , {RPAREN SEMICOLON COMMA }]
 }
-transition on IDENT to state [198]
 
 -------------------
 lalr_state [29]: {
+  [MethodDeclarationTypeAndName ::= (*) VOID IDENT , {LPAREN }]
+  [Program ::= PROGRAM ProgramName Namespace DeclarationList LBRACE MethodsDeclarationList (*) RBRACE , {EOF }]
+  [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
+  [MethodDeclarationTypeAndName ::= (*) Type IDENT , {LPAREN }]
+  [MethodsDeclarationList ::= MethodsDeclarationList (*) MethodDeclaration , {VOID RBRACE IDENT }]
+  [Type ::= (*) IDENT , {IDENT }]
+  [MethodDeclaration ::= (*) MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
+}
+transition on VOID to state [34]
+transition on IDENT to state [15]
+transition on MethodDeclarationTypeAndName to state [33]
+transition on RBRACE to state [32]
+transition on MethodDeclaration to state [31]
+transition on Type to state [30]
+
+-------------------
+lalr_state [30]: {
+  [MethodDeclarationTypeAndName ::= Type (*) IDENT , {LPAREN }]
+}
+transition on IDENT to state [205]
+
+-------------------
+lalr_state [31]: {
   [MethodsDeclarationList ::= MethodsDeclarationList MethodDeclaration (*) , {VOID RBRACE IDENT }]
 }
 
 -------------------
-lalr_state [30]: {
+lalr_state [32]: {
   [Program ::= PROGRAM ProgramName Namespace DeclarationList LBRACE MethodsDeclarationList RBRACE (*) , {EOF }]
 }
 
 -------------------
-lalr_state [31]: {
+lalr_state [33]: {
   [MethodDeclaration ::= MethodDeclarationTypeAndName (*) LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
 }
-transition on LPAREN to state [34]
+transition on LPAREN to state [36]
 
 -------------------
-lalr_state [32]: {
+lalr_state [34]: {
   [MethodDeclarationTypeAndName ::= VOID (*) IDENT , {LPAREN }]
 }
-transition on IDENT to state [33]
+transition on IDENT to state [35]
 
 -------------------
-lalr_state [33]: {
+lalr_state [35]: {
   [MethodDeclarationTypeAndName ::= VOID IDENT (*) , {LPAREN }]
 }
 
 -------------------
-lalr_state [34]: {
-  [Parameter ::= (*) Type IDENT VarOrArray , {RPAREN COMMA }]
-  [FormPars ::= (*) error , {RPAREN }]
+lalr_state [36]: {
   [FormParsList ::= (*) Parameter , {RPAREN COMMA }]
   [FormPars ::= (*) , {RPAREN }]
-  [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
   [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN (*) FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
   [FormParsList ::= (*) FormParsList COMMA Parameter , {RPAREN COMMA }]
   [FormPars ::= (*) FormParsList , {RPAREN }]
+  [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
+  [Parameter ::= (*) Type IDENT VarOrArray , {RPAREN COMMA }]
+  [FormPars ::= (*) error , {RPAREN }]
   [Type ::= (*) IDENT , {IDENT }]
 }
-transition on Parameter to state [39]
+transition on Parameter to state [41]
 transition on IDENT to state [15]
-transition on FormPars to state [38]
-transition on FormParsList to state [37]
-transition on error to state [36]
-transition on Type to state [35]
+transition on FormPars to state [40]
+transition on FormParsList to state [39]
+transition on error to state [38]
+transition on Type to state [37]
 
 -------------------
-lalr_state [35]: {
+lalr_state [37]: {
   [Parameter ::= Type (*) IDENT VarOrArray , {RPAREN COMMA }]
 }
-transition on IDENT to state [196]
+transition on IDENT to state [203]
 
 -------------------
-lalr_state [36]: {
+lalr_state [38]: {
   [FormPars ::= error (*) , {RPAREN }]
 }
 
 -------------------
-lalr_state [37]: {
+lalr_state [39]: {
   [FormParsList ::= FormParsList (*) COMMA Parameter , {RPAREN COMMA }]
   [FormPars ::= FormParsList (*) , {RPAREN }]
 }
-transition on COMMA to state [194]
+transition on COMMA to state [201]
 
 -------------------
-lalr_state [38]: {
+lalr_state [40]: {
   [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars (*) RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
 }
-transition on RPAREN to state [40]
+transition on RPAREN to state [42]
 
 -------------------
-lalr_state [39]: {
+lalr_state [41]: {
   [FormParsList ::= Parameter (*) , {RPAREN COMMA }]
 }
 
 -------------------
-lalr_state [40]: {
+lalr_state [42]: {
   [VarDeclaration ::= (*) error , {SEMICOLON }]
   [VarDeclarationListOptional ::= (*) VarDeclaration SEMICOLON VarDeclarationListOptional , {LBRACE }]
   [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
   [VarDeclaration ::= (*) Type VarList , {SEMICOLON }]
+  [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN (*) VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
   [Type ::= (*) IDENT , {IDENT }]
   [VarDeclarationListOptional ::= (*) , {LBRACE }]
-  [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN (*) VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
 }
 transition on IDENT to state [15]
-transition on VarDeclaration to state [42]
-transition on VarDeclarationListOptional to state [41]
+transition on VarDeclaration to state [44]
+transition on VarDeclarationListOptional to state [43]
 transition on error to state [13]
 transition on Type to state [12]
 
 -------------------
-lalr_state [41]: {
+lalr_state [43]: {
   [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional (*) LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
 }
-transition on LBRACE to state [45]
+transition on LBRACE to state [47]
 
 -------------------
-lalr_state [42]: {
+lalr_state [44]: {
   [VarDeclarationListOptional ::= VarDeclaration (*) SEMICOLON VarDeclarationListOptional , {LBRACE }]
 }
-transition on SEMICOLON to state [43]
+transition on SEMICOLON to state [45]
 
 -------------------
-lalr_state [43]: {
+lalr_state [45]: {
   [VarDeclarationListOptional ::= VarDeclaration SEMICOLON (*) VarDeclarationListOptional , {LBRACE }]
   [VarDeclaration ::= (*) error , {SEMICOLON }]
   [VarDeclarationListOptional ::= (*) VarDeclaration SEMICOLON VarDeclarationListOptional , {LBRACE }]
@@ -356,149 +370,156 @@ lalr_state [43]: {
   [VarDeclarationListOptional ::= (*) , {LBRACE }]
 }
 transition on IDENT to state [15]
-transition on VarDeclaration to state [42]
-transition on VarDeclarationListOptional to state [44]
+transition on VarDeclaration to state [44]
+transition on VarDeclarationListOptional to state [46]
 transition on error to state [13]
 transition on Type to state [12]
 
 -------------------
-lalr_state [44]: {
+lalr_state [46]: {
   [VarDeclarationListOptional ::= VarDeclaration SEMICOLON VarDeclarationListOptional (*) , {LBRACE }]
 }
 
 -------------------
-lalr_state [45]: {
-  [Statements ::= (*) Statements Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+lalr_state [47]: {
   [Statements ::= (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE (*) Statements RBRACE , {VOID RBRACE IDENT }]
+  [Statements ::= (*) Statements Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on Statements to state [46]
-
--------------------
-lalr_state [46]: {
-  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-  [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements (*) RBRACE , {VOID RBRACE IDENT }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
-  [Statement ::= (*) ForHeader Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statements ::= Statements (*) Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) BREAK SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
-  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on BREAK to state [62]
-transition on Var to state [61]
-transition on RBRACE to state [60]
-transition on CONTINUE to state [59]
-transition on ForHeader to state [58]
-transition on RETURN to state [57]
-transition on LBRACK to state [56]
-transition on PRINT to state [55]
-transition on DesignatorStatement to state [54]
-transition on Statement to state [53]
-transition on IF to state [52]
-transition on Designator to state [51]
-transition on FOR to state [50]
-transition on IDENT to state [49]
-transition on LBRACE to state [48]
-transition on READ to state [47]
-
--------------------
-lalr_state [47]: {
-  [Statement ::= READ (*) LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on LPAREN to state [190]
+transition on Statements to state [48]
 
 -------------------
 lalr_state [48]: {
-  [Statements ::= (*) Statements Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= LBRACE (*) Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statements ::= (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
+  [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements (*) RBRACE , {VOID RBRACE IDENT }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) ForHeader Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
+  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statements ::= Statements (*) Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) BREAK SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
+  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on Statements to state [188]
+transition on BREAK to state [64]
+transition on Var to state [63]
+transition on RBRACE to state [62]
+transition on ForHeader to state [61]
+transition on RETURN to state [60]
+transition on CONTINUE to state [59]
+transition on LBRACK to state [58]
+transition on PRINT to state [57]
+transition on Statement to state [56]
+transition on DesignatorStatement to state [55]
+transition on IF to state [54]
+transition on Designator to state [53]
+transition on FOR to state [52]
+transition on IDENT to state [51]
+transition on LBRACE to state [50]
+transition on READ to state [49]
 
 -------------------
 lalr_state [49]: {
-  [Var ::= IDENT (*) , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
-  [Var ::= IDENT (*) DOUBLE_COLON IDENT , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
+  [Statement ::= READ (*) LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on DOUBLE_COLON to state [186]
+transition on LPAREN to state [197]
 
 -------------------
 lalr_state [50]: {
-  [ForHeader ::= FOR (*) LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Statements ::= (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statements ::= (*) Statements Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= LBRACE (*) Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on LPAREN to state [172]
+transition on Statements to state [195]
 
 -------------------
 lalr_state [51]: {
+  [Var ::= IDENT (*) , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
+  [Var ::= IDENT (*) DOUBLE_COLON IDENT , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
+}
+transition on DOUBLE_COLON to state [193]
+
+-------------------
+lalr_state [52]: {
+  [ForHeader ::= FOR (*) LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+}
+transition on LPAREN to state [179]
+
+-------------------
+lalr_state [53]: {
+  [DesignatorStatementOptions ::= (*) AssignOp Expr , {RPAREN SEMICOLON COMMA }]
   [AssignOp ::= (*) EQUAL , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
+  [DesignatorStatementOptions ::= (*) INC , {RPAREN SEMICOLON COMMA }]
   [DesignatorStatementOptions ::= (*) error , {RPAREN SEMICOLON COMMA }]
   [DesignatorStatementOptions ::= (*) LPAREN ActParsOptional RPAREN , {RPAREN SEMICOLON COMMA }]
   [DesignatorStatement ::= Designator (*) DesignatorStatementOptions , {RPAREN SEMICOLON COMMA }]
   [DesignatorStatementOptions ::= (*) DEC , {RPAREN SEMICOLON COMMA }]
-  [DesignatorStatementOptions ::= (*) AssignOp Expr , {RPAREN SEMICOLON COMMA }]
-  [DesignatorStatementOptions ::= (*) INC , {RPAREN SEMICOLON COMMA }]
 }
-transition on LPAREN to state [168]
-transition on DEC to state [167]
-transition on EQUAL to state [166]
-transition on DesignatorStatementOptions to state [165]
-transition on INC to state [164]
-transition on error to state [163]
-transition on AssignOp to state [162]
+transition on LPAREN to state [175]
+transition on DEC to state [174]
+transition on EQUAL to state [173]
+transition on INC to state [172]
+transition on DesignatorStatementOptions to state [171]
+transition on AssignOp to state [170]
+transition on error to state [169]
 
 -------------------
-lalr_state [52]: {
-  [Statement ::= IF (*) LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+lalr_state [54]: {
+  [Statement ::= IF (*) LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on LPAREN to state [134]
+transition on LPAREN to state [142]
 
 -------------------
-lalr_state [53]: {
+lalr_state [55]: {
+  [Statement ::= DesignatorStatement (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on SEMICOLON to state [141]
+
+-------------------
+lalr_state [56]: {
   [Statements ::= Statements Statement (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [54]: {
-  [Statement ::= DesignatorStatement (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on SEMICOLON to state [133]
-
--------------------
-lalr_state [55]: {
+lalr_state [57]: {
   [Statement ::= PRINT (*) LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on LPAREN to state [126]
+transition on LPAREN to state [134]
 
 -------------------
-lalr_state [56]: {
+lalr_state [58]: {
   [Var ::= (*) IDENT , {LBRACK COMMA DOT }]
-  [DesignatorList ::= (*) Designator COMMA , {MUL COMMA }]
-  [DesignatorListOptional ::= (*) , {MUL }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LBRACK COMMA DOT }]
   [DesignatorList ::= (*) DesignatorList COMMA Designator COMMA , {MUL COMMA }]
   [DesignatorListOptional ::= (*) DesignatorList , {MUL }]
   [Designator ::= (*) Var Member , {COMMA }]
   [DesignatorStatement ::= LBRACK (*) DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
+  [DesignatorList ::= (*) Designator COMMA , {MUL COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LBRACK COMMA DOT }]
+  [DesignatorListOptional ::= (*) , {MUL }]
 }
-transition on Var to state [61]
-transition on IDENT to state [49]
-transition on Designator to state [116]
-transition on DesignatorList to state [115]
-transition on DesignatorListOptional to state [114]
+transition on Var to state [63]
+transition on IDENT to state [51]
+transition on DesignatorList to state [124]
+transition on Designator to state [123]
+transition on DesignatorListOptional to state [122]
 
 -------------------
-lalr_state [57]: {
+lalr_state [59]: {
+  [Statement ::= CONTINUE (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on SEMICOLON to state [121]
+
+-------------------
+lalr_state [60]: {
   [Var ::= (*) IDENT , {LPAREN LBRACK PLUS MINUS MUL DIV MOD SEMICOLON DOT }]
+  [Designator ::= (*) Var Member , {LPAREN PLUS MINUS MUL DIV MOD SEMICOLON }]
   [ConstValue ::= (*) CHAR , {PLUS MINUS MUL DIV MOD SEMICOLON }]
   [Expr ::= (*) Expr AddOp Term , {PLUS MINUS SEMICOLON }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {PLUS MINUS MUL DIV MOD SEMICOLON }]
@@ -506,244 +527,241 @@ lalr_state [57]: {
   [Term ::= (*) Factor , {PLUS MINUS MUL DIV MOD SEMICOLON }]
   [Factor ::= (*) NEW Type FactorNew , {PLUS MINUS MUL DIV MOD SEMICOLON }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK PLUS MINUS MUL DIV MOD SEMICOLON DOT }]
-  [Designator ::= (*) Var Member , {LPAREN PLUS MINUS MUL DIV MOD SEMICOLON }]
   [ExprOptional ::= (*) Expr , {SEMICOLON }]
   [Expr ::= (*) Term , {PLUS MINUS SEMICOLON }]
-  [Statement ::= RETURN (*) ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Factor ::= (*) ConstValue , {PLUS MINUS MUL DIV MOD SEMICOLON }]
   [ConstValue ::= (*) BOOL , {PLUS MINUS MUL DIV MOD SEMICOLON }]
   [Term ::= (*) Term MulOp Factor , {PLUS MINUS MUL DIV MOD SEMICOLON }]
   [ExprOptional ::= (*) , {SEMICOLON }]
   [Expr ::= (*) MINUS Term , {PLUS MINUS SEMICOLON }]
+  [Statement ::= RETURN (*) ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Factor ::= (*) LPAREN Expr RPAREN , {PLUS MINUS MUL DIV MOD SEMICOLON }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ExprOptional to state [112]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on Expr to state [111]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ExprOptional to state [119]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on NEW to state [72]
+transition on Expr to state [118]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [58]: {
-  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+lalr_state [61]: {
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
   [Statement ::= ForHeader (*) Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
   [Statement ::= (*) ForHeader Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
   [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Statement ::= (*) BREAK SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
-  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
+  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on BREAK to state [62]
-transition on Var to state [61]
+transition on BREAK to state [64]
+transition on Var to state [63]
+transition on ForHeader to state [61]
+transition on RETURN to state [60]
 transition on CONTINUE to state [59]
-transition on ForHeader to state [58]
-transition on RETURN to state [57]
-transition on LBRACK to state [56]
-transition on PRINT to state [55]
-transition on Statement to state [110]
-transition on DesignatorStatement to state [54]
-transition on IF to state [52]
-transition on Designator to state [51]
-transition on FOR to state [50]
-transition on IDENT to state [49]
-transition on LBRACE to state [48]
-transition on READ to state [47]
+transition on LBRACK to state [58]
+transition on PRINT to state [57]
+transition on Statement to state [117]
+transition on DesignatorStatement to state [55]
+transition on IF to state [54]
+transition on Designator to state [53]
+transition on FOR to state [52]
+transition on IDENT to state [51]
+transition on LBRACE to state [50]
+transition on READ to state [49]
 
 -------------------
-lalr_state [59]: {
-  [Statement ::= CONTINUE (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on SEMICOLON to state [109]
-
--------------------
-lalr_state [60]: {
+lalr_state [62]: {
   [MethodDeclaration ::= MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE (*) , {VOID RBRACE IDENT }]
 }
 
 -------------------
-lalr_state [61]: {
-  [Member ::= (*) LBRACK Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
-  [Member ::= (*) DOT IDENT , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
-  [Member ::= (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+lalr_state [63]: {
+  [Member ::= (*) LBRACK Expr RBRACK LBRACK Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
   [Designator ::= Var (*) Member , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+  [Member ::= (*) LBRACK Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+  [Member ::= (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+  [Member ::= (*) DOT IDENT , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
 }
-transition on DOT to state [66]
-transition on Member to state [65]
-transition on LBRACK to state [64]
+transition on DOT to state [68]
+transition on Member to state [67]
+transition on LBRACK to state [66]
 
 -------------------
-lalr_state [62]: {
+lalr_state [64]: {
   [Statement ::= BREAK (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on SEMICOLON to state [63]
+transition on SEMICOLON to state [65]
 
 -------------------
-lalr_state [63]: {
+lalr_state [65]: {
   [Statement ::= BREAK SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [64]: {
+lalr_state [66]: {
   [ConstValue ::= (*) CHAR , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Designator ::= (*) Var Member , {LPAREN RBRACK PLUS MINUS MUL DIV MOD }]
   [Term ::= (*) Term MulOp Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) Term , {RBRACK PLUS MINUS }]
   [Var ::= (*) IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
+  [Member ::= LBRACK (*) Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
   [ConstValue ::= (*) BOOL , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) ConstValue , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Term ::= (*) Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) Expr AddOp Term , {RBRACK PLUS MINUS }]
   [Factor ::= (*) NEW Type FactorNew , {RBRACK PLUS MINUS MUL DIV MOD }]
   [ConstValue ::= (*) INT , {RBRACK PLUS MINUS MUL DIV MOD }]
-  [Designator ::= (*) Var Member , {LPAREN RBRACK PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) MINUS Term , {RBRACK PLUS MINUS }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
-  [Member ::= LBRACK (*) Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+  [Member ::= LBRACK (*) Expr RBRACK LBRACK Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [72]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on Expr to state [74]
+transition on BOOL to state [73]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [65]: {
+lalr_state [67]: {
   [Designator ::= Var Member (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [66]: {
+lalr_state [68]: {
   [Member ::= DOT (*) IDENT , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
 }
-transition on IDENT to state [67]
+transition on IDENT to state [69]
 
 -------------------
-lalr_state [67]: {
+lalr_state [69]: {
   [Member ::= DOT IDENT (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [68]: {
+lalr_state [70]: {
   [ConstValue ::= (*) CHAR , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Term ::= (*) Term MulOp Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA DOT }]
   [ConstValue ::= (*) BOOL , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Term ::= (*) Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [ConstValue ::= (*) INT , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Expr ::= MINUS (*) Term , {RPAREN RBRACK PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [108]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [116]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
 
 -------------------
-lalr_state [69]: {
+lalr_state [71]: {
   [ConstValue ::= INT (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [70]: {
+lalr_state [72]: {
   [Factor ::= NEW (*) Type FactorNew , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Type ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK }]
   [Type ::= (*) IDENT , {LPAREN LBRACK }]
 }
 transition on IDENT to state [15]
-transition on Type to state [100]
+transition on Type to state [105]
 
 -------------------
-lalr_state [71]: {
+lalr_state [73]: {
   [ConstValue ::= BOOL (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [72]: {
-  [Member ::= LBRACK Expr (*) RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+lalr_state [74]: {
+  [Member ::= LBRACK Expr (*) RBRACK LBRACK Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
   [Expr ::= Expr (*) AddOp Term , {RBRACK PLUS MINUS }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+  [Member ::= LBRACK Expr (*) RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
-transition on RBRACK to state [99]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
+transition on RBRACK to state [101]
 
 -------------------
-lalr_state [73]: {
+lalr_state [75]: {
   [Factor ::= Designator (*) ActParsOptionalBrackets , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [ActParsOptionalBrackets ::= (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [ActParsOptionalBrackets ::= (*) LPAREN ActParsOptional RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on LPAREN to state [91]
-transition on ActParsOptionalBrackets to state [90]
+transition on LPAREN to state [93]
+transition on ActParsOptionalBrackets to state [92]
 
 -------------------
-lalr_state [74]: {
+lalr_state [76]: {
   [Factor ::= ConstValue (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [75]: {
+lalr_state [77]: {
   [MulOp ::= (*) MOD , {NEW LPAREN INT BOOL CHAR IDENT }]
   [MulOp ::= (*) DIV , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Term ::= Term (*) MulOp Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Expr ::= Term (*) , {RPAREN RBRACK PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [MulOp ::= (*) MUL , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
-transition on MulOp to state [88]
-transition on DIV to state [87]
-transition on MUL to state [86]
-transition on MOD to state [85]
+transition on MulOp to state [90]
+transition on DIV to state [89]
+transition on MUL to state [88]
+transition on MOD to state [87]
 
 -------------------
-lalr_state [76]: {
+lalr_state [78]: {
   [Term ::= Factor (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [77]: {
+lalr_state [79]: {
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOT }]
@@ -753,63 +771,63 @@ lalr_state [77]: {
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOT }]
   [Factor ::= LPAREN (*) Expr RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [79]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [81]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [78]: {
+lalr_state [80]: {
   [ConstValue ::= CHAR (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [79]: {
+lalr_state [81]: {
   [Expr ::= Expr (*) AddOp Term , {RPAREN PLUS MINUS }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Factor ::= LPAREN Expr (*) RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
-transition on RPAREN to state [80]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
+transition on RPAREN to state [82]
 
 -------------------
-lalr_state [80]: {
+lalr_state [82]: {
   [Factor ::= LPAREN Expr RPAREN (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [81]: {
+lalr_state [83]: {
   [AddOp ::= PLUS (*) , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [82]: {
+lalr_state [84]: {
   [AddOp ::= MINUS (*) , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [83]: {
+lalr_state [85]: {
   [ConstValue ::= (*) CHAR , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Term ::= (*) Term MulOp Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA DOT }]
   [ConstValue ::= (*) BOOL , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Expr ::= Expr AddOp (*) Term , {RPAREN RBRACK PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
@@ -817,88 +835,88 @@ lalr_state [83]: {
   [Term ::= (*) Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [ConstValue ::= (*) INT , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [84]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [86]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
 
 -------------------
-lalr_state [84]: {
+lalr_state [86]: {
   [MulOp ::= (*) MOD , {NEW LPAREN INT BOOL CHAR IDENT }]
   [MulOp ::= (*) DIV , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Term ::= Term (*) MulOp Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [MulOp ::= (*) MUL , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Expr ::= Expr AddOp Term (*) , {RPAREN RBRACK PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on MulOp to state [88]
-transition on DIV to state [87]
-transition on MUL to state [86]
-transition on MOD to state [85]
+transition on MulOp to state [90]
+transition on DIV to state [89]
+transition on MUL to state [88]
+transition on MOD to state [87]
 
 -------------------
-lalr_state [85]: {
+lalr_state [87]: {
   [MulOp ::= MOD (*) , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [86]: {
+lalr_state [88]: {
   [MulOp ::= MUL (*) , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [87]: {
+lalr_state [89]: {
   [MulOp ::= DIV (*) , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [88]: {
+lalr_state [90]: {
   [ConstValue ::= (*) CHAR , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA DOT }]
   [ConstValue ::= (*) BOOL , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [ConstValue ::= (*) INT , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA DOT }]
   [Term ::= Term MulOp (*) Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [89]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [91]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on NEW to state [72]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
 
 -------------------
-lalr_state [89]: {
+lalr_state [91]: {
   [Term ::= Term MulOp Factor (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [90]: {
+lalr_state [92]: {
   [Factor ::= Designator ActParsOptionalBrackets (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [91]: {
+lalr_state [93]: {
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActParsOptional ::= (*) ActPars , {RPAREN }]
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS COMMA }]
@@ -909,7 +927,6 @@ lalr_state [91]: {
   [Term ::= (*) Factor , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActParsOptional ::= (*) , {RPAREN }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
@@ -920,61 +937,62 @@ lalr_state [91]: {
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Argument to state [95]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ActParsOptional to state [94]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on ActPars to state [93]
-transition on Expr to state [92]
-transition on NEW to state [70]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Argument to state [97]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ActParsOptional to state [96]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on ActPars to state [95]
+transition on Expr to state [94]
+transition on NEW to state [72]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [92]: {
+lalr_state [94]: {
   [Expr ::= Expr (*) AddOp Term , {RPAREN PLUS MINUS COMMA }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Argument ::= Expr (*) , {RPAREN COMMA }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
-
--------------------
-lalr_state [93]: {
-  [ActPars ::= ActPars (*) COMMA Argument , {RPAREN COMMA }]
-  [ActParsOptional ::= ActPars (*) , {RPAREN }]
-}
-transition on COMMA to state [97]
-
--------------------
-lalr_state [94]: {
-  [ActParsOptionalBrackets ::= LPAREN ActParsOptional (*) RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-}
-transition on RPAREN to state [96]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
 
 -------------------
 lalr_state [95]: {
+  [ActPars ::= ActPars (*) COMMA Argument , {RPAREN COMMA }]
+  [ActParsOptional ::= ActPars (*) , {RPAREN }]
+}
+transition on COMMA to state [99]
+
+-------------------
+lalr_state [96]: {
+  [ActParsOptionalBrackets ::= LPAREN ActParsOptional (*) RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+}
+transition on RPAREN to state [98]
+
+-------------------
+lalr_state [97]: {
   [ActPars ::= Argument (*) , {RPAREN COMMA }]
 }
 
 -------------------
-lalr_state [96]: {
+lalr_state [98]: {
   [ActParsOptionalBrackets ::= LPAREN ActParsOptional RPAREN (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [97]: {
+lalr_state [99]: {
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActPars ::= ActPars COMMA (*) Argument , {RPAREN COMMA }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS COMMA }]
@@ -985,56 +1003,109 @@ lalr_state [97]: {
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS COMMA }]
   [Argument ::= (*) Expr , {RPAREN COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Argument to state [98]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on BOOL to state [71]
-transition on Expr to state [92]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Argument to state [100]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [94]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [98]: {
+lalr_state [100]: {
   [ActPars ::= ActPars COMMA Argument (*) , {RPAREN COMMA }]
 }
 
 -------------------
-lalr_state [99]: {
-  [Member ::= LBRACK Expr RBRACK (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
-}
-
--------------------
-lalr_state [100]: {
-  [Factor ::= NEW Type (*) FactorNew , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-  [FactorNew ::= (*) LPAREN ActParsOptional RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-  [FactorNew ::= (*) LBRACK Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
-}
-transition on LPAREN to state [103]
-transition on LBRACK to state [102]
-transition on FactorNew to state [101]
-
--------------------
 lalr_state [101]: {
-  [Factor ::= NEW Type FactorNew (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [Member ::= LBRACK Expr RBRACK (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+  [Member ::= LBRACK Expr RBRACK (*) LBRACK Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
 }
+transition on LBRACK to state [102]
 
 -------------------
 lalr_state [102]: {
   [ConstValue ::= (*) CHAR , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Designator ::= (*) Var Member , {LPAREN RBRACK PLUS MINUS MUL DIV MOD }]
+  [Term ::= (*) Term MulOp Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Expr ::= (*) Term , {RBRACK PLUS MINUS }]
+  [Var ::= (*) IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
+  [ConstValue ::= (*) BOOL , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Factor ::= (*) ConstValue , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Term ::= (*) Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Expr ::= (*) Expr AddOp Term , {RBRACK PLUS MINUS }]
+  [Factor ::= (*) NEW Type FactorNew , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [ConstValue ::= (*) INT , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Factor ::= (*) Designator ActParsOptionalBrackets , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Expr ::= (*) MINUS Term , {RBRACK PLUS MINUS }]
+  [Member ::= LBRACK Expr RBRACK LBRACK (*) Expr RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
+}
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [103]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
+
+-------------------
+lalr_state [103]: {
+  [Expr ::= Expr (*) AddOp Term , {RBRACK PLUS MINUS }]
+  [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+  [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+  [Member ::= LBRACK Expr RBRACK LBRACK Expr (*) RBRACK , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+}
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
+transition on RBRACK to state [104]
+
+-------------------
+lalr_state [104]: {
+  [Member ::= LBRACK Expr RBRACK LBRACK Expr RBRACK (*) , {error LPAREN RPAREN RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA }]
+}
+
+-------------------
+lalr_state [105]: {
+  [Factor ::= NEW Type (*) FactorNew , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [FactorNew ::= (*) LPAREN ActParsOptional RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [FactorNew ::= (*) LBRACK Expr RBRACK LBRACK Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [FactorNew ::= (*) LBRACK Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+}
+transition on LPAREN to state [108]
+transition on LBRACK to state [107]
+transition on FactorNew to state [106]
+
+-------------------
+lalr_state [106]: {
+  [Factor ::= NEW Type FactorNew (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+}
+
+-------------------
+lalr_state [107]: {
+  [ConstValue ::= (*) CHAR , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Factor ::= (*) LPAREN Expr RPAREN , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Designator ::= (*) Var Member , {LPAREN RBRACK PLUS MINUS MUL DIV MOD }]
   [Term ::= (*) Term MulOp Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) Term , {RBRACK PLUS MINUS }]
   [Var ::= (*) IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
@@ -1045,41 +1116,41 @@ lalr_state [102]: {
   [Expr ::= (*) Expr AddOp Term , {RBRACK PLUS MINUS }]
   [Factor ::= (*) NEW Type FactorNew , {RBRACK PLUS MINUS MUL DIV MOD }]
   [ConstValue ::= (*) INT , {RBRACK PLUS MINUS MUL DIV MOD }]
-  [Designator ::= (*) Var Member , {LPAREN RBRACK PLUS MINUS MUL DIV MOD }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RBRACK PLUS MINUS MUL DIV MOD }]
   [Expr ::= (*) MINUS Term , {RBRACK PLUS MINUS }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
+  [FactorNew ::= LBRACK (*) Expr RBRACK LBRACK Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [106]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on Expr to state [111]
+transition on BOOL to state [73]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [103]: {
+lalr_state [108]: {
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActParsOptional ::= (*) ActPars , {RPAREN }]
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS COMMA }]
-  [FactorNew ::= LPAREN (*) ActParsOptional RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActPars ::= (*) ActPars COMMA Argument , {RPAREN COMMA }]
   [Term ::= (*) Factor , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActParsOptional ::= (*) , {RPAREN }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS COMMA }]
+  [FactorNew ::= LPAREN (*) ActParsOptional RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) BOOL , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Argument ::= (*) Expr , {RPAREN COMMA }]
@@ -1088,188 +1159,241 @@ lalr_state [103]: {
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Argument to state [95]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ActParsOptional to state [104]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on ActPars to state [93]
-transition on Expr to state [92]
-transition on NEW to state [70]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Argument to state [97]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ActParsOptional to state [109]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on ActPars to state [95]
+transition on Expr to state [94]
+transition on NEW to state [72]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [104]: {
+lalr_state [109]: {
   [FactorNew ::= LPAREN ActParsOptional (*) RPAREN , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on RPAREN to state [105]
+transition on RPAREN to state [110]
 
 -------------------
-lalr_state [105]: {
+lalr_state [110]: {
   [FactorNew ::= LPAREN ActParsOptional RPAREN (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [106]: {
+lalr_state [111]: {
   [Expr ::= Expr (*) AddOp Term , {RBRACK PLUS MINUS }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+  [FactorNew ::= LBRACK Expr (*) RBRACK LBRACK Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [FactorNew ::= LBRACK Expr (*) RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
-transition on RBRACK to state [107]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
+transition on RBRACK to state [112]
 
 -------------------
-lalr_state [107]: {
+lalr_state [112]: {
+  [FactorNew ::= LBRACK Expr RBRACK (*) LBRACK Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [FactorNew ::= LBRACK Expr RBRACK (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+}
+transition on LBRACK to state [113]
+
+-------------------
+lalr_state [113]: {
+  [ConstValue ::= (*) CHAR , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Factor ::= (*) LPAREN Expr RPAREN , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Designator ::= (*) Var Member , {LPAREN RBRACK PLUS MINUS MUL DIV MOD }]
+  [Term ::= (*) Term MulOp Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Expr ::= (*) Term , {RBRACK PLUS MINUS }]
+  [Var ::= (*) IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
+  [ConstValue ::= (*) BOOL , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Factor ::= (*) ConstValue , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Term ::= (*) Factor , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Expr ::= (*) Expr AddOp Term , {RBRACK PLUS MINUS }]
+  [Factor ::= (*) NEW Type FactorNew , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [ConstValue ::= (*) INT , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Factor ::= (*) Designator ActParsOptionalBrackets , {RBRACK PLUS MINUS MUL DIV MOD }]
+  [Expr ::= (*) MINUS Term , {RBRACK PLUS MINUS }]
+  [FactorNew ::= LBRACK Expr RBRACK LBRACK (*) Expr RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD DOT }]
+}
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [114]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
+
+-------------------
+lalr_state [114]: {
+  [FactorNew ::= LBRACK Expr RBRACK LBRACK Expr (*) RBRACK , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
+  [Expr ::= Expr (*) AddOp Term , {RBRACK PLUS MINUS }]
+  [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+  [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+}
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
+transition on RBRACK to state [115]
+
+-------------------
+lalr_state [115]: {
+  [FactorNew ::= LBRACK Expr RBRACK LBRACK Expr RBRACK (*) , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [108]: {
+lalr_state [116]: {
   [MulOp ::= (*) MOD , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Expr ::= MINUS Term (*) , {RPAREN RBRACK PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [MulOp ::= (*) DIV , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Term ::= Term (*) MulOp Factor , {RPAREN RBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR SEMICOLON COMMA }]
   [MulOp ::= (*) MUL , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
-transition on MulOp to state [88]
-transition on DIV to state [87]
-transition on MUL to state [86]
-transition on MOD to state [85]
+transition on MulOp to state [90]
+transition on DIV to state [89]
+transition on MUL to state [88]
+transition on MOD to state [87]
 
 -------------------
-lalr_state [109]: {
-  [Statement ::= CONTINUE SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-
--------------------
-lalr_state [110]: {
+lalr_state [117]: {
   [Statement ::= ForHeader Statement (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [111]: {
+lalr_state [118]: {
   [Expr ::= Expr (*) AddOp Term , {PLUS MINUS SEMICOLON }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [ExprOptional ::= Expr (*) , {SEMICOLON }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
 
 -------------------
-lalr_state [112]: {
+lalr_state [119]: {
   [Statement ::= RETURN ExprOptional (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on SEMICOLON to state [113]
+transition on SEMICOLON to state [120]
 
 -------------------
-lalr_state [113]: {
+lalr_state [120]: {
   [Statement ::= RETURN ExprOptional SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [114]: {
-  [DesignatorStatement ::= LBRACK DesignatorListOptional (*) MUL Designator RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
+lalr_state [121]: {
+  [Statement ::= CONTINUE SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on MUL to state [121]
 
 -------------------
-lalr_state [115]: {
+lalr_state [122]: {
+  [DesignatorStatement ::= LBRACK DesignatorListOptional (*) MUL Designator RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
+}
+transition on MUL to state [129]
+
+-------------------
+lalr_state [123]: {
+  [DesignatorList ::= Designator (*) COMMA , {MUL COMMA }]
+}
+transition on COMMA to state [128]
+
+-------------------
+lalr_state [124]: {
   [DesignatorList ::= DesignatorList (*) COMMA Designator COMMA , {MUL COMMA }]
   [DesignatorListOptional ::= DesignatorList (*) , {MUL }]
 }
-transition on COMMA to state [118]
+transition on COMMA to state [125]
 
 -------------------
-lalr_state [116]: {
-  [DesignatorList ::= Designator (*) COMMA , {MUL COMMA }]
-}
-transition on COMMA to state [117]
-
--------------------
-lalr_state [117]: {
-  [DesignatorList ::= Designator COMMA (*) , {MUL COMMA }]
-}
-
--------------------
-lalr_state [118]: {
+lalr_state [125]: {
   [Var ::= (*) IDENT , {LBRACK COMMA DOT }]
-  [DesignatorList ::= DesignatorList COMMA (*) Designator COMMA , {MUL COMMA }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LBRACK COMMA DOT }]
   [Designator ::= (*) Var Member , {COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LBRACK COMMA DOT }]
+  [DesignatorList ::= DesignatorList COMMA (*) Designator COMMA , {MUL COMMA }]
 }
-transition on Var to state [61]
-transition on IDENT to state [49]
-transition on Designator to state [119]
+transition on Var to state [63]
+transition on IDENT to state [51]
+transition on Designator to state [126]
 
 -------------------
-lalr_state [119]: {
+lalr_state [126]: {
   [DesignatorList ::= DesignatorList COMMA Designator (*) COMMA , {MUL COMMA }]
 }
-transition on COMMA to state [120]
+transition on COMMA to state [127]
 
 -------------------
-lalr_state [120]: {
+lalr_state [127]: {
   [DesignatorList ::= DesignatorList COMMA Designator COMMA (*) , {MUL COMMA }]
 }
 
 -------------------
-lalr_state [121]: {
+lalr_state [128]: {
+  [DesignatorList ::= Designator COMMA (*) , {MUL COMMA }]
+}
+
+-------------------
+lalr_state [129]: {
   [Var ::= (*) IDENT , {LBRACK RBRACK DOT }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LBRACK RBRACK DOT }]
   [DesignatorStatement ::= LBRACK DesignatorListOptional MUL (*) Designator RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
   [Designator ::= (*) Var Member , {RBRACK }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LBRACK RBRACK DOT }]
 }
-transition on Var to state [61]
-transition on IDENT to state [49]
-transition on Designator to state [122]
+transition on Var to state [63]
+transition on IDENT to state [51]
+transition on Designator to state [130]
 
 -------------------
-lalr_state [122]: {
+lalr_state [130]: {
   [DesignatorStatement ::= LBRACK DesignatorListOptional MUL Designator (*) RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
 }
-transition on RBRACK to state [123]
+transition on RBRACK to state [131]
 
 -------------------
-lalr_state [123]: {
+lalr_state [131]: {
   [DesignatorStatement ::= LBRACK DesignatorListOptional MUL Designator RBRACK (*) EQUAL Designator , {RPAREN SEMICOLON COMMA }]
 }
-transition on EQUAL to state [124]
+transition on EQUAL to state [132]
 
 -------------------
-lalr_state [124]: {
+lalr_state [132]: {
   [Var ::= (*) IDENT , {RPAREN LBRACK SEMICOLON COMMA DOT }]
-  [DesignatorStatement ::= LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL (*) Designator , {RPAREN SEMICOLON COMMA }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {RPAREN LBRACK SEMICOLON COMMA DOT }]
   [Designator ::= (*) Var Member , {RPAREN SEMICOLON COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {RPAREN LBRACK SEMICOLON COMMA DOT }]
+  [DesignatorStatement ::= LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL (*) Designator , {RPAREN SEMICOLON COMMA }]
 }
-transition on Var to state [61]
-transition on IDENT to state [49]
-transition on Designator to state [125]
+transition on Var to state [63]
+transition on IDENT to state [51]
+transition on Designator to state [133]
 
 -------------------
-lalr_state [125]: {
+lalr_state [133]: {
   [DesignatorStatement ::= LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator (*) , {RPAREN SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [126]: {
+lalr_state [134]: {
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS COMMA }]
-  [Statement ::= PRINT LPAREN (*) Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
   [ConstValue ::= (*) BOOL , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
@@ -1277,86 +1401,88 @@ lalr_state [126]: {
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS COMMA }]
+  [Statement ::= PRINT LPAREN (*) Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [127]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [135]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [127]: {
+lalr_state [135]: {
   [Expr ::= Expr (*) AddOp Term , {RPAREN PLUS MINUS COMMA }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
-  [Statement ::= PRINT LPAREN Expr (*) NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [NumConstOptional ::= (*) , {RPAREN }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [NumConstOptional ::= (*) COMMA INT , {RPAREN }]
+  [Statement ::= PRINT LPAREN Expr (*) NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
-transition on NumConstOptional to state [129]
-transition on COMMA to state [128]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
+transition on NumConstOptional to state [137]
+transition on COMMA to state [136]
 
 -------------------
-lalr_state [128]: {
+lalr_state [136]: {
   [NumConstOptional ::= COMMA (*) INT , {RPAREN }]
 }
-transition on INT to state [132]
+transition on INT to state [140]
 
 -------------------
-lalr_state [129]: {
+lalr_state [137]: {
   [Statement ::= PRINT LPAREN Expr NumConstOptional (*) RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on RPAREN to state [130]
+transition on RPAREN to state [138]
 
 -------------------
-lalr_state [130]: {
+lalr_state [138]: {
   [Statement ::= PRINT LPAREN Expr NumConstOptional RPAREN (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on SEMICOLON to state [131]
+transition on SEMICOLON to state [139]
 
 -------------------
-lalr_state [131]: {
+lalr_state [139]: {
   [Statement ::= PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [132]: {
+lalr_state [140]: {
   [NumConstOptional ::= COMMA INT (*) , {RPAREN }]
 }
 
 -------------------
-lalr_state [133]: {
+lalr_state [141]: {
   [Statement ::= DesignatorStatement SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [134]: {
+lalr_state [142]: {
+  [Statement ::= IF LPAREN (*) IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [IfBeforeCondition ::= (*) , {error NEW LPAREN MINUS INT BOOL CHAR IDENT }]
-  [Statement ::= IF LPAREN (*) IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
-transition on IfBeforeCondition to state [135]
+transition on IfBeforeCondition to state [143]
 
 -------------------
-lalr_state [135]: {
+lalr_state [143]: {
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR DOT }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [CondTerm ::= (*) CondTerm AND CondFact , {RPAREN AND OR }]
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
+  [Statement ::= IF LPAREN IfBeforeCondition (*) Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Condition ::= (*) error , {RPAREN OR }]
@@ -1364,38 +1490,36 @@ lalr_state [135]: {
   [Term ::= (*) Factor , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR DOT }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Condition ::= (*) CondTerm , {RPAREN OR }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [ConstValue ::= (*) BOOL , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [CondTerm ::= (*) CondFact , {RPAREN AND OR }]
-  [Statement ::= IF LPAREN IfBeforeCondition (*) Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Condition ::= (*) Condition OR CondTerm , {RPAREN OR }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on CondTerm to state [140]
-transition on Factor to state [76]
-transition on error to state [139]
-transition on Term to state [75]
-transition on CondFact to state [138]
-transition on Condition to state [137]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [136]
-transition on NEW to state [70]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on CondTerm to state [148]
+transition on error to state [147]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on CondFact to state [146]
+transition on Condition to state [145]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on Expr to state [144]
+transition on NEW to state [72]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [136]: {
+lalr_state [144]: {
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [Relop ::= (*) LT , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
   [Relop ::= (*) NOT_EQUAL , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
@@ -1409,48 +1533,49 @@ lalr_state [136]: {
   [Relop ::= (*) GT , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
   [ExprRelopOptional ::= (*) , {RPAREN AND OR SEMICOLON }]
 }
-transition on LT to state [160]
-transition on ExprRelopOptional to state [159]
-transition on NOT_EQUAL to state [158]
-transition on AddOp to state [83]
-transition on GT to state [157]
-transition on Relop to state [156]
-transition on PLUS to state [81]
-transition on DOUBLE_EQUAL to state [155]
-transition on LTE to state [154]
-transition on GTE to state [153]
-transition on MINUS to state [82]
+transition on LT to state [167]
+transition on ExprRelopOptional to state [166]
+transition on NOT_EQUAL to state [165]
+transition on AddOp to state [85]
+transition on GT to state [164]
+transition on Relop to state [163]
+transition on PLUS to state [83]
+transition on DOUBLE_EQUAL to state [162]
+transition on LTE to state [161]
+transition on GTE to state [160]
+transition on MINUS to state [84]
 
 -------------------
-lalr_state [137]: {
+lalr_state [145]: {
+  [Statement ::= IF LPAREN IfBeforeCondition Condition (*) IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [Condition ::= Condition (*) OR CondTerm , {RPAREN OR }]
-  [Statement ::= IF LPAREN IfBeforeCondition Condition (*) IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
   [IfAfterCondition ::= (*) , {RPAREN }]
 }
-transition on OR to state [144]
-transition on IfAfterCondition to state [143]
+transition on IfAfterCondition to state [152]
+transition on OR to state [151]
 
 -------------------
-lalr_state [138]: {
+lalr_state [146]: {
   [CondTerm ::= CondFact (*) , {RPAREN AND OR }]
 }
 
 -------------------
-lalr_state [139]: {
+lalr_state [147]: {
   [Condition ::= error (*) , {RPAREN OR }]
 }
 
 -------------------
-lalr_state [140]: {
+lalr_state [148]: {
   [CondTerm ::= CondTerm (*) AND CondFact , {RPAREN AND OR }]
   [Condition ::= CondTerm (*) , {RPAREN OR }]
 }
-transition on AND to state [141]
+transition on AND to state [149]
 
 -------------------
-lalr_state [141]: {
+lalr_state [149]: {
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR DOT }]
@@ -1462,40 +1587,34 @@ lalr_state [141]: {
   [CondFact ::= (*) Expr ExprRelopOptional , {RPAREN AND OR }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on CondFact to state [142]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [136]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on CondFact to state [150]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [144]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [142]: {
+lalr_state [150]: {
   [CondTerm ::= CondTerm AND CondFact (*) , {RPAREN AND OR }]
 }
 
 -------------------
-lalr_state [143]: {
-  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition (*) RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on RPAREN to state [146]
-
--------------------
-lalr_state [144]: {
+lalr_state [151]: {
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR DOT }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [CondTerm ::= (*) CondTerm AND CondFact , {RPAREN AND OR }]
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
@@ -1505,7 +1624,6 @@ lalr_state [144]: {
   [Term ::= (*) Factor , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR DOT }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [ConstValue ::= (*) BOOL , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
@@ -1515,151 +1633,151 @@ lalr_state [144]: {
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on CondTerm to state [145]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on CondFact to state [138]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on Expr to state [136]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
-
--------------------
-lalr_state [145]: {
-  [Condition ::= Condition OR CondTerm (*) , {RPAREN OR }]
-  [CondTerm ::= CondTerm (*) AND CondFact , {RPAREN AND OR }]
-}
-transition on AND to state [141]
-
--------------------
-lalr_state [146]: {
-  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN (*) IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [IfThenStart ::= (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-}
-transition on IfThenStart to state [147]
-
--------------------
-lalr_state [147]: {
-  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
-  [Statement ::= (*) ForHeader Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart (*) Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) BREAK SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
-  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on BREAK to state [62]
-transition on Var to state [61]
-transition on CONTINUE to state [59]
-transition on ForHeader to state [58]
-transition on RETURN to state [57]
-transition on LBRACK to state [56]
-transition on PRINT to state [55]
-transition on DesignatorStatement to state [54]
-transition on Statement to state [148]
-transition on IF to state [52]
-transition on Designator to state [51]
-transition on FOR to state [50]
-transition on IDENT to state [49]
-transition on LBRACE to state [48]
-transition on READ to state [47]
-
--------------------
-lalr_state [148]: {
-  [IfThenEnd ::= (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement (*) IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on IfThenEnd to state [149]
-
--------------------
-lalr_state [149]: {
-  [ElseOptional ::= (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd (*) ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ElseOptional ::= (*) ELSE Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on ElseOptional to state [151]
-transition on ELSE to state [150]
-
--------------------
-lalr_state [150]: {
-  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ElseOptional ::= ELSE (*) Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
-  [Statement ::= (*) ForHeader Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) BREAK SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
-  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on BREAK to state [62]
-transition on Var to state [61]
-transition on CONTINUE to state [59]
-transition on ForHeader to state [58]
-transition on RETURN to state [57]
-transition on LBRACK to state [56]
-transition on PRINT to state [55]
-transition on Statement to state [152]
-transition on DesignatorStatement to state [54]
-transition on IF to state [52]
-transition on Designator to state [51]
-transition on FOR to state [50]
-transition on IDENT to state [49]
-transition on LBRACE to state [48]
-transition on READ to state [47]
-
--------------------
-lalr_state [151]: {
-  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on CondTerm to state [159]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on CondFact to state [146]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on Expr to state [144]
+transition on NEW to state [72]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
 lalr_state [152]: {
+  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition (*) RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on RPAREN to state [153]
+
+-------------------
+lalr_state [153]: {
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) ForHeader Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
+  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) BREAK SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN (*) Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
+  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on BREAK to state [64]
+transition on Var to state [63]
+transition on ForHeader to state [61]
+transition on RETURN to state [60]
+transition on CONTINUE to state [59]
+transition on LBRACK to state [58]
+transition on PRINT to state [57]
+transition on Statement to state [154]
+transition on DesignatorStatement to state [55]
+transition on IF to state [54]
+transition on Designator to state [53]
+transition on FOR to state [52]
+transition on IDENT to state [51]
+transition on LBRACE to state [50]
+transition on READ to state [49]
+
+-------------------
+lalr_state [154]: {
+  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement (*) IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [IfThenEnd ::= (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on IfThenEnd to state [155]
+
+-------------------
+lalr_state [155]: {
+  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd (*) ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ElseOptional ::= (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ElseOptional ::= (*) ELSE Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on ElseOptional to state [157]
+transition on ELSE to state [156]
+
+-------------------
+lalr_state [156]: {
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) ForHeader Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
+  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) BREAK SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ElseOptional ::= ELSE (*) Statement , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
+  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on BREAK to state [64]
+transition on Var to state [63]
+transition on ForHeader to state [61]
+transition on RETURN to state [60]
+transition on CONTINUE to state [59]
+transition on LBRACK to state [58]
+transition on PRINT to state [57]
+transition on Statement to state [158]
+transition on DesignatorStatement to state [55]
+transition on IF to state [54]
+transition on Designator to state [53]
+transition on FOR to state [52]
+transition on IDENT to state [51]
+transition on LBRACE to state [50]
+transition on READ to state [49]
+
+-------------------
+lalr_state [157]: {
+  [Statement ::= IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+
+-------------------
+lalr_state [158]: {
   [ElseOptional ::= ELSE Statement (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [153]: {
+lalr_state [159]: {
+  [Condition ::= Condition OR CondTerm (*) , {RPAREN OR }]
+  [CondTerm ::= CondTerm (*) AND CondFact , {RPAREN AND OR }]
+}
+transition on AND to state [149]
+
+-------------------
+lalr_state [160]: {
   [Relop ::= GTE (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [154]: {
+lalr_state [161]: {
   [Relop ::= LTE (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [155]: {
+lalr_state [162]: {
   [Relop ::= DOUBLE_EQUAL (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [156]: {
+lalr_state [163]: {
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS AND OR SEMICOLON }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD AND OR SEMICOLON DOT }]
@@ -1670,131 +1788,130 @@ lalr_state [156]: {
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS AND OR SEMICOLON }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD AND OR SEMICOLON }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS AND OR SEMICOLON }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD AND OR SEMICOLON DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [161]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on Expr to state [168]
+transition on BOOL to state [73]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [157]: {
+lalr_state [164]: {
   [Relop ::= GT (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [158]: {
+lalr_state [165]: {
   [Relop ::= NOT_EQUAL (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [159]: {
+lalr_state [166]: {
   [CondFact ::= Expr ExprRelopOptional (*) , {RPAREN AND OR SEMICOLON }]
 }
 
 -------------------
-lalr_state [160]: {
+lalr_state [167]: {
   [Relop ::= LT (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [161]: {
+lalr_state [168]: {
   [Expr ::= Expr (*) AddOp Term , {RPAREN PLUS MINUS AND OR SEMICOLON }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
   [ExprRelopOptional ::= Relop Expr (*) , {RPAREN AND OR SEMICOLON }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
 
 -------------------
-lalr_state [162]: {
+lalr_state [169]: {
+  [DesignatorStatementOptions ::= error (*) , {RPAREN SEMICOLON COMMA }]
+}
+
+-------------------
+lalr_state [170]: {
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS SEMICOLON COMMA }]
-  [DesignatorStatementOptions ::= AssignOp (*) Expr , {RPAREN SEMICOLON COMMA }]
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD SEMICOLON COMMA DOT }]
   [ConstValue ::= (*) BOOL , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Term ::= (*) Factor , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS SEMICOLON COMMA }]
+  [DesignatorStatementOptions ::= AssignOp (*) Expr , {RPAREN SEMICOLON COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD SEMICOLON COMMA }]
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS SEMICOLON COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD SEMICOLON COMMA DOT }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on Expr to state [171]
-transition on BOOL to state [71]
-transition on NEW to state [70]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on BOOL to state [73]
+transition on Expr to state [178]
+transition on NEW to state [72]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [163]: {
-  [DesignatorStatementOptions ::= error (*) , {RPAREN SEMICOLON COMMA }]
-}
-
--------------------
-lalr_state [164]: {
-  [DesignatorStatementOptions ::= INC (*) , {RPAREN SEMICOLON COMMA }]
-}
-
--------------------
-lalr_state [165]: {
+lalr_state [171]: {
   [DesignatorStatement ::= Designator DesignatorStatementOptions (*) , {RPAREN SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [166]: {
+lalr_state [172]: {
+  [DesignatorStatementOptions ::= INC (*) , {RPAREN SEMICOLON COMMA }]
+}
+
+-------------------
+lalr_state [173]: {
   [AssignOp ::= EQUAL (*) , {NEW LPAREN MINUS INT BOOL CHAR IDENT }]
 }
 
 -------------------
-lalr_state [167]: {
+lalr_state [174]: {
   [DesignatorStatementOptions ::= DEC (*) , {RPAREN SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [168]: {
+lalr_state [175]: {
   [Var ::= (*) IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
+  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ConstValue ::= (*) CHAR , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActParsOptional ::= (*) ActPars , {RPAREN }]
   [Expr ::= (*) Expr AddOp Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
+  [DesignatorStatementOptions ::= LPAREN (*) ActParsOptional RPAREN , {RPAREN SEMICOLON COMMA }]
   [ConstValue ::= (*) INT , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActPars ::= (*) ActPars COMMA Argument , {RPAREN COMMA }]
   [Term ::= (*) Factor , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Factor ::= (*) NEW Type FactorNew , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN RPAREN LBRACK PLUS MINUS MUL DIV MOD COMMA DOT }]
-  [Designator ::= (*) Var Member , {LPAREN RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [ActParsOptional ::= (*) , {RPAREN }]
   [Expr ::= (*) Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) ConstValue , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
-  [DesignatorStatementOptions ::= LPAREN (*) ActParsOptional RPAREN , {RPAREN SEMICOLON COMMA }]
   [ConstValue ::= (*) BOOL , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
   [Argument ::= (*) Expr , {RPAREN COMMA }]
   [Term ::= (*) Term MulOp Factor , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
@@ -1802,114 +1919,115 @@ lalr_state [168]: {
   [Expr ::= (*) MINUS Term , {RPAREN PLUS MINUS COMMA }]
   [Factor ::= (*) LPAREN Expr RPAREN , {RPAREN PLUS MINUS MUL DIV MOD COMMA }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on Argument to state [95]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on ActParsOptional to state [169]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on ActPars to state [93]
-transition on Expr to state [92]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on Argument to state [97]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on ActParsOptional to state [176]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on ActPars to state [95]
+transition on Expr to state [94]
+transition on NEW to state [72]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [169]: {
+lalr_state [176]: {
   [DesignatorStatementOptions ::= LPAREN ActParsOptional (*) RPAREN , {RPAREN SEMICOLON COMMA }]
 }
-transition on RPAREN to state [170]
+transition on RPAREN to state [177]
 
 -------------------
-lalr_state [170]: {
+lalr_state [177]: {
   [DesignatorStatementOptions ::= LPAREN ActParsOptional RPAREN (*) , {RPAREN SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [171]: {
+lalr_state [178]: {
   [Expr ::= Expr (*) AddOp Term , {RPAREN PLUS MINUS SEMICOLON COMMA }]
   [AddOp ::= (*) MINUS , {NEW LPAREN INT BOOL CHAR IDENT }]
-  [DesignatorStatementOptions ::= AssignOp Expr (*) , {RPAREN SEMICOLON COMMA }]
   [AddOp ::= (*) PLUS , {NEW LPAREN INT BOOL CHAR IDENT }]
+  [DesignatorStatementOptions ::= AssignOp Expr (*) , {RPAREN SEMICOLON COMMA }]
 }
-transition on AddOp to state [83]
-transition on MINUS to state [82]
-transition on PLUS to state [81]
+transition on AddOp to state [85]
+transition on MINUS to state [84]
+transition on PLUS to state [83]
 
 -------------------
-lalr_state [172]: {
-  [DesignatorStatementList ::= (*) DesignatorStatement , {SEMICOLON COMMA }]
-  [DesignatorStatementListOptional ::= (*) DesignatorStatementList , {SEMICOLON }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatementList ::= (*) DesignatorStatementList COMMA DesignatorStatement , {SEMICOLON COMMA }]
-  [ForHeader ::= FOR LPAREN (*) DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON COMMA }]
+lalr_state [179]: {
   [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
   [DesignatorStatementListOptional ::= (*) , {SEMICOLON }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
   [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON COMMA }]
+  [DesignatorStatementList ::= (*) DesignatorStatement , {SEMICOLON COMMA }]
+  [ForHeader ::= FOR LPAREN (*) DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [DesignatorStatementListOptional ::= (*) DesignatorStatementList , {SEMICOLON }]
+  [DesignatorStatementList ::= (*) DesignatorStatementList COMMA DesignatorStatement , {SEMICOLON COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON COMMA }]
 }
-transition on DesignatorStatementList to state [175]
-transition on Var to state [61]
-transition on DesignatorStatement to state [174]
-transition on DesignatorStatementListOptional to state [173]
-transition on IDENT to state [49]
-transition on Designator to state [51]
-transition on LBRACK to state [56]
+transition on Var to state [63]
+transition on DesignatorStatementList to state [182]
+transition on DesignatorStatement to state [181]
+transition on DesignatorStatementListOptional to state [180]
+transition on IDENT to state [51]
+transition on Designator to state [53]
+transition on LBRACK to state [58]
 
 -------------------
-lalr_state [173]: {
+lalr_state [180]: {
   [ForHeader ::= FOR LPAREN DesignatorStatementListOptional (*) SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
 }
-transition on SEMICOLON to state [178]
+transition on SEMICOLON to state [185]
 
 -------------------
-lalr_state [174]: {
+lalr_state [181]: {
   [DesignatorStatementList ::= DesignatorStatement (*) , {RPAREN SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [175]: {
+lalr_state [182]: {
   [DesignatorStatementListOptional ::= DesignatorStatementList (*) , {RPAREN SEMICOLON }]
   [DesignatorStatementList ::= DesignatorStatementList (*) COMMA DesignatorStatement , {RPAREN SEMICOLON COMMA }]
 }
-transition on COMMA to state [176]
+transition on COMMA to state [183]
 
 -------------------
-lalr_state [176]: {
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
+lalr_state [183]: {
   [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {RPAREN SEMICOLON COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
   [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {RPAREN SEMICOLON COMMA }]
   [DesignatorStatementList ::= DesignatorStatementList COMMA (*) DesignatorStatement , {RPAREN SEMICOLON COMMA }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
 }
-transition on Var to state [61]
-transition on DesignatorStatement to state [177]
-transition on IDENT to state [49]
-transition on Designator to state [51]
-transition on LBRACK to state [56]
+transition on Var to state [63]
+transition on DesignatorStatement to state [184]
+transition on IDENT to state [51]
+transition on Designator to state [53]
+transition on LBRACK to state [58]
 
 -------------------
-lalr_state [177]: {
+lalr_state [184]: {
   [DesignatorStatementList ::= DesignatorStatementList COMMA DesignatorStatement (*) , {RPAREN SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [178]: {
+lalr_state [185]: {
   [ForBeforeCondition ::= (*) , {NEW LPAREN MINUS SEMICOLON INT BOOL CHAR IDENT }]
   [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON (*) ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
 }
-transition on ForBeforeCondition to state [179]
+transition on ForBeforeCondition to state [186]
 
 -------------------
-lalr_state [179]: {
+lalr_state [186]: {
   [Var ::= (*) IDENT , {LPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON DOT }]
+  [Designator ::= (*) Var Member , {LPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [ConstValue ::= (*) CHAR , {PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [Expr ::= (*) Expr AddOp Term , {PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [Factor ::= (*) Designator ActParsOptionalBrackets , {PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
@@ -1918,7 +2036,6 @@ lalr_state [179]: {
   [Term ::= (*) Factor , {PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [Factor ::= (*) NEW Type FactorNew , {PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [Var ::= (*) IDENT DOUBLE_COLON IDENT , {LPAREN LBRACK PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON DOT }]
-  [Designator ::= (*) Var Member , {LPAREN PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [CondFactOptional ::= (*) CondFact , {SEMICOLON }]
   [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition (*) CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
   [Expr ::= (*) Term , {PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
@@ -1929,273 +2046,274 @@ lalr_state [179]: {
   [Expr ::= (*) MINUS Term , {PLUS MINUS DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
   [Factor ::= (*) LPAREN Expr RPAREN , {PLUS MINUS MUL DIV MOD DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE SEMICOLON }]
 }
-transition on CHAR to state [78]
-transition on Var to state [61]
-transition on LPAREN to state [77]
-transition on CondFactOptional to state [181]
-transition on Factor to state [76]
-transition on Term to state [75]
-transition on CondFact to state [180]
-transition on ConstValue to state [74]
-transition on Designator to state [73]
-transition on NEW to state [70]
-transition on Expr to state [136]
-transition on BOOL to state [71]
-transition on IDENT to state [49]
-transition on INT to state [69]
-transition on MINUS to state [68]
+transition on CHAR to state [80]
+transition on Var to state [63]
+transition on LPAREN to state [79]
+transition on CondFactOptional to state [188]
+transition on Factor to state [78]
+transition on Term to state [77]
+transition on CondFact to state [187]
+transition on ConstValue to state [76]
+transition on Designator to state [75]
+transition on NEW to state [72]
+transition on Expr to state [144]
+transition on BOOL to state [73]
+transition on IDENT to state [51]
+transition on INT to state [71]
+transition on MINUS to state [70]
 
 -------------------
-lalr_state [180]: {
+lalr_state [187]: {
   [CondFactOptional ::= CondFact (*) , {SEMICOLON }]
 }
 
 -------------------
-lalr_state [181]: {
+lalr_state [188]: {
   [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional (*) ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
   [ForAfterCondition ::= (*) , {SEMICOLON }]
 }
-transition on ForAfterCondition to state [182]
-
--------------------
-lalr_state [182]: {
-  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition (*) SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-}
-transition on SEMICOLON to state [183]
-
--------------------
-lalr_state [183]: {
-  [DesignatorStatementList ::= (*) DesignatorStatement , {RPAREN COMMA }]
-  [DesignatorStatementListOptional ::= (*) DesignatorStatementList , {RPAREN }]
-  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON (*) DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatementList ::= (*) DesignatorStatementList COMMA DesignatorStatement , {RPAREN COMMA }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {RPAREN COMMA }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
-  [DesignatorStatementListOptional ::= (*) , {RPAREN }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {RPAREN COMMA }]
-}
-transition on DesignatorStatementList to state [175]
-transition on Var to state [61]
-transition on DesignatorStatement to state [174]
-transition on DesignatorStatementListOptional to state [184]
-transition on IDENT to state [49]
-transition on Designator to state [51]
-transition on LBRACK to state [56]
-
--------------------
-lalr_state [184]: {
-  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional (*) RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-}
-transition on RPAREN to state [185]
-
--------------------
-lalr_state [185]: {
-  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-}
-
--------------------
-lalr_state [186]: {
-  [Var ::= IDENT DOUBLE_COLON (*) IDENT , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
-}
-transition on IDENT to state [187]
-
--------------------
-lalr_state [187]: {
-  [Var ::= IDENT DOUBLE_COLON IDENT (*) , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
-}
-
--------------------
-lalr_state [188]: {
-  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= LBRACE Statements (*) RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
-  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
-  [Statement ::= (*) ForHeader Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statements ::= Statements (*) Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) BREAK SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
-  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
-  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-}
-transition on BREAK to state [62]
-transition on Var to state [61]
-transition on RBRACE to state [189]
-transition on CONTINUE to state [59]
-transition on ForHeader to state [58]
-transition on RETURN to state [57]
-transition on LBRACK to state [56]
-transition on PRINT to state [55]
-transition on DesignatorStatement to state [54]
-transition on Statement to state [53]
-transition on IF to state [52]
-transition on Designator to state [51]
-transition on FOR to state [50]
-transition on IDENT to state [49]
-transition on LBRACE to state [48]
-transition on READ to state [47]
+transition on ForAfterCondition to state [189]
 
 -------------------
 lalr_state [189]: {
-  [Statement ::= LBRACE Statements RBRACE (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition (*) SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
 }
+transition on SEMICOLON to state [190]
 
 -------------------
 lalr_state [190]: {
-  [Var ::= (*) IDENT , {RPAREN LBRACK DOT }]
-  [Statement ::= READ LPAREN (*) Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
-  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {RPAREN LBRACK DOT }]
-  [Designator ::= (*) Var Member , {RPAREN }]
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
+  [DesignatorStatementListOptional ::= (*) , {RPAREN }]
+  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON (*) DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {RPAREN COMMA }]
+  [DesignatorStatementList ::= (*) DesignatorStatement , {RPAREN COMMA }]
+  [DesignatorStatementListOptional ::= (*) DesignatorStatementList , {RPAREN }]
+  [DesignatorStatementList ::= (*) DesignatorStatementList COMMA DesignatorStatement , {RPAREN COMMA }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {RPAREN COMMA }]
 }
-transition on Var to state [61]
-transition on IDENT to state [49]
-transition on Designator to state [191]
+transition on Var to state [63]
+transition on DesignatorStatementList to state [182]
+transition on DesignatorStatementListOptional to state [191]
+transition on DesignatorStatement to state [181]
+transition on IDENT to state [51]
+transition on Designator to state [53]
+transition on LBRACK to state [58]
 
 -------------------
 lalr_state [191]: {
-  [Statement ::= READ LPAREN Designator (*) RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional (*) RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
 }
 transition on RPAREN to state [192]
 
 -------------------
 lalr_state [192]: {
-  [Statement ::= READ LPAREN Designator RPAREN (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN (*) , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
 }
-transition on SEMICOLON to state [193]
 
 -------------------
 lalr_state [193]: {
+  [Var ::= IDENT DOUBLE_COLON (*) IDENT , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
+}
+transition on IDENT to state [194]
+
+-------------------
+lalr_state [194]: {
+  [Var ::= IDENT DOUBLE_COLON IDENT (*) , {error LPAREN RPAREN LBRACK RBRACK PLUS MINUS MUL DIV MOD EQUAL DOUBLE_EQUAL NOT_EQUAL GT GTE LT LTE AND OR INC DEC SEMICOLON COMMA DOT }]
+}
+
+-------------------
+lalr_state [195]: {
+  [Designator ::= (*) Var Member , {error LPAREN EQUAL INC DEC }]
+  [Var ::= (*) IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) ForHeader Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) Designator DesignatorStatementOptions , {SEMICOLON }]
+  [Statement ::= (*) READ LPAREN Designator RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statements ::= Statements (*) Statement , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) BREAK SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [ForHeader ::= (*) FOR LPAREN DesignatorStatementListOptional SEMICOLON ForBeforeCondition CondFactOptional ForAfterCondition SEMICOLON DesignatorStatementListOptional RPAREN , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE LBRACK IDENT }]
+  [Statement ::= (*) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) RETURN ExprOptional SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) DesignatorStatement SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= LBRACE Statements (*) RBRACE , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {error LPAREN LBRACK EQUAL INC DEC DOT }]
+  [Statement ::= (*) LBRACE Statements RBRACE , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [DesignatorStatement ::= (*) LBRACK DesignatorListOptional MUL Designator RBRACK EQUAL Designator , {SEMICOLON }]
+  [Statement ::= (*) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Statement ::= (*) CONTINUE SEMICOLON , {BREAK IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on BREAK to state [64]
+transition on Var to state [63]
+transition on RBRACE to state [196]
+transition on ForHeader to state [61]
+transition on RETURN to state [60]
+transition on CONTINUE to state [59]
+transition on LBRACK to state [58]
+transition on PRINT to state [57]
+transition on Statement to state [56]
+transition on DesignatorStatement to state [55]
+transition on IF to state [54]
+transition on Designator to state [53]
+transition on FOR to state [52]
+transition on IDENT to state [51]
+transition on LBRACE to state [50]
+transition on READ to state [49]
+
+-------------------
+lalr_state [196]: {
+  [Statement ::= LBRACE Statements RBRACE (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+
+-------------------
+lalr_state [197]: {
+  [Var ::= (*) IDENT , {RPAREN LBRACK DOT }]
+  [Designator ::= (*) Var Member , {RPAREN }]
+  [Statement ::= READ LPAREN (*) Designator RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+  [Var ::= (*) IDENT DOUBLE_COLON IDENT , {RPAREN LBRACK DOT }]
+}
+transition on Var to state [63]
+transition on IDENT to state [51]
+transition on Designator to state [198]
+
+-------------------
+lalr_state [198]: {
+  [Statement ::= READ LPAREN Designator (*) RPAREN SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on RPAREN to state [199]
+
+-------------------
+lalr_state [199]: {
+  [Statement ::= READ LPAREN Designator RPAREN (*) SEMICOLON , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
+}
+transition on SEMICOLON to state [200]
+
+-------------------
+lalr_state [200]: {
   [Statement ::= READ LPAREN Designator RPAREN SEMICOLON (*) , {BREAK ELSE IF PRINT READ RETURN CONTINUE FOR LBRACE RBRACE LBRACK IDENT }]
 }
 
 -------------------
-lalr_state [194]: {
+lalr_state [201]: {
   [Parameter ::= (*) Type IDENT VarOrArray , {RPAREN COMMA }]
   [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
-  [Type ::= (*) IDENT , {IDENT }]
   [FormParsList ::= FormParsList COMMA (*) Parameter , {RPAREN COMMA }]
+  [Type ::= (*) IDENT , {IDENT }]
 }
-transition on Parameter to state [195]
+transition on Parameter to state [202]
 transition on IDENT to state [15]
-transition on Type to state [35]
+transition on Type to state [37]
 
 -------------------
-lalr_state [195]: {
+lalr_state [202]: {
   [FormParsList ::= FormParsList COMMA Parameter (*) , {RPAREN COMMA }]
 }
 
 -------------------
-lalr_state [196]: {
-  [Parameter ::= Type IDENT (*) VarOrArray , {RPAREN COMMA }]
+lalr_state [203]: {
   [VarOrArray ::= (*) , {RPAREN COMMA }]
+  [VarOrArray ::= (*) LBRACK RBRACK LBRACK RBRACK , {RPAREN COMMA }]
   [VarOrArray ::= (*) LBRACK RBRACK , {RPAREN COMMA }]
+  [Parameter ::= Type IDENT (*) VarOrArray , {RPAREN COMMA }]
 }
 transition on LBRACK to state [25]
-transition on VarOrArray to state [197]
+transition on VarOrArray to state [204]
 
 -------------------
-lalr_state [197]: {
+lalr_state [204]: {
   [Parameter ::= Type IDENT VarOrArray (*) , {RPAREN COMMA }]
 }
 
 -------------------
-lalr_state [198]: {
+lalr_state [205]: {
   [MethodDeclarationTypeAndName ::= Type IDENT (*) , {LPAREN }]
 }
 
 -------------------
-lalr_state [199]: {
+lalr_state [206]: {
   [ConstDeclarationList ::= (*) ConstDeclarationList COMMA ConstDeclarationElement , {SEMICOLON COMMA }]
   [ConstDeclarationList ::= (*) ConstDeclarationElement , {SEMICOLON COMMA }]
   [ConstDeclaration ::= CONST Type (*) ConstDeclarationList , {SEMICOLON }]
   [ConstDeclarationElement ::= (*) IDENT EQUAL ConstValue , {SEMICOLON COMMA }]
 }
-transition on ConstDeclarationElement to state [202]
-transition on IDENT to state [201]
-transition on ConstDeclarationList to state [200]
+transition on ConstDeclarationElement to state [209]
+transition on IDENT to state [208]
+transition on ConstDeclarationList to state [207]
 
 -------------------
-lalr_state [200]: {
+lalr_state [207]: {
   [ConstDeclarationList ::= ConstDeclarationList (*) COMMA ConstDeclarationElement , {SEMICOLON COMMA }]
   [ConstDeclaration ::= CONST Type ConstDeclarationList (*) , {SEMICOLON }]
 }
-transition on COMMA to state [205]
+transition on COMMA to state [212]
 
 -------------------
-lalr_state [201]: {
+lalr_state [208]: {
   [ConstDeclarationElement ::= IDENT (*) EQUAL ConstValue , {SEMICOLON COMMA }]
 }
-transition on EQUAL to state [203]
+transition on EQUAL to state [210]
 
 -------------------
-lalr_state [202]: {
+lalr_state [209]: {
   [ConstDeclarationList ::= ConstDeclarationElement (*) , {SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [203]: {
+lalr_state [210]: {
   [ConstValue ::= (*) BOOL , {SEMICOLON COMMA }]
   [ConstValue ::= (*) INT , {SEMICOLON COMMA }]
   [ConstDeclarationElement ::= IDENT EQUAL (*) ConstValue , {SEMICOLON COMMA }]
   [ConstValue ::= (*) CHAR , {SEMICOLON COMMA }]
 }
-transition on INT to state [69]
-transition on CHAR to state [78]
-transition on BOOL to state [71]
-transition on ConstValue to state [204]
+transition on INT to state [71]
+transition on CHAR to state [80]
+transition on BOOL to state [73]
+transition on ConstValue to state [211]
 
 -------------------
-lalr_state [204]: {
+lalr_state [211]: {
   [ConstDeclarationElement ::= IDENT EQUAL ConstValue (*) , {SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [205]: {
+lalr_state [212]: {
   [ConstDeclarationElement ::= (*) IDENT EQUAL ConstValue , {SEMICOLON COMMA }]
   [ConstDeclarationList ::= ConstDeclarationList COMMA (*) ConstDeclarationElement , {SEMICOLON COMMA }]
 }
-transition on IDENT to state [201]
-transition on ConstDeclarationElement to state [206]
+transition on IDENT to state [208]
+transition on ConstDeclarationElement to state [213]
 
 -------------------
-lalr_state [206]: {
+lalr_state [213]: {
   [ConstDeclarationList ::= ConstDeclarationList COMMA ConstDeclarationElement (*) , {SEMICOLON COMMA }]
 }
 
 -------------------
-lalr_state [207]: {
+lalr_state [214]: {
   [Declaration ::= ConstDeclaration SEMICOLON (*) , {error CONST LBRACE IDENT }]
 }
 
 -------------------
-lalr_state [208]: {
+lalr_state [215]: {
   [NamespaceName ::= IDENT (*) , {LBRACE }]
 }
 
 -------------------
-lalr_state [209]: {
+lalr_state [216]: {
   [Namespace ::= NAMESPACE NamespaceName (*) LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE , {error CONST LBRACE IDENT }]
 }
-transition on LBRACE to state [210]
+transition on LBRACE to state [217]
 
 -------------------
-lalr_state [210]: {
+lalr_state [217]: {
   [Namespace ::= NAMESPACE NamespaceName LBRACE (*) DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE , {error CONST LBRACE IDENT }]
   [DeclarationList ::= (*) DeclarationList Declaration , {error CONST LBRACE IDENT }]
   [DeclarationList ::= (*) , {error CONST LBRACE IDENT }]
 }
-transition on DeclarationList to state [211]
+transition on DeclarationList to state [218]
 
 -------------------
-lalr_state [211]: {
+lalr_state [218]: {
   [ConstDeclaration ::= (*) CONST Type ConstDeclarationList , {SEMICOLON }]
   [Namespace ::= NAMESPACE NamespaceName LBRACE DeclarationList (*) LBRACE MethodsDeclarationList RBRACE RBRACE , {error CONST LBRACE IDENT }]
   [DeclarationList ::= DeclarationList (*) Declaration , {error CONST LBRACE IDENT }]
@@ -2210,59 +2328,59 @@ transition on IDENT to state [15]
 transition on VarDeclaration to state [14]
 transition on error to state [13]
 transition on Type to state [12]
-transition on LBRACE to state [212]
+transition on LBRACE to state [219]
 transition on Declaration to state [11]
 transition on CONST to state [9]
 transition on ConstDeclaration to state [8]
 
 -------------------
-lalr_state [212]: {
-  [MethodsDeclarationList ::= (*) MethodsDeclarationList MethodDeclaration , {VOID RBRACE IDENT }]
+lalr_state [219]: {
   [MethodsDeclarationList ::= (*) , {VOID RBRACE IDENT }]
+  [MethodsDeclarationList ::= (*) MethodsDeclarationList MethodDeclaration , {VOID RBRACE IDENT }]
   [Namespace ::= NAMESPACE NamespaceName LBRACE DeclarationList LBRACE (*) MethodsDeclarationList RBRACE RBRACE , {error CONST LBRACE IDENT }]
 }
-transition on MethodsDeclarationList to state [213]
+transition on MethodsDeclarationList to state [220]
 
 -------------------
-lalr_state [213]: {
-  [MethodDeclaration ::= (*) MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
-  [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
+lalr_state [220]: {
   [MethodDeclarationTypeAndName ::= (*) VOID IDENT , {LPAREN }]
-  [Type ::= (*) IDENT , {IDENT }]
-  [Namespace ::= NAMESPACE NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList (*) RBRACE RBRACE , {error CONST LBRACE IDENT }]
+  [Type ::= (*) IDENT DOUBLE_COLON IDENT , {IDENT }]
   [MethodDeclarationTypeAndName ::= (*) Type IDENT , {LPAREN }]
   [MethodsDeclarationList ::= MethodsDeclarationList (*) MethodDeclaration , {VOID RBRACE IDENT }]
+  [Type ::= (*) IDENT , {IDENT }]
+  [Namespace ::= NAMESPACE NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList (*) RBRACE RBRACE , {error CONST LBRACE IDENT }]
+  [MethodDeclaration ::= (*) MethodDeclarationTypeAndName LPAREN FormPars RPAREN VarDeclarationListOptional LBRACE Statements RBRACE , {VOID RBRACE IDENT }]
 }
-transition on VOID to state [32]
-transition on MethodDeclarationTypeAndName to state [31]
+transition on VOID to state [34]
 transition on IDENT to state [15]
-transition on RBRACE to state [214]
-transition on MethodDeclaration to state [29]
-transition on Type to state [28]
+transition on MethodDeclarationTypeAndName to state [33]
+transition on RBRACE to state [221]
+transition on MethodDeclaration to state [31]
+transition on Type to state [30]
 
 -------------------
-lalr_state [214]: {
+lalr_state [221]: {
   [Namespace ::= NAMESPACE NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE (*) RBRACE , {error CONST LBRACE IDENT }]
 }
-transition on RBRACE to state [215]
+transition on RBRACE to state [222]
 
 -------------------
-lalr_state [215]: {
+lalr_state [222]: {
   [Namespace ::= NAMESPACE NamespaceName LBRACE DeclarationList LBRACE MethodsDeclarationList RBRACE RBRACE (*) , {error CONST LBRACE IDENT }]
 }
 
 -------------------
-lalr_state [216]: {
+lalr_state [223]: {
   [$START ::= Program EOF (*) , {EOF }]
 }
 
 -------------------
 Closing files...
 ------- CUP v0.10k Parser Generation Summary -------
-  0 errors and 7 warnings
-  49 terminals, 63 non-terminals, and 127 productions declared, 
-  producing 217 unique parse states.
-  4 terminals declared but not used.
+  0 errors and 6 warnings
+  49 terminals, 62 non-terminals, and 127 productions declared, 
+  producing 224 unique parse states.
+  5 terminals declared but not used.
   0 non-terminals declared but not used.
   0 productions never reduced.
   0 conflicts detected (0 expected).

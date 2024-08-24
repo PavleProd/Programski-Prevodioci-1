@@ -65,6 +65,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		sb.append("\n=====================================\n");
 
 		System.out.println(sb);
+		
 	}
 	
 	// TYPE
@@ -88,7 +89,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			type.struct = Tab.noType;
 		}
 		
-		log.info("Tip: " + typeName);
+		//log.info("Tip: " + typeName);
 		type.struct = typeNode.getType();
 	}
 	
@@ -143,7 +144,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		if(varNode == Tab.noObj) // nije pronadjen simbol
 		{
-			reportError("Nije pronadjen simbol " + varName + " u tabeli simbola!", null);
+			reportError("Nije pronadjen simbol " + varName + " u tabeli simbola!", var);
 		}
 		
 		var.obj = varNode;
@@ -152,8 +153,37 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		{
 			++argumentUsageCount;
 		}
+		
+		
+		String kind = ""; // Con = 0, Var = 1, Type = 2, Meth = 3, Fld = 4, Elem=5, Prog = 6;
+		switch(var.obj.getKind())
+		{
+		case 0: kind = "Con"; break;
+		case 1: kind = "Var"; break;
+		case 2: kind = "Type"; break;
+		case 3: kind = "Meth"; break;
+		case 4: kind = "Fld"; break;
+		case 5: kind = "Elem"; break;
+		case 6: kind = "Prog"; break;
+		}
+		
+		// None, Int, Char, Array, Class, Bool, Enum, Interface
+		String type = "";
+		switch(var.obj.getType().getKind())
+		{
+		case 0: type = "None"; break;
+		case 1: type = "Int"; break;
+		case 2: type = "Char"; break;
+		case 3: type = "Array"; break;
+		case 4: type = "Class"; break;
+		case 5: type = "Bool"; break;
+		case 6: type = "Enum"; break;
+		case 7: type = "Interface"; break;
+		}
+
+		log.info("Pretraga na " + var.getLine() + "(" +  var.obj.getName() +"). Vrsta: " + kind + ", Tip: " + type);
 			
-		log.info("Var: " + varName);
+		//log.info("Var: " + varName);
 	}
 	
 	@Override
@@ -170,7 +200,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		var.obj = varNode;
 		
-		log.info("Var: " + varName);
+		//log.info("Var: " + varName);
 	}
 	
 	// PROGRAM
@@ -195,7 +225,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(ProgramName progName) // pocetak programa
 	{
 		// kind (enum simbola), name, type
-		log.info("Obrada programa " + progName.getName());
+		//log.info("Obrada programa " + progName.getName());
 		progName.obj = Tab.insert(Obj.Prog, progName.getName(), Tab.noType);
 		Tab.openScope();     	
 	}
@@ -205,7 +235,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(NamespaceName namespaceName) // pocetak namespace-a
 	{
 		String name = namespaceName.getNamespaceName();
-		log.info("Obrada namespacea: " + name);
+		//log.info("Obrada namespacea: " + name);
 	
 		namespaceName.obj = Tab.insert(ObjCustom.Namespace, name, Tab.noType);
 		
@@ -251,7 +281,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			reportError("Redefinicija metode " + methodName, null);
 		}
 		
-		log.info("Obrada metode " + methodName);
+		//log.info("Obrada metode " + methodName);
 		currentMethod = Tab.insert(Obj.Meth, methodName, this.currentType.struct);
 		currentMethod.setLevel(0);
 		typeAndName.obj = currentMethod;
@@ -268,7 +298,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			reportError("Redefinicija metode " + methodName, typeAndName);
 		}
 		
-		log.info("Obrada metode " + methodName);
+		//log.info("Obrada metode " + methodName);
 		currentMethod = Tab.insert(Obj.Meth, methodName, Tab.noType);
 		currentMethod.setLevel(0);
 		typeAndName.obj = currentMethod;
@@ -289,12 +319,17 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Struct type;
 		if(parameter.getVarOrArray() instanceof VarOrArray_Array)
 		{
-			log.info("Obrada argumenta niza " + name);
+			//log.info("Obrada argumenta niza " + name);
 			type = new Struct(Struct.Array, this.currentType.struct);
+		}
+		else if(parameter.getVarOrArray() instanceof VarOrArray_Matrix) // !! matrica
+		{
+			//log.info("Obrada argumenta matrice " + name);
+			type = new Struct(Struct.Array, new Struct(Struct.Array, this.currentType.struct));
 		}
 		else
 		{
-			log.info("Obrada argumenta promenljive " + name);
+			//log.info("Obrada argumenta promenljive " + name);
 			type = this.currentType.struct;
 		}
 		
@@ -311,7 +346,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 	public void visit(ConstDeclarationElement constDecl)
 	{
 		String name = this.getNamespacePrefix() + constDecl.getVarName();
-		log.info("Obrada konstante " + name);
+		//log.info("Obrada konstante " + name);
 		
 		if(Tab.currentScope.findSymbol(name) != null)
 		{
@@ -328,6 +363,23 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		
 		constDecl.obj = Tab.insert(Obj.Con, name, actualType);
 		++this.constCount;
+		
+		ConstValue constValue = constDecl.getConstValue();
+		int valueAsInt = 0;
+		if(actualType == Tab.intType)
+		{
+			valueAsInt = ((ConstValue_INT) constValue).getValue();
+		}
+		else if(actualType == Tab.charType)
+		{
+			valueAsInt = ((ConstValue_CHAR) constValue).getValue();
+		}
+		else if(actualType == TabCustom.boolType)
+		{
+			valueAsInt = ((ConstValue_BOOL) constValue).getValue() ? 1 : 0;
+		}
+		
+		constDecl.obj.setAdr(valueAsInt); // vrednost konstante se upisuje u njegovu adresu za 4. fazu
 	}
 	
 	@Override
@@ -362,12 +414,17 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 		Struct struct;
 		if(element.getVarOrArray() instanceof VarOrArray_Array)
 		{
-			log.info("Obrada niza " + name);
+			//log.info("Obrada niza " + name);
 			struct = new Struct(Struct.Array, this.currentType.struct);
+		}
+		else if(element.getVarOrArray() instanceof VarOrArray_Matrix)
+		{
+			//log.info("Obrada matrice " + name);
+			struct = new Struct(Struct.Array, new Struct(Struct.Array, this.currentType.struct)); // !! matrica
 		}
 		else
 		{
-			log.info("Obrada promenljive " + name);
+			//log.info("Obrada promenljive " + name);
 			struct = this.currentType.struct;
 		}
 		
@@ -425,7 +482,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			return;
 		}
 		
-		log.info("Povratak iz metode " + this.currentMethod.getName());
+		//log.info("Povratak iz metode " + this.currentMethod.getName());
 		
 		if(this.currentMethod.getType() == Tab.noType) // void metoda
 		{
@@ -612,14 +669,31 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			Struct argType = args.get(i);
 			Struct paramType = params.get(i).getType();
 			
-			if(argType != paramType)
+			if(argType.getKind() == Struct.Array) // !! nizovi nemaju isti struct, poredimo da li su elementi isti
 			{
-				reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", null);
+				if(methodToBeCalled.getName() == "len") // !! za len mora posebno zato sto prima NoType
+				{
+					if(paramType.getKind() != Struct.Array)
+					{
+						reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", factor);
+					}
+				}
+				else if(argType.getElemType() != paramType.getElemType())
+				{
+					reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", factor);
+				}
+			}
+			else
+			{
+				if(argType != paramType)
+				{
+					reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", factor);
+				}
 			}
 		}
 		
 		this.args.clear();
-		log.info("Poziv funkcije " + methodToBeCalled.getName());
+		//log.info("Poziv funkcije " + methodToBeCalled.getName());
 
 	}
 	
@@ -648,9 +722,23 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				reportError("Pogresan tip izraza, ocekivan int", factor);
 				return;
 			}
+			
+			factor.struct = new Struct(Struct.Array, arrayElementType);
+		}
+		else if(factorNew instanceof FactorNew_Matrix)
+		{
+			FactorNew_Matrix factorNewMatrix = (FactorNew_Matrix)factorNew;
+			if((factorNewMatrix.getExpr().struct != Tab.intType)
+					|| factorNewMatrix.getExpr1().struct != Tab.intType)
+			{
+				reportError("Pogresan tip izraza, ocekivan int", factor);
+				return;
+			}
+			
+			factor.struct = new Struct(Struct.Array, new Struct(Struct.Array, arrayElementType)); // !! matrica
 		}
 		
-		factor.struct = new Struct(Struct.Array, arrayElementType);
+		
 	}
 	
 	// DESIGNATOR
@@ -677,7 +765,7 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			
 			if(!isAllowed)
 			{
-				reportError("Nedozvoljeni tip podataka!", null);
+				reportError("Nedozvoljeni tip podataka!", designator);
 				return;
 			}
 		}
@@ -687,12 +775,38 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			
 			if(type.getKind() != Struct.Array)
 			{
-				reportError("Pogresan tip izraza, ocekivan array", null);
+				reportError("Pogresan tip izraza, ocekivan array", designator);
+				return;
+			}
+			
+			Member_Array arr = (Member_Array)member;
+			if(arr.getExpr().struct != Tab.intType)
+			{
+				reportError("Pogresan tip izraza, ocekivan int", designator);
 				return;
 			}
 			
 			++this.arrayAccessCount;
 			designator.obj = new Obj(Obj.Elem, "", type.getElemType());
+		}
+		else if(member instanceof Member_Matrix) // designator je matrica
+		{
+			Struct type = designator.getVar().obj.getType();
+			
+			if(type.getKind() != Struct.Array || type.getElemType().getKind() != Struct.Array)
+			{
+				reportError("Pogresan tip izraza, ocekivana matrica", designator);
+				return;
+			}
+			
+			Member_Matrix mtx = (Member_Matrix)member;
+			if(mtx.getExpr().struct != Tab.intType || mtx.getExpr().struct != Tab.intType)
+			{
+				reportError("Pogresan tip izraza, ocekivan int", designator);
+				return;
+			}
+			
+			designator.obj = new Obj(Obj.Elem, "", type.getElemType().getElemType()); // !! matrica
 		}
 		
 		
@@ -729,11 +843,33 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 			DesignatorStatementOptions_AssignOpExpr optionsChild = (DesignatorStatementOptions_AssignOpExpr) options;
 			Expr expr = optionsChild.getExpr();
 			
-			if(designator.obj.getType() != expr.struct)
+			Struct type = designator.obj.getType();
+			if(type.getKind() == Struct.Array) // !! nizovi nemaju isti struct, poredimo da li su elementi isti
 			{
-				reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
-				return;
+				if(type.getElemType().getKind() == Struct.Array) // !! matrica
+				{
+					if(type.getElemType().getElemType() != expr.struct.getElemType().getElemType())
+					{
+						reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+						return;
+					}
+				}
+				else if(type.getElemType() != expr.struct.getElemType())
+				{
+					reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+					return;
+				}
 			}
+			else
+			{
+				if(designator.obj.getType() != expr.struct)
+				{
+					reportError("Neodgovarajuci tip u izrazu!", designatorStatement);
+					return;
+				}
+			}
+			
+			
 		}
 		else if((options instanceof DesignatorStatementOptions_Inc) || (options instanceof DesignatorStatementOptions_Dec))
 		{
@@ -775,14 +911,32 @@ public class SemanticAnalyzer extends VisitorAdaptor {
 				Struct argType = args.get(i);
 				Struct paramType = params.get(i).getType();
 				
-				if(argType != paramType)
+				if(argType.getKind() == Struct.Array) // !! nizovi nemaju isti struct, poredimo da li su elementi isti
 				{
-					reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", designatorStatement);
+					if(methodToBeCalled.getName() == "len")
+					{
+						if(paramType.getKind() != Struct.Array)
+						{
+							reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", designatorStatement);
+						}
+					}
+					else if(argType.getElemType() != paramType.getElemType())
+					{
+						reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", designatorStatement);
+					}
 				}
+				else
+				{
+					if(argType != paramType)
+					{
+						reportError("Parametar " + i + " je nekompatabilan sa argumentom funkcije", designatorStatement);
+					}
+				}
+				
 			}
 
 			this.args.clear();
-			log.info("Poziv funkcije " + methodToBeCalled.getName());
+			//log.info("Poziv funkcije " + methodToBeCalled.getName());
 			
 		}
 		

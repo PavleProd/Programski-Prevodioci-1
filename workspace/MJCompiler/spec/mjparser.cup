@@ -74,7 +74,7 @@ nonterminal MethodsDeclarationList, FormPars, FormParsList, Statement, Statement
 
 nonterminal ExprRelopOptional, ActPars, ActParsOptionalBrackets, ActParsOptional;
 nonterminal FactorNew;
-nonterminal MinusOptional, Label, AssignOp, Relop, AddOp, MulOp;
+nonterminal Label, AssignOp, Relop, AddOp, MulOp;
 nonterminal DesignatorStatement, DesignatorStatementOptions, DesignatorListOptional, DesignatorList, DesignatorStatementListOptional, DesignatorStatementList;
 nonterminal Member;
 nonterminal ForHeader, ForBeforeCondition, ForAfterCondition;
@@ -168,6 +168,8 @@ VarListElement ::= (VarListElement) IDENT:elementName VarOrArray
 				  
 VarOrArray ::= (VarOrArray_Array) LBRACK RBRACK
 			   |
+			   (VarOrArray_Matrix) LBRACK RBRACK LBRACK RBRACK
+			   |
 			   (VarOrArray_Var) /* EPSILON */
 			   ;
 	
@@ -218,7 +220,7 @@ Statement ::= (Statement_DesignatorStatement) DesignatorStatement SEMICOLON
 			  |
 			  (Statement_Print) PRINT LPAREN Expr NumConstOptional RPAREN SEMICOLON
 			  |
-			  (Statement_If) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN IfThenStart Statement IfThenEnd ElseOptional
+			  (Statement_If) IF LPAREN IfBeforeCondition Condition IfAfterCondition RPAREN Statement IfThenEnd ElseOptional
 			  |
 			  (Statement_For) ForHeader Statement
 			  |
@@ -227,9 +229,6 @@ Statement ::= (Statement_DesignatorStatement) DesignatorStatement SEMICOLON
 
 IfBeforeCondition ::= (IfBeforeCondition) /* EPSILON */
 					  ;
-					  
-IfThenStart ::= (IfThenStart) /* EPSILON */
-				;
 				
 IfThenEnd ::= (IfThenEnd) /* EPSILON */
 			  ;
@@ -246,7 +245,7 @@ ForBeforeCondition ::= (ForBeforeCondition) /* EPSILON */
 ForAfterCondition ::= (ForAfterCondition) /* EPSILON */
 				      ;
 			  
-ElseOptional ::= (ElseOptional_Define) ELSE Statement ElseEnd
+ElseOptional ::= (ElseOptional_Define) ELSE Statement
 				 |
 				 (ElseOptional_Skip) /* EPSILON */
 				 ;
@@ -333,13 +332,10 @@ Factor ::= (Factor_Designator) Designator ActParsOptionalBrackets
 		   
 FactorNew ::= (FactorNew_Array) LBRACK Expr RBRACK
 			  |
+			  (FactorNew_Matrix) LBRACK Expr:expr1 RBRACK LBRACK Expr:expr2 RBRACK
+			  |
 			  (FactorNew_Object) LPAREN ActParsOptional RPAREN
 			  ;
-
-MinusOptional ::= (MinusOptional_Define) MINUS
-			      |
-			      (MinusOptional_Skip) /* EPSILON */
-			      ;
 
 /* DESIGNATOR */
 
@@ -385,6 +381,8 @@ Designator ::= (Designator) Var Member
 Member ::= (Member_Obj) DOT IDENT:member
 		   |
 		   (Member_Array) LBRACK Expr RBRACK
+		   |
+		   (Member_Matrix) LBRACK Expr:expr1 RBRACK LBRACK Expr:expr2 RBRACK
 		   |
 		   (Member_Skip) /* EPSILON */
 		   ;
