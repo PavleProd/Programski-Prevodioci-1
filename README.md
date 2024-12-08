@@ -1,6 +1,6 @@
 # Compiler Construction 1 Project / Projekat Iz Programskih Prevodioca 1
 
-This project implements a **compiler for the imaginary Mikrojava programming language**, designed to translate valid Mikrojava programs into bytecode executable on the Mikrojava Virtual Machine (MJVM). 
+This project implements a **compiler for the imaginary Microjava programming language**, designed to translate valid Mikrojava programs into bytecode executable on the Mikrojava Virtual Machine (MJVM). 
 The compiler includes four primary phases: 
 - lexical analysis
 - syntax analysis
